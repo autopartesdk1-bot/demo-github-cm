@@ -1,32 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Casa Mecha Bazar | Bazar online con envíos a todo el país</title>
-  <meta name="description" content="Casa Mecha Bazar: productos para el hogar, cocina, organización, termos, limpieza y decoración. Compra online con envíos a todo el país, WhatsApp e Instagram." />
-  <meta name="keywords" content="bazar online, casa mecha, bazar, hogar, cocina, organización, termos, limpieza, decoración, envíos a todo el país" />
-  <meta name="theme-color" content="#0f4f3a" />
-  <meta property="og:title" content="Casa Mecha Bazar" />
-  <meta property="og:description" content="Todo lo que necesitás para tu hogar, en un solo lugar." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/hero.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Casa Mecha Bazar: tienda online con productos para el hogar, envíos a todo el país, atención personalizada y compra segura." />
+  <meta name="theme-color" content="#0d5b3f" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://casamecha.com.ar/" />
+  <title>Casa Mecha Bazar | Todo lo que necesitás para tu hogar</title>
   <style>
     :root{
-      --green:#0f4f3a;
-      --green-2:#145f46;
-      --green-3:#1e7354;
-      --bg:#f7f4ee;
-      --card:#ffffff;
-      --text:#173126;
-      --muted:#66756d;
-      --line:#e5dfd4;
-      --shadow:0 18px 50px rgba(15,79,58,.12);
-      --radius:24px;
-      --radius-sm:18px;
+      --green:#0f5a3f;
+      --green-dark:#0a4a33;
+      --green-soft:#e7efe9;
+      --bg:#ffffff;
+      --page:#f7f4ed;
+      --text:#20352c;
+      --muted:#5f6f64;
+      --line:#e7e1d5;
+      --shadow:0 12px 34px rgba(14,44,29,.10);
+      --radius:22px;
+      --max:1280px;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -34,545 +28,315 @@
       margin:0;
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(15,79,58,.06), transparent 35%),
-        linear-gradient(180deg,#fbfaf7 0%, #f3efe7 100%);
+      background:linear-gradient(180deg,#fff 0%,#fbf8f0 18%,#fff 60%,#fbf8f0 100%);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
-    img{max-width:100%;display:block}
-    a{color:inherit;text-decoration:none}
-    button,input{font:inherit}
-    .container{width:min(1180px, calc(100% - 32px)); margin:0 auto}
-    .topbar{
-      background:var(--green);
-      color:#fff;
-      font-size:.86rem;
-      padding:10px 0;
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    button,input,textarea,select{font:inherit}
+    :focus-visible{outline:3px solid #9acbb5;outline-offset:3px}
+    .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:16px;top:16px;width:auto;height:auto;padding:.8rem 1rem;border-radius:12px;background:#fff;z-index:9999;box-shadow:var(--shadow)}
+    .container{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+    .topbar{background:linear-gradient(90deg,var(--green-dark),var(--green));color:#fff;font-size:.92rem}
+    .topbar__inner{min-height:34px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;padding:7px 20px}
+    .topbar__item{display:flex;align-items:center;gap:8px;white-space:nowrap}
+    .topbar__item svg{width:16px;height:16px;flex:none}
+
+    header{
+      position:sticky;top:0;z-index:60;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(180%) blur(14px);
+      border-bottom:1px solid rgba(231,225,213,.9);
     }
-    .topbar .row{display:flex;gap:18px;justify-content:space-between;align-items:center;flex-wrap:wrap}
-    .topbar .pill{display:flex;gap:8px;align-items:center;opacity:.95}
-    .header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(170%) blur(16px);
-      background:rgba(251,250,247,.84);
-      border-bottom:1px solid rgba(15,79,58,.08);
+    .nav{max-width:var(--max);margin:0 auto;padding:0 20px;min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:max-content}
+    .brand__mark{
+      width:60px;height:60px;border-radius:18px;border:1px solid var(--line);background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.05);
+      display:grid;place-items:center;line-height:1;color:var(--green);font-weight:900;font-size:1rem;text-align:center;
     }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between; gap:18px;
-      padding:16px 0;
-    }
-    .brand{display:flex; align-items:center; gap:14px; min-width:180px}
-    .brand-mark{
-      width:64px; height:64px; border:2px solid var(--green);
-      border-radius:18px; display:grid; place-items:center; position:relative;
-      background:linear-gradient(180deg,#fff, #f4f0e8);
-      box-shadow:0 8px 18px rgba(15,79,58,.06);
-      font-family:"Cormorant Garamond",serif;
-      font-weight:700; color:var(--green);
-    }
-    .brand-mark:before{
-      content:"";
-      position:absolute; top:10px; left:13px; right:13px; height:18px;
-      border-top:3px solid var(--green);
-      border-left:3px solid transparent;
-      border-right:3px solid transparent;
-      transform:skewY(-3deg);
-      border-radius:4px;
-    }
-    .brand-text strong{display:block; font-size:1.08rem; letter-spacing:.12em}
-    .brand-text span{font-size:.8rem; letter-spacing:.42em; color:var(--muted)}
-    .menu{display:flex; align-items:center; gap:20px; flex-wrap:wrap}
-    .menu a{
-      position:relative; font-weight:600; color:#20392f; padding:8px 0;
-    }
-    .menu a:after{
-      content:""; position:absolute; left:0; bottom:2px; width:0; height:2px;
-      background:var(--green); transition:.25s ease;
-    }
-    .menu a:hover:after,.menu a.active:after{width:100%}
-    .actions{display:flex; align-items:center; gap:10px}
-    .search{
-      position:relative; display:flex; align-items:center;
-      background:#fff; border:1px solid var(--line); border-radius:999px; padding:10px 14px;
-      min-width:min(340px, 38vw);
-      box-shadow:0 8px 18px rgba(15,79,58,.04);
-    }
-    .search input{
-      border:0; outline:none; width:100%; background:transparent; color:var(--text);
-    }
+    .brand__mark span{display:block}
+    .brand__text strong{display:block;color:var(--green);font-size:1.12rem;letter-spacing:.12em}
+    .brand__text small{display:block;color:#7a857f;text-transform:uppercase;letter-spacing:.28em;margin-top:2px}
+    .menu{display:flex;align-items:center;gap:28px;flex-wrap:wrap;justify-content:center}
+    .menu a{font-size:.95rem;font-weight:700;color:#2c3d34;position:relative;padding:8px 0}
+    .menu a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:2px;background:var(--green);border-radius:999px;transition:.2s ease}
+    .menu a:hover::after,.menu a[aria-current="page"]::after{width:100%}
+    .actions{display:flex;align-items:center;gap:10px}
     .icon-btn{
-      width:44px; height:44px; border-radius:50%; border:1px solid var(--line);
-      background:#fff; display:grid; place-items:center; cursor:pointer;
-      transition:.2s ease; position:relative;
+      width:42px;height:42px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.04)
     }
-    .icon-btn:hover{transform:translateY(-1px); border-color:rgba(15,79,58,.25)}
-    .badge{
-      position:absolute; top:-3px; right:-3px; min-width:18px; height:18px; padding:0 5px;
-      border-radius:999px; background:var(--green); color:#fff; font-size:.72rem; display:grid; place-items:center;
-      border:2px solid #fff;
+    .icon-btn svg{width:20px;height:20px;color:var(--green)}
+
+    .hero{padding:0 0 22px}
+    .hero__shell{
+      margin-top:14px;border:1px solid rgba(231,225,213,.9);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;background:#fff
     }
-    .burger{display:none}
-    .hero{padding:28px 0 18px}
-    .hero-grid{
-      display:grid; grid-template-columns:1.05fr .95fr; gap:24px; align-items:stretch;
+    .hero__grid{display:grid;grid-template-columns:1fr 1fr;min-height:410px}
+    .hero__copy{padding:36px 28px 28px 46px;display:flex;flex-direction:column;justify-content:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;width:max-content;border:1px solid #d6e3d8;background:#eef5f0;color:var(--green);padding:7px 13px;border-radius:999px;font-size:.8rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase}
+    h1{margin:16px 0 10px;font-size:clamp(2.55rem,4.5vw,4.9rem);line-height:.9;letter-spacing:-.05em}
+    .script{display:block;font-family:"Brush Script MT",cursive;font-size:1.28em;color:#7a8f72;font-weight:400;letter-spacing:0;line-height:.95;margin-top:8px}
+    .hero__copy p{margin:12px 0 22px;max-width:430px;font-size:1.08rem;color:#3d4a43}
+    .hero__cta{display:flex;gap:12px;flex-wrap:wrap}
+    .cta,.cta-secondary,.outline-btn,.newsletter button,.cta-inline{height:46px;padding:0 20px;border-radius:12px;border:0;display:inline-flex;align-items:center;justify-content:center;font-weight:800;cursor:pointer;transition:.2s ease}
+    .cta{background:var(--green);color:#fff;box-shadow:0 10px 24px rgba(15,90,63,.22)}
+    .cta:hover{transform:translateY(-1px);background:#0b4e36}
+    .cta-secondary,.outline-btn,.cta-inline{background:#fff;color:var(--green);border:1px solid #cdd8cf}
+    .cta-secondary:hover,.outline-btn:hover,.cta-inline:hover{transform:translateY(-1px);border-color:var(--green)}
+    .hero__badges{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
+    .mini{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px 14px 13px}
+    .mini svg{width:21px;height:21px;color:var(--green);flex:none;margin-top:2px}
+    .mini strong{display:block;font-size:.95rem}
+    .mini span{display:block;color:var(--muted);font-size:.84rem;line-height:1.2}
+    .hero__visual{position:relative;background:url('assets/hero.png') center/cover no-repeat;min-height:100%}
+    .shipping-badge{
+      position:absolute;right:24px;top:20px;width:124px;height:124px;border-radius:999px;background:var(--green);color:#fff;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:6px solid rgba(255,255,255,.85);box-shadow:var(--shadow);font-weight:900;letter-spacing:.02em
     }
-    .hero-copy{
-      padding:18px 0 14px;
-      display:flex; flex-direction:column; justify-content:center;
-    }
-    .eyebrow{
-      display:inline-flex; align-items:center; gap:8px;
-      width:max-content; padding:8px 14px; border-radius:999px; border:1px solid rgba(15,79,58,.18);
-      background:rgba(255,255,255,.6); color:var(--green); font-size:.82rem; font-weight:700;
-      letter-spacing:.08em; text-transform:uppercase;
-    }
-    h1{
-      font-family:"Cormorant Garamond",serif;
-      font-size:clamp(3rem, 7vw, 5.7rem);
-      line-height:.92; margin:18px 0 14px;
-      color:var(--green);
-    }
-    h1 .script{
-      display:block; font-size:.5em; color:var(--green-3); font-style:italic; font-weight:500;
-      margin-top:6px;
-    }
-    .hero-copy p{
-      font-size:1.03rem; line-height:1.7; color:var(--muted); max-width:44ch; margin:0 0 22px;
-    }
-    .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:22px}
-    .btn{
-      border:0; cursor:pointer; border-radius:16px; padding:14px 20px; font-weight:800;
-      transition:.25s ease; display:inline-flex; align-items:center; gap:10px;
-    }
-    .btn-primary{
-      background:linear-gradient(135deg,var(--green),var(--green-2));
-      color:#fff; box-shadow:0 14px 30px rgba(15,79,58,.18);
-    }
-    .btn-primary:hover{transform:translateY(-2px); box-shadow:0 18px 34px rgba(15,79,58,.22)}
-    .btn-secondary{
-      background:#fff; color:var(--green); border:1px solid rgba(15,79,58,.18);
-    }
-    .btn-secondary:hover{transform:translateY(-2px); background:#f6fbf8}
-    .trust-row{
-      display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
-      margin-top:10px;
-    }
-    .trust{
-      background:rgba(255,255,255,.72); border:1px solid rgba(15,79,58,.08);
-      border-radius:18px; padding:14px; display:flex; gap:12px; align-items:flex-start;
-      box-shadow:0 10px 24px rgba(15,79,58,.05);
-    }
-    .trust b{display:block; margin-bottom:3px}
-    .trust span{display:block; color:var(--muted); font-size:.9rem}
-    .hero-visual{
-      position:relative; min-height:560px; border-radius:32px; overflow:hidden; box-shadow:var(--shadow);
-      background:linear-gradient(180deg,#fff 0%, #f4efe5 100%);
-      border:1px solid rgba(15,79,58,.08);
-    }
-    .hero-visual img{
-      width:100%; height:100%; object-fit:cover;
-    }
-    .hero-badge{
-      position:absolute; right:22px; top:22px; background:linear-gradient(135deg,var(--green),var(--green-3));
-      color:#fff; width:132px; height:132px; border-radius:50%; display:grid; place-items:center;
-      text-align:center; font-weight:800; line-height:1.1; box-shadow:0 16px 40px rgba(15,79,58,.24);
-      border:4px solid rgba(255,255,255,.65);
-    }
+    .shipping-badge small{font-weight:800;opacity:.95}
+    .shipping-badge svg{width:32px;height:32px;margin-top:6px}
+
     section{padding:24px 0}
-    .section-head{
-      display:flex; align-items:end; justify-content:space-between; gap:18px; margin-bottom:16px;
+    .section-title{margin:0 0 6px;font-size:clamp(1.45rem,2.1vw,2.1rem);letter-spacing:-.03em;text-align:center}
+    .section-sub{margin:0 auto 18px;max-width:780px;color:var(--muted);text-align:center}
+    .section-left{ text-align:left; }
+
+    .categories{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+    .cat-card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.04);transition:.2s ease}
+    .cat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+    .cat-card figure{margin:0;aspect-ratio:140/170;background:#f2eee5}
+    .cat-card img{width:100%;height:100%;object-fit:cover}
+    .cat-card__body{padding:12px 12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .cat-card__body strong{font-size:.88rem;letter-spacing:.02em;text-transform:uppercase}
+    .cat-card__body span{color:var(--green);font-size:1.1rem;font-weight:900}
+    .carousel-edge{position:relative}
+    .carousel-arrow{
+      position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:999px;border:1px solid var(--line);background:#fff;
+      display:grid;place-items:center;box-shadow:0 4px 10px rgba(0,0,0,.05);cursor:pointer;z-index:2
     }
-    .section-head h2{
-      margin:0; font-family:"Cormorant Garamond",serif; font-size:clamp(2rem, 4vw, 3rem);
-      color:var(--green);
+    .carousel-arrow.left{left:-8px}
+    .carousel-arrow.right{right:-8px}
+
+    .offer-banner{background:linear-gradient(90deg,#0f5a3f,#144f38);border-radius:20px;padding:18px;display:grid;grid-template-columns:.9fr 2.1fr;gap:16px;align-items:stretch;box-shadow:var(--shadow)}
+    .offer-banner__intro{color:#fff;display:flex;flex-direction:column;justify-content:center;padding:6px 12px}
+    .offer-banner__intro h3{margin:0 0 10px;font-size:1.5rem;line-height:1.05}
+    .offer-banner__intro p{margin:0 0 16px;color:rgba(255,255,255,.88)}
+    .offer-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .offer-card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
+    .offer-card figure{margin:0;aspect-ratio:145/230;background:#f4efe6;position:relative}
+    .offer-card img{width:100%;height:100%;object-fit:cover}
+    .discount{position:absolute;left:10px;top:10px;width:40px;height:40px;border-radius:999px;background:#215f42;color:#fff;font-weight:800;font-size:.84rem;display:grid;place-items:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+    .offer-card__body{padding:10px 10px 12px}
+    .offer-card__title{margin:0 0 4px;font-size:.92rem;line-height:1.2}
+    .price{font-size:1.08rem;font-weight:900;color:var(--green)}
+    .old{font-size:.8rem;text-decoration:line-through;color:#838a86;margin-left:6px}
+
+    .three-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+    .info-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 20px;display:flex;align-items:center;gap:14px;min-height:120px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+    .info-card svg{width:40px;height:40px;color:var(--green);flex:none}
+    .info-card h4{margin:0 0 4px;font-size:1rem}
+    .info-card p{margin:0;color:var(--muted);font-size:.95rem}
+
+    .why-grid{display:grid;grid-template-columns:1.5fr .95fr;gap:16px}
+    .panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+    .why{padding:18px}
+    .why__items{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .why__item{padding:12px 10px;text-align:center}
+    .why__item svg{width:32px;height:32px;color:var(--green)}
+    .why__item strong{display:block;margin:8px 0 4px;font-size:.93rem}
+    .why__item p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.25}
+
+    .testimonial{padding:18px}
+    .stars{color:#0b7a45;letter-spacing:3px;font-size:1.2rem;margin-bottom:8px}
+    .testimonial h4{margin:0 0 8px;font-size:1rem}
+    .testimonial p{margin:0 0 10px;color:#35423b;font-style:italic}
+    .dots{display:flex;gap:6px;justify-content:center;margin-top:12px}
+    .dots span{width:8px;height:8px;border-radius:999px;background:#c8d0ca}
+    .dots span.active{background:var(--green)}
+
+    .insta{display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;padding:18px 20px}
+    .insta__left h3{margin:0 0 4px;font-size:1.1rem}
+    .insta__left p{margin:0;color:var(--muted)}
+    .insta__thumbs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .insta__thumbs img{width:80px;height:60px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+    .insta__btn{min-width:220px;height:44px}
+
+    .newsletter{background:linear-gradient(90deg,#0f5a3f,#0a4c36);color:#fff;border-radius:18px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:var(--shadow)}
+    .newsletter h3{margin:0 0 4px;font-size:1.15rem}
+    .newsletter p{margin:0;color:rgba(255,255,255,.85)}
+    .newsletter form{display:flex;gap:10px;flex-wrap:wrap;min-width:min(520px,100%)}
+    .newsletter input{flex:1;min-width:min(330px,100%);height:46px;border-radius:12px;border:0;padding:0 16px}
+    .newsletter button{background:#fff;color:var(--green);min-width:150px}
+
+    .features-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+    .feature{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+    .feature svg{width:24px;height:24px;color:var(--green);flex:none}
+    .feature strong{display:block;font-size:.94rem}
+    .feature span{display:block;color:var(--muted);font-size:.86rem}
+
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .contact-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+    .contact-list{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:10px}
+    .contact-list li{display:flex;gap:10px;align-items:flex-start}
+    .contact-list svg{width:18px;height:18px;color:var(--green);flex:none;margin-top:3px}
+    .contact-form{display:grid;gap:12px}
+    .contact-form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .contact-form input,.contact-form textarea,.contact-form select{width:100%;border:1px solid var(--line);border-radius:14px;padding:14px 14px;background:#fff}
+    .contact-form button{background:var(--green);color:#fff;height:48px}
+    .map{margin-top:14px;border-radius:16px;overflow:hidden;border:1px solid var(--line);min-height:244px;background:#eef3ee}
+    .map iframe{width:100%;height:100%;min-height:244px;border:0}
+
+    .footer-top{padding:0 0 18px}
+    .footer-features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+    .footer-features .feature{border:0;box-shadow:none;padding:8px 6px;background:transparent}
+
+    footer{background:linear-gradient(180deg,#0f5a3f,#0a4a33);color:#fff;margin-top:20px}
+    .footer-grid{max-width:var(--max);margin:0 auto;padding:34px 20px 18px;display:grid;grid-template-columns:1.15fr .8fr .8fr .9fr;gap:26px}
+    .footer-grid h4{margin:0 0 12px;font-size:1rem}
+    .footer-grid p,.footer-grid a,.footer-grid li{color:rgba(255,255,255,.9)}
+    .footer-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+    .footer-brand p{max-width:300px}
+    .payments{display:grid;gap:10px}
+    .pay{display:flex;align-items:center;gap:10px;font-weight:700}
+    .pay-box{display:inline-flex;align-items:center;justify-content:center;min-width:74px;height:28px;border:1px solid rgba(255,255,255,.24);border-radius:8px;padding:0 8px}
+    .footer-bottom{max-width:var(--max);margin:0 auto;padding:12px 20px 18px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:rgba(255,255,255,.8);font-size:.93rem}
+
+    .floating-whatsapp{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:999px;background:#22c55e;color:#fff;display:grid;place-items:center;box-shadow:0 16px 30px rgba(0,0,0,.2);z-index:80}
+    .floating-whatsapp svg{width:28px;height:28px}
+
+    @media (max-width: 1100px){
+      .menu{display:none}
+      .hero__grid,.why-grid,.contact-grid,.footer-grid,.newsletter,.insta{grid-template-columns:1fr}
+      .hero__badges,.categories,.offer-grid,.three-cards,.why__items,.features-row,.footer-features{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .newsletter form{min-width:100%}
+      .hero__visual{min-height:360px}
     }
-    .section-head p{margin:0; color:var(--muted); max-width:58ch; line-height:1.6}
-    .section-link{
-      color:var(--green); font-weight:800; display:inline-flex; gap:8px; align-items:center;
-    }
-    .cards-5{
-      display:grid; grid-template-columns:repeat(5,1fr); gap:14px;
-    }
-    .card{
-      background:rgba(255,255,255,.78); border:1px solid rgba(15,79,58,.08); border-radius:22px; overflow:hidden;
-      box-shadow:0 12px 28px rgba(15,79,58,.05); transition:.25s ease;
-    }
-    .card:hover{transform:translateY(-4px); box-shadow:0 18px 34px rgba(15,79,58,.08)}
-    .category-card{cursor:pointer}
-    .media{aspect-ratio: 1/1; overflow:hidden; background:#efe9de}
-    .media img{width:100%; height:100%; object-fit:cover; transition:.35s ease}
-    .card:hover .media img{transform:scale(1.03)}
-    .card-body{padding:14px}
-    .card-title{margin:0 0 6px; font-size:1rem; font-weight:800}
-    .card-sub{margin:0; color:var(--muted); font-size:.92rem; line-height:1.45}
-    .offer{
-      background:linear-gradient(135deg,#0f4f3a,#155d44 60%, #1b6b4d);
-      color:#fff; border-radius:30px; padding:22px; display:grid; grid-template-columns:1fr 1.5fr; gap:18px; align-items:stretch;
-      box-shadow:0 20px 52px rgba(15,79,58,.2);
-    }
-    .offer-left{display:flex; flex-direction:column; justify-content:center}
-    .offer-left h3{
-      margin:0 0 10px; font-family:"Cormorant Garamond",serif; font-size:2.4rem;
-      line-height:1; letter-spacing:.02em;
-    }
-    .offer-left p{margin:0 0 18px; color:rgba(255,255,255,.86); line-height:1.6}
-    .offer-grid{
-      display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
-    }
-    .product{
-      background:#fff; color:var(--text); border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,.28);
-      display:flex; flex-direction:column;
-    }
-    .product .media{aspect-ratio:4/4.8}
-    .product .card-body{display:flex; flex-direction:column; gap:8px}
-    .price{font-size:1.1rem; font-weight:900; color:var(--green)}
-    .old{font-size:.82rem; color:#96a094; text-decoration:line-through; margin-left:8px; font-weight:600}
-    .tag{
-      display:inline-flex; align-items:center; width:max-content; padding:6px 10px; border-radius:999px;
-      background:#eef7f2; color:var(--green); font-size:.78rem; font-weight:800;
-    }
-    .product-actions{display:flex; gap:8px; margin-top:auto; flex-wrap:wrap}
-    .small-btn{
-      flex:1; min-width:120px; padding:11px 14px; border-radius:14px; border:1px solid rgba(15,79,58,.16);
-      background:#fff; cursor:pointer; font-weight:800; color:var(--green);
-    }
-    .small-btn.primary{background:var(--green); color:#fff}
-    .panel-grid{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
-    }
-    .panel{
-      background:rgba(255,255,255,.78); border:1px solid rgba(15,79,58,.08); border-radius:22px; padding:18px;
-      box-shadow:0 12px 28px rgba(15,79,58,.05);
-    }
-    .panel h3{margin:0 0 8px; color:var(--green); font-size:1.08rem}
-    .panel p{margin:0; color:var(--muted); line-height:1.55}
-    .why{
-      display:grid; grid-template-columns:1.4fr .9fr; gap:14px;
-    }
-    .why .reasons{
-      display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
-    }
-    .reason{
-      background:rgba(255,255,255,.78); border:1px solid rgba(15,79,58,.08); border-radius:22px; padding:18px;
-      text-align:center; box-shadow:0 12px 28px rgba(15,79,58,.05);
-    }
-    .reason .ico{font-size:1.8rem; margin-bottom:10px}
-    .reason h4{margin:0 0 6px}
-    .reason p{margin:0; color:var(--muted); font-size:.92rem; line-height:1.5}
-    .testimonials{
-      background:rgba(255,255,255,.8); border:1px solid rgba(15,79,58,.08); border-radius:22px; padding:18px;
-      box-shadow:0 12px 28px rgba(15,79,58,.05); display:flex; flex-direction:column; justify-content:center;
-    }
-    .stars{letter-spacing:2px; color:#0f4f3a; font-size:1.15rem; margin-bottom:10px}
-    .insta{
-      display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center;
-      background:rgba(255,255,255,.78); border:1px solid rgba(15,79,58,.08); border-radius:22px; padding:18px;
-    }
-    .insta-strip{display:flex; gap:10px; overflow:auto; padding-bottom:4px}
-    .insta-strip img{
-      width:88px; height:88px; border-radius:16px; object-fit:cover; flex:0 0 auto;
-      border:1px solid rgba(15,79,58,.1);
-    }
-    .newsletter{
-      background:linear-gradient(135deg,var(--green),#0e3f2f 80%);
-      color:#fff; border-radius:28px; padding:24px; display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center;
-      box-shadow:0 20px 52px rgba(15,79,58,.2);
-    }
-    .newsletter p{margin:6px 0 0; color:rgba(255,255,255,.84)}
-    .newsletter form{display:flex; gap:10px; flex-wrap:wrap}
-    .newsletter input{
-      min-width:min(340px, 68vw);
-      border:0; outline:none; padding:14px 16px; border-radius:14px;
-    }
-    .footer{
-      background:linear-gradient(180deg,#0f4f3a,#0d3f2f);
-      color:#fff; padding:34px 0 22px; margin-top:26px;
-    }
-    .footer-grid{
-      display:grid; grid-template-columns:1.2fr .9fr .9fr 1fr; gap:22px;
-    }
-    .footer h4{margin:0 0 12px; font-size:1rem}
-    .footer a,.footer p{color:rgba(255,255,255,.84); line-height:1.7; margin:0}
-    .footer .brand-mark{background:rgba(255,255,255,.06); color:#fff; border-color:rgba(255,255,255,.2)}
-    .footer .brand-text span{color:rgba(255,255,255,.7)}
-    .socials{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
-    .social-pill{
-      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px;
-      background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12);
-    }
-    .bottom-note{
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
-      margin-top:24px; padding-top:18px; border-top:1px solid rgba(255,255,255,.14);
-      color:rgba(255,255,255,.7); font-size:.92rem;
-    }
-    .floating-wa{
-      position:fixed; right:18px; bottom:18px; z-index:60;
-      width:56px; height:56px; border-radius:50%; background:#25d366; color:#fff;
-      display:grid; place-items:center; box-shadow:0 18px 40px rgba(37,211,102,.28);
-      border:0; cursor:pointer;
-    }
-    .floating-wa:hover{transform:translateY(-2px)}
-    .cart-drawer{
-      position:fixed; top:0; right:-420px; width:min(400px, 94vw); height:100vh; z-index:70;
-      background:#fff; box-shadow:-20px 0 60px rgba(0,0,0,.15); transition:.3s ease; display:flex; flex-direction:column;
-    }
-    .cart-drawer.open{right:0}
-    .drawer-head,.drawer-foot{
-      padding:18px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;
-    }
-    .drawer-foot{border-top:1px solid var(--line); border-bottom:0; margin-top:auto}
-    .drawer-body{padding:10px 18px; overflow:auto}
-    .cart-item{
-      display:grid; grid-template-columns:68px 1fr auto; gap:12px; align-items:center;
-      padding:12px 0; border-bottom:1px solid #eee;
-    }
-    .cart-item img{width:68px; height:68px; border-radius:14px; object-fit:cover}
-    .cart-item h5{margin:0 0 4px}
-    .cart-item p{margin:0; color:var(--muted); font-size:.9rem}
-    .cart-empty{padding:24px 0; color:var(--muted); text-align:center}
-    .toast{
-      position:fixed; left:50%; transform:translateX(-50%) translateY(18px); bottom:18px; z-index:90;
-      background:#173126; color:#fff; padding:14px 18px; border-radius:999px; opacity:0; pointer-events:none;
-      transition:.25s ease; box-shadow:0 16px 38px rgba(0,0,0,.18);
-    }
-    .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
-    .mobile-menu{
-      display:none;
-      border-top:1px solid rgba(15,79,58,.08);
-      background:rgba(251,250,247,.94);
-    }
-    .mobile-menu.open{display:block}
-    .mobile-menu .menu{padding:0 0 16px}
-    .mobile-menu .search{min-width:0; width:100%}
-    .hidden{display:none !important}
-    @media (max-width:1100px){
-      .hero-grid,.offer,.why,.footer-grid,.insta,.panel-grid{grid-template-columns:1fr}
-      .cards-5,.offer-grid,.why .reasons,.trust-row{grid-template-columns:repeat(2,1fr)}
-      .search{min-width:220px}
-    }
-    @media (max-width:760px){
-      .menu,.actions .search,.desktop-only{display:none}
-      .burger{display:grid}
-      .hero{padding-top:18px}
-      .trust-row,.cards-5,.offer-grid,.panel-grid,.why .reasons{grid-template-columns:1fr}
-      .hero-visual{min-height:420px}
-      .newsletter form{width:100%}
-      .newsletter input{min-width:0; width:100%}
-      .section-head{align-items:flex-start; flex-direction:column}
-      .brand{min-width:0}
+    @media (max-width: 720px){
+      .topbar__inner{gap:10px;text-align:center}
+      .nav{min-height:68px}
+      .brand__mark{width:54px;height:54px}
+      .hero__copy{padding:24px 18px 20px}
+      h1{font-size:2.55rem}
+      .script{font-size:1.12em}
+      .hero__cta{display:grid;grid-template-columns:1fr;}
+      .hero__badges,.categories,.offer-grid,.three-cards,.why__items,.features-row,.footer-features,.contact-form .row{grid-template-columns:1fr}
+      .carousel-arrow{display:none}
+      .offer-banner{grid-template-columns:1fr}
+      .insta{justify-items:start}
+      .insta__btn{min-width:100%}
     }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Casa Mecha Bazar",
+    "url": "https://casamecha.com.ar/",
+    "description": "Tienda online de bazar con envío a todo el país, atención por WhatsApp y productos para el hogar.",
+    "areaServed": "AR",
+    "sameAs": ["https://instagram.com/casamechabazar","https://wa.me/5491134309610"]
+  }
+  </script>
 </head>
 <body>
-  <div class="topbar">
-    <div class="container row">
-      <div class="pill">🚚 Envíos a todo el país</div>
-      <div class="pill">💳 Pagá como quieras: transferencia y más</div>
-      <div class="pill">🔒 Compra 100% segura</div>
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <div class="topbar" role="banner">
+    <div class="topbar__inner container" aria-label="Beneficios superiores">
+      <div class="topbar__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3z"/><path d="M16 10h3l2 3v4h-5z"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>Envíos a todo el país</div>
+      <div class="topbar__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Pagá como quieras: Tarjetas, Transferencias y más</div>
+      <div class="topbar__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1l3 6 6 1-4.5 4.3 1.1 6.2L12 15.8 6.4 18.5 7.5 12.3 3 8l6-1z"/></svg>Compra 100% segura</div>
     </div>
   </div>
 
-  <header class="header">
-    <div class="container nav">
-      <a class="brand" href="#inicio" aria-label="Casa Mecha Bazar">
-        <div class="brand-mark">CM</div>
-        <div class="brand-text">
-          <strong>CASA</strong>
-          <strong>MECHA</strong>
-          <span>BAZAR</span>
-        </div>
+  <header>
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="Casa Mecha Bazar inicio">
+        <span class="brand__mark"><span>CASA</span><span>MECHA</span><small style="font-size:.62rem;letter-spacing:.18em;font-weight:900;margin-top:2px">BAZAR</small></span>
+        <span class="brand__text"><strong>CASA MECHA</strong><small>BAZAR</small></span>
       </a>
-
-      <nav class="menu desktop-only" aria-label="Navegación principal">
-        <a href="#inicio" class="active">Inicio</a>
-        <a href="#categorias">Categorías</a>
-        <a href="#ofertas">Ofertas</a>
-        <a href="#productos">Productos</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-
+      <div class="menu">
+        <a href="#inicio" aria-current="page">INICIO</a>
+        <a href="#productos">PRODUCTOS</a>
+        <a href="#categorias">CATEGORÍAS</a>
+        <a href="#ofertas">OFERTAS</a>
+        <a href="#nosotros">NOSOTROS</a>
+        <a href="#contacto">CONTACTO</a>
+      </div>
       <div class="actions">
-        <div class="search desktop-only">
-          <input id="searchInput" type="search" placeholder="Buscar productos..." aria-label="Buscar productos">
-          <button class="icon-btn" id="searchClear" aria-label="Limpiar búsqueda">✕</button>
-        </div>
-        <button class="icon-btn burger" id="menuToggle" aria-label="Abrir menú">☰</button>
-        <button class="icon-btn" id="cartToggle" aria-label="Abrir carrito">
-          🛒 <span class="badge" id="cartCount">0</span>
-        </button>
+        <button class="icon-btn" type="button" aria-label="Buscar productos" onclick="irAProductos()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
+        <button class="icon-btn" type="button" aria-label="Abrir WhatsApp" onclick="abrirWhatsApp('Hola Casa Mecha, quiero hacer una consulta.')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 11.5a7.5 7.5 0 1 1-3-6"/><path d="M9 9c.2 1.4 1 2.6 2 3.5.8.7 1.8 1.3 3 1.5"/></svg></button>
+        <button class="icon-btn" type="button" aria-label="Abrir carrito" onclick="abrirCarrito()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 8h-11z"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M6 6L5 3H2"/></svg></button>
       </div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <div class="container" style="padding-top:12px;">
-        <div class="search" style="margin-bottom:12px;">
-          <input id="searchInputMobile" type="search" placeholder="Buscar productos..." aria-label="Buscar productos">
-          <button class="icon-btn" id="searchClearMobile" aria-label="Limpiar búsqueda">✕</button>
-        </div>
-        <nav class="menu" aria-label="Navegación móvil">
-          <a href="#inicio">Inicio</a>
-          <a href="#categorias">Categorías</a>
-          <a href="#ofertas">Ofertas</a>
-          <a href="#productos">Productos</a>
-          <a href="#nosotros">Nosotros</a>
-          <a href="#contacto">Contacto</a>
-        </nav>
-      </div>
-    </div>
+    </nav>
   </header>
 
-  <main id="inicio">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow">Bienvenidos a Casa Mecha</div>
-          <h1>
-            Todo lo que necesitás,
-            <span class="script">en un solo lugar</span>
-          </h1>
-          <p>
-            Un bazar online con identidad propia: productos para el hogar, cocina, organización, limpieza y decoración.
-            Diseño profesional, contenido claro, envíos a todo el país y atención por WhatsApp e Instagram.
-          </p>
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#productos">Ver productos ➜</a>
-            <a class="btn btn-secondary" href="#ofertas">Ver ofertas</a>
-          </div>
-          <div class="trust-row">
-            <div class="trust">
-              <div>🚚</div>
-              <div><b>Envíos rápidos</b><span>A todo el país</span></div>
+  <main id="contenido">
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero__shell">
+          <div class="hero__grid">
+            <div class="hero__copy">
+              <div class="eyebrow">BIENVENIDOS A</div>
+              <h1>
+                TODO LO QUE<br>
+                NECESITÁS,
+                <span class="script">en un solo lugar</span>
+              </h1>
+              <p>Descubrí miles de productos para tu hogar, con la mejor calidad, precios increíbles y envíos a todo el país.</p>
+              <div class="hero__cta">
+                <a class="cta" href="#productos">VER PRODUCTOS</a>
+                <a class="cta-secondary" href="#ofertas">VER OFERTAS</a>
+              </div>
+              <div class="hero__badges" aria-label="Beneficios">
+                <div class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3z"/><path d="M16 10h3l2 3v4h-5z"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg><div><strong>Envíos rápidos</strong><span>A todo el país</span></div></div>
+                <div class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/></svg><div><strong>Compra segura</strong><span>Tus datos protegidos</span></div></div>
+                <div class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16"/></svg><div><strong>Hasta 6 cuotas</strong><span>Sin interés</span></div></div>
+                <div class="mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0z"/><path d="M8 12h8"/><path d="M12 8v8"/></svg><div><strong>Atención personalizada</strong><span>Estamos para ayudarte</span></div></div>
+              </div>
             </div>
-            <div class="trust">
-              <div>🛡️</div>
-              <div><b>Compra segura</b><span>Protección y confianza</span></div>
-            </div>
-            <div class="trust">
-              <div>💳</div>
-              <div><b>Varios medios</b><span>Transferencia y más</span></div>
-            </div>
-            <div class="trust">
-              <div>🎧</div>
-              <div><b>Atención personalizada</b><span>Respondemos rápido</span></div>
+            <div class="hero__visual" aria-label="Imagen principal de Casa Mecha">
+              <div class="shipping-badge">ENVIOS<small>A TODO EL PAÍS</small><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3z"/><path d="M16 10h3l2 3v4h-5z"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg></div>
             </div>
           </div>
-        </div>
-        <div class="hero-visual">
-          <img src="assets/hero.png" alt="Casa Mecha Bazar - imagen principal">
-          <div class="hero-badge">ENVÍOS<br>A TODO EL PAÍS</div>
         </div>
       </div>
     </section>
 
     <section id="categorias">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Comprá por categoría</h2>
-            <p>Explorá las categorías destacadas y filtrá el catálogo con un clic.</p>
+        <h2 class="section-title">COMPRÁ POR CATEGORÍA</h2>
+        <p class="section-sub">Explorá nuestras categorías y encontrá lo que necesitás</p>
+        <div class="carousel-edge">
+          <button class="carousel-arrow left" type="button" aria-label="Mover categorías a la izquierda" onclick="alert('Carrusel visual listo. Podés convertirlo en deslizable si querés.')">‹</button>
+          <div class="categories" aria-label="Categorías destacadas">
+            <a class="cat-card" href="#productos"><figure><img src="assets/cat1.png" alt="Organización" loading="lazy" decoding="async"></figure><div class="cat-card__body"><strong>ORGANIZACIÓN</strong><span>→</span></div></a>
+            <a class="cat-card" href="#productos"><figure><img src="assets/cat2.png" alt="Cocina" loading="lazy" decoding="async"></figure><div class="cat-card__body"><strong>COCINA</strong><span>→</span></div></a>
+            <a class="cat-card" href="#productos"><figure><img src="assets/cat3.png" alt="Termos y botellas" loading="lazy" decoding="async"></figure><div class="cat-card__body"><strong>TERMOS Y BOTELLAS</strong><span>→</span></div></a>
+            <a class="cat-card" href="#productos"><figure><img src="assets/cat4.png" alt="Limpieza" loading="lazy" decoding="async"></figure><div class="cat-card__body"><strong>LIMPIEZA</strong><span>→</span></div></a>
+            <a class="cat-card" href="#productos"><figure><img src="assets/cat5.png" alt="Decoración" loading="lazy" decoding="async"></figure><div class="cat-card__body"><strong>DECORACIÓN</strong><span>→</span></div></a>
           </div>
-          <a class="section-link" href="#productos">Ver todos los productos →</a>
-        </div>
-
-        <div class="cards-5">
-          <article class="card category-card" data-filter="Organización">
-            <div class="media"><img src="assets/cat1.png" alt="Organización"></div>
-            <div class="card-body">
-              <h3 class="card-title">Organización</h3>
-              <p class="card-sub">Canastos, contenedores y orden para tu hogar.</p>
-            </div>
-          </article>
-          <article class="card category-card" data-filter="Cocina">
-            <div class="media"><img src="assets/cat2.png" alt="Cocina"></div>
-            <div class="card-body">
-              <h3 class="card-title">Cocina</h3>
-              <p class="card-sub">Utensilios, accesorios y soluciones prácticas.</p>
-            </div>
-          </article>
-          <article class="card category-card" data-filter="Termos">
-            <div class="media"><img src="assets/cat3.png" alt="Termos y botellas"></div>
-            <div class="card-body">
-              <h3 class="card-title">Termos y botellas</h3>
-              <p class="card-sub">Productos pensados para uso diario.</p>
-            </div>
-          </article>
-          <article class="card category-card" data-filter="Limpieza">
-            <div class="media"><img src="assets/cat4.png" alt="Limpieza"></div>
-            <div class="card-body">
-              <h3 class="card-title">Limpieza</h3>
-              <p class="card-sub">Herramientas para mantener todo impecable.</p>
-            </div>
-          </article>
-          <article class="card category-card" data-filter="Decoración">
-            <div class="media"><img src="assets/cat5.png" alt="Decoración"></div>
-            <div class="card-body">
-              <h3 class="card-title">Decoración</h3>
-              <p class="card-sub">Detalles que suman estilo y calidez.</p>
-            </div>
-          </article>
+          <button class="carousel-arrow right" type="button" aria-label="Mover categorías a la derecha" onclick="alert('Carrusel visual listo. Podés convertirlo en deslizable si querés.')">›</button>
         </div>
       </div>
     </section>
 
     <section id="ofertas">
       <div class="container">
-        <div class="offer">
-          <div class="offer-left">
-            <h3>Ofertas que convienen</h3>
-            <p>Armamos promociones reales para vender mejor: precios claros, stock visible y llamados a la acción directos.</p>
-            <div class="cta-row">
-              <a class="btn btn-secondary" href="#productos">Ver catálogo</a>
-              <a class="btn btn-primary" href="#contacto">Consultar por WhatsApp</a>
-            </div>
+        <div class="offer-banner">
+          <div class="offer-banner__intro">
+            <h3>OFERTAS<br>QUE CONVIENEN</h3>
+            <p>Los mejores productos a precios increíbles</p>
+            <button class="outline-btn" type="button" onclick="irAProductos()">VER TODAS LAS OFERTAS</button>
           </div>
           <div class="offer-grid">
-            <article class="product card">
-              <div class="media"><img src="assets/cat2.png" alt="Oferta 1"></div>
-              <div class="card-body">
-                <span class="tag">-20%</span>
-                <h3 class="card-title">Frasco de vidrio hermético</h3>
-                <div><span class="price">$4.990</span><span class="old">$6.200</span></div>
-                <div class="product-actions">
-                  <button class="small-btn primary add-to-cart" data-name="Frasco de vidrio hermético" data-price="4990" data-img="assets/cat2.png">Agregar</button>
-                  <button class="small-btn" data-message="Frasco de vidrio hermético">Consultar</button>
-                </div>
-              </div>
-            </article>
-            <article class="product card">
-              <div class="media"><img src="assets/cat3.png" alt="Oferta 2"></div>
-              <div class="card-body">
-                <span class="tag">-15%</span>
-                <h3 class="card-title">Set contenedores herméticos x3</h3>
-                <div><span class="price">$6.990</span><span class="old">$8.200</span></div>
-                <div class="product-actions">
-                  <button class="small-btn primary add-to-cart" data-name="Set contenedores herméticos x3" data-price="6990" data-img="assets/cat3.png">Agregar</button>
-                  <button class="small-btn" data-message="Set contenedores herméticos x3">Consultar</button>
-                </div>
-              </div>
-            </article>
-            <article class="product card">
-              <div class="media"><img src="assets/cat3.png" alt="Oferta 3"></div>
-              <div class="card-body">
-                <span class="tag">-15%</span>
-                <h3 class="card-title">Termo acero inoxidable 1L</h3>
-                <div><span class="price">$14.990</span><span class="old">$18.000</span></div>
-                <div class="product-actions">
-                  <button class="small-btn primary add-to-cart" data-name="Termo acero inoxidable 1L" data-price="14990" data-img="assets/cat3.png">Agregar</button>
-                  <button class="small-btn" data-message="Termo acero inoxidable 1L">Consultar</button>
-                </div>
-              </div>
-            </article>
-            <article class="product card">
-              <div class="media"><img src="assets/cat5.png" alt="Oferta 4"></div>
-              <div class="card-body">
-                <span class="tag">-20%</span>
-                <h3 class="card-title">Lámpara de mesa minimalista</h3>
-                <div><span class="price">$15.990</span><span class="old">$19.000</span></div>
-                <div class="product-actions">
-                  <button class="small-btn primary add-to-cart" data-name="Lámpara de mesa minimalista" data-price="15990" data-img="assets/cat5.png">Agregar</button>
-                  <button class="small-btn" data-message="Lámpara de mesa minimalista">Consultar</button>
-                </div>
-              </div>
-            </article>
+            <article class="offer-card"><figure><img src="assets/prod1.png" alt="Frasco de vidrio hermético 1.2L" loading="lazy"><span class="discount">-20%</span></figure><div class="offer-card__body"><p class="offer-card__title">Frasco de Vidrio Hermético 1.2L</p><div><span class="price">$4.990</span><span class="old">$6.200</span></div></div></article>
+            <article class="offer-card"><figure><img src="assets/prod2.png" alt="Set contenedores herméticos x3" loading="lazy"><span class="discount">-15%</span></figure><div class="offer-card__body"><p class="offer-card__title">Set Contenedores Herméticos x3</p><div><span class="price">$6.990</span><span class="old">$8.200</span></div></div></article>
+            <article class="offer-card"><figure><img src="assets/prod3.png" alt="Termo acero inoxidable 1L" loading="lazy"><span class="discount">-15%</span></figure><div class="offer-card__body"><p class="offer-card__title">Termo Acero Inoxidable 1L</p><div><span class="price">$14.990</span><span class="old">$18.000</span></div></div></article>
+            <article class="offer-card"><figure><img src="assets/prod5.png" alt="Lámpara de mesa minimalista" loading="lazy"><span class="discount">-20%</span></figure><div class="offer-card__body"><p class="offer-card__title">Lámpara de Mesa Minimalista</p><div><span class="price">$15.990</span><span class="old">$19.000</span></div></div></article>
           </div>
         </div>
       </div>
@@ -580,361 +344,160 @@
 
     <section id="productos">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>Productos destacados</h2>
-            <p>Catálogo pensado para vender por internet, con tarjetas claras y botones accionables.</p>
-          </div>
-          <a class="section-link" href="#contacto">Pedir por WhatsApp →</a>
-        </div>
-
-        <div class="panel-grid" id="productGrid">
-          <article class="panel product-item" data-category="Organización" data-name="Canasto organizador" data-price="3990">
-            <div class="media" style="border-radius:16px; margin-bottom:14px;"><img src="assets/cat1.png" alt="Canasto organizador"></div>
-            <h3>Canasto organizador</h3>
-            <p>Ideal para baños, estantes y espacios chicos.</p>
-            <div class="product-actions">
-              <button class="small-btn primary add-to-cart" data-name="Canasto organizador" data-price="3990" data-img="assets/cat1.png">Agregar</button>
-              <button class="small-btn" data-message="Canasto organizador">Ver detalle</button>
-            </div>
-          </article>
-
-          <article class="panel product-item" data-category="Cocina" data-name="Utensilios de cocina" data-price="4990">
-            <div class="media" style="border-radius:16px; margin-bottom:14px;"><img src="assets/cat2.png" alt="Utensilios de cocina"></div>
-            <h3>Utensilios de cocina</h3>
-            <p>Set práctico para cocinar mejor todos los días.</p>
-            <div class="product-actions">
-              <button class="small-btn primary add-to-cart" data-name="Utensilios de cocina" data-price="4990" data-img="assets/cat2.png">Agregar</button>
-              <button class="small-btn" data-message="Utensilios de cocina">Ver detalle</button>
-            </div>
-          </article>
-
-          <article class="panel product-item" data-category="Termos" data-name="Termo acero inoxidable 1L" data-price="14990">
-            <div class="media" style="border-radius:16px; margin-bottom:14px;"><img src="assets/cat3.png" alt="Termo acero inoxidable 1L"></div>
-            <h3>Termo acero inoxidable 1L</h3>
-            <p>Diseño moderno, resistente y con excelente presencia.</p>
-            <div class="product-actions">
-              <button class="small-btn primary add-to-cart" data-name="Termo acero inoxidable 1L" data-price="14990" data-img="assets/cat3.png">Agregar</button>
-              <button class="small-btn" data-message="Termo acero inoxidable 1L">Ver detalle</button>
-            </div>
-          </article>
-
-          <article class="panel product-item" data-category="Limpieza" data-name="Balde con escurridor" data-price="9990">
-            <div class="media" style="border-radius:16px; margin-bottom:14px;"><img src="assets/cat4.png" alt="Balde con escurridor"></div>
-            <h3>Balde con escurridor</h3>
-            <p>Funcional, cómodo y listo para simplificar la limpieza.</p>
-            <div class="product-actions">
-              <button class="small-btn primary add-to-cart" data-name="Balde con escurridor" data-price="9990" data-img="assets/cat4.png">Agregar</button>
-              <button class="small-btn" data-message="Balde con escurridor">Ver detalle</button>
-            </div>
-          </article>
-
-          <article class="panel product-item" data-category="Decoración" data-name="Lámpara de mesa" data-price="15990">
-            <div class="media" style="border-radius:16px; margin-bottom:14px;"><img src="assets/cat5.png" alt="Lámpara de mesa"></div>
-            <h3>Lámpara de mesa</h3>
-            <p>Detalle decorativo para sumar calidez y estilo.</p>
-            <div class="product-actions">
-              <button class="small-btn primary add-to-cart" data-name="Lámpara de mesa" data-price="15990" data-img="assets/cat5.png">Agregar</button>
-              <button class="small-btn" data-message="Lámpara de mesa">Ver detalle</button>
-            </div>
-          </article>
-
-          <article class="panel product-item" data-category="Organización" data-name="Set contenedores herméticos x3" data-price="6990">
-            <div class="media" style="border-radius:16px; margin-bottom:14px;"><img src="assets/cat1.png" alt="Set contenedores herméticos x3"></div>
-            <h3>Set contenedores herméticos x3</h3>
-            <p>Orden inteligente para guardar alimentos o accesorios.</p>
-            <div class="product-actions">
-              <button class="small-btn primary add-to-cart" data-name="Set contenedores herméticos x3" data-price="6990" data-img="assets/cat1.png">Agregar</button>
-              <button class="small-btn" data-message="Set contenedores herméticos x3">Ver detalle</button>
-            </div>
-          </article>
+        <div class="three-cards">
+          <div class="info-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3z"/><path d="M16 10h3l2 3v4h-5z"/></svg><div><h4>10% OFF EN TU PRIMERA COMPRA</h4><p>Suscribite y recibí tu cupón</p></div></div>
+          <div class="info-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/></svg><div><h4>NUEVOS INGRESOS TODAS LAS SEMANAS</h4><p>Productos seleccionados para vos</p></div></div>
+          <div class="info-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg><div><h4>SUMATE A NUESTRA COMUNIDAD</h4><p>y enterate de todas las novedades</p></div></div>
         </div>
       </div>
     </section>
 
     <section id="nosotros">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>¿Por qué elegir Casa Mecha?</h2>
-            <p>La identidad importa: claridad visual, confianza, mensajes concretos y una experiencia simple.</p>
+        <div class="why-grid">
+          <div class="panel why">
+            <h2 class="section-title section-left" style="margin-bottom:8px;text-align:left">¿POR QUÉ ELEGIR CASA MECHA?</h2>
+            <div class="why__items">
+              <div class="why__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.7 5.5 6.1.9-4.4 4.2 1 6-5.4-2.8-5.4 2.8 1-6-4.4-4.2 6.1-.9z"/></svg><strong>Productos de calidad</strong><p>Seleccionamos lo mejor para tu hogar</p></div>
+              <div class="why__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M4 9h16"/></svg><strong>Precios justos</strong><p>La mejor relación calidad-precio</p></div>
+              <div class="why__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/></svg><strong>Atención personalizada</strong><p>Te acompañamos en cada compra</p></div>
+              <div class="why__item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="M9 12l2 2 4-4"/></svg><strong>Confianza</strong><p>Miles de clientes satisfechos</p></div>
+            </div>
           </div>
-        </div>
-        <div class="why">
-          <div class="reasons">
-            <div class="reason"><div class="ico">✿</div><h4>Productos de calidad</h4><p>Seleccionamos productos útiles y presentables.</p></div>
-            <div class="reason"><div class="ico">🏷️</div><h4>Precios justos</h4><p>Ofertas claras y fácil de entender.</p></div>
-            <div class="reason"><div class="ico">🎧</div><h4>Atención personalizada</h4><p>Respondemos consultas sin vueltas.</p></div>
-            <div class="reason"><div class="ico">✅</div><h4>Confianza</h4><p>Compra segura y presencia profesional.</p></div>
-          </div>
-          <div class="testimonials">
-            <h3 style="margin:0 0 8px; color:var(--green);">Lo que dicen nuestros clientes</h3>
+          <aside class="panel testimonial">
+            <h2 class="section-title section-left" style="margin-bottom:10px;text-align:left;font-size:1rem">LO QUE DICEN NUESTROS CLIENTES</h2>
             <div class="stars">★★★★★</div>
-            <p style="margin:0; color:var(--muted); line-height:1.7;">
-              “Excelente atención y productos de calidad. Me llegó todo perfecto y rapidísimo.”
-            </p>
-            <p style="margin:14px 0 0; font-weight:800;">María G.</p>
-          </div>
+            <p>“Excelente atención y productos de calidad. Me llegó todo perfecto y rapidísimo.”</p>
+            <h4>— María G.</h4>
+            <div class="dots"><span class="active"></span><span></span><span></span></div>
+          </aside>
         </div>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <div class="insta">
-          <div>
-            <h2 style="margin:0; font-family:'Cormorant Garamond',serif; color:var(--green); font-size:clamp(1.9rem, 4vw, 2.8rem);">Seguinos en Instagram</h2>
-            <p style="margin:8px 0 0; color:var(--muted);">@casamechabazar</p>
-            <div class="socials">
-              <a class="social-pill" href="https://www.instagram.com/casamechabazar" target="_blank" rel="noopener">📷 Instagram</a>
-              <a class="social-pill" href="#contacto">💬 WhatsApp</a>
-            </div>
+        <div class="panel insta">
+          <div class="insta__left">
+            <h3>SEGUINOS EN INSTAGRAM</h3>
+            <p>@casamechabazar</p>
           </div>
-          <div class="insta-strip" aria-label="Muestras de Instagram">
-            <img src="assets/cat1.png" alt="Instagram 1">
-            <img src="assets/cat2.png" alt="Instagram 2">
-            <img src="assets/cat3.png" alt="Instagram 3">
-            <img src="assets/cat4.png" alt="Instagram 4">
-            <img src="assets/cat5.png" alt="Instagram 5">
+          <div class="insta__thumbs">
+            <img src="assets/prod1b.png" alt="Instagram 1" loading="lazy">
+            <img src="assets/prod2b.png" alt="Instagram 2" loading="lazy">
+            <img src="assets/prod3b.png" alt="Instagram 3" loading="lazy">
+            <img src="assets/prod4b.png" alt="Instagram 4" loading="lazy">
+            <img src="assets/prod5b.png" alt="Instagram 5" loading="lazy">
           </div>
+          <button class="cta-inline insta__btn" type="button" onclick="window.open('https://instagram.com/casamechabazar','_blank','noopener,noreferrer')">VER MÁS EN INSTAGRAM</button>
         </div>
       </div>
     </section>
 
-    <section id="contacto">
+    <section>
       <div class="container">
         <div class="newsletter">
           <div>
-            <h2 style="margin:0; font-family:'Cormorant Garamond',serif; font-size:clamp(2rem, 4vw, 3rem);">No te pierdas nada</h2>
-            <p>Suscribite para recibir novedades, lanzamientos y promos por correo.</p>
+            <h3>NO TE PIERDAS NADA</h3>
+            <p>Suscribite a nuestro newsletter y recibí ofertas exclusivas y novedades en tu correo.</p>
           </div>
-          <form id="newsletterForm">
-            <input type="email" id="newsletterEmail" placeholder="Tu correo electrónico" required>
-            <button class="btn btn-primary" type="submit">Suscribirme</button>
+          <form onsubmit="suscribir(event)">
+            <label class="sr-only" for="news-email">Tu correo electrónico</label>
+            <input id="news-email" type="email" placeholder="Tu correo electrónico" required>
+            <button type="submit">SUSCRIBIRME</button>
           </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="footer-top">
+      <div class="container">
+        <div class="footer-features">
+          <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h13v10H3z"/><path d="M16 10h3l2 3v4h-5z"/></svg><div><strong>ENVÍOS A TODO EL PAÍS</strong><span>Llegamos a donde estés</span></div></div>
+          <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg><div><strong>PAGÁ COMO QUIERAS</strong><span>Tarjetas, Transferencias y más</span></div></div>
+          <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/></svg><div><strong>HASTA 6 CUOTAS</strong><span>Sin interés en productos seleccionados</span></div></div>
+          <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div><strong>COMPRA 100% SEGURA</strong><span>Tus datos siempre protegidos</span></div></div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <a class="brand" href="#inicio">
-          <div class="brand-mark">CM</div>
-          <div class="brand-text">
-            <strong>CASA</strong>
-            <strong>MECHA</strong>
-            <span>BAZAR</span>
-          </div>
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#inicio" aria-label="Casa Mecha inicio">
+          <span class="brand__mark" style="background:transparent;border-color:rgba(255,255,255,.28);color:#fff"><span>CASA</span><span>MECHA</span><small style="font-size:.62rem;letter-spacing:.18em;font-weight:900;margin-top:2px;color:#fff">BAZAR</small></span>
         </a>
-        <p style="margin-top:14px; max-width:38ch;">
-          Tu bazar online de confianza. Envíos a todo el país, catálogo claro y atención rápida.
-        </p>
+        <p>Tu bazar online de confianza. Miles de productos para tu hogar, al mejor precio y con envíos a todo el país.</p>
       </div>
       <div>
-        <h4>Navegación</h4>
-        <p><a href="#inicio">Inicio</a></p>
-        <p><a href="#productos">Productos</a></p>
-        <p><a href="#categorias">Categorías</a></p>
-        <p><a href="#ofertas">Ofertas</a></p>
-        <p><a href="#nosotros">Nosotros</a></p>
-        <p><a href="#contacto">Contacto</a></p>
+        <h4>NAVEGACIÓN</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#categorias">Categorías</a></li>
+          <li><a href="#ofertas">Ofertas</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
       </div>
       <div>
-        <h4>Contacto</h4>
-        <p>📱 362 456-7890</p>
-        <p>📷 @casamechabazar</p>
-        <p>✉️ hola@casamecha.com.ar</p>
-        <p>📍 Resistencia, Chaco</p>
+        <h4>CATEGORÍAS</h4>
+        <ul>
+          <li><a href="#productos">Organización</a></li>
+          <li><a href="#productos">Cocina</a></li>
+          <li><a href="#productos">Termos y Botellas</a></li>
+          <li><a href="#productos">Limpieza</a></li>
+          <li><a href="#productos">Decoración</a></li>
+          <li><a href="#productos">Cuidado Personal</a></li>
+        </ul>
       </div>
       <div>
-        <h4>Medios de pago</h4>
-        <p>Visa</p>
-        <p>Mastercard</p>
-        <p>Transferencia bancaria</p>
-        <p>Mercado Pago</p>
+        <h4>CONTACTO</h4>
+        <ul>
+          <li><a href="#" onclick="abrirWhatsApp('Hola Casa Mecha, quiero hacer una consulta.')">362 456-7890</a></li>
+          <li><a href="https://instagram.com/casamechabazar" target="_blank" rel="noopener noreferrer">@casamechabazar</a></li>
+          <li><a href="mailto:hola@casamecha.com.ar">hola@casamecha.com.ar</a></li>
+          <li>Resistencia, Chaco</li>
+        </ul>
+        <h4 style="margin-top:18px">MEDIOS DE PAGO</h4>
+        <div class="payments">
+          <div class="pay"><span class="pay-box">VISA</span><span class="pay-box">MC</span><span class="pay-box">AMEX</span><span class="pay-box">CABAL</span></div>
+          <div class="pay"><span class="pay-box">TRANSFERENCIA BANCARIA</span></div>
+          <div class="pay"><span class="pay-box">MERCADO PAGO</span></div>
+        </div>
       </div>
     </div>
-    <div class="container bottom-note">
-      <span>© 2025 Casa Mecha Bazar. Todos los derechos reservados.</span>
-      <span>Términos y condiciones · Política de privacidad</span>
+    <div class="footer-bottom">
+      <div>© 2024 Casa Mecha Bazar. Todos los derechos reservados.</div>
+      <div><a href="#">Términos y Condiciones</a> · <a href="#">Política de Privacidad</a></div>
     </div>
   </footer>
 
-  <button class="floating-wa" id="waFloat" aria-label="Abrir WhatsApp">✆</button>
-
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
-    <div class="drawer-head">
-      <strong>Tu carrito</strong>
-      <button class="icon-btn" id="closeCart" aria-label="Cerrar carrito">✕</button>
-    </div>
-    <div class="drawer-body" id="cartItems"></div>
-    <div class="drawer-foot">
-      <div>
-        <div style="color:var(--muted); font-size:.9rem;">Total</div>
-        <div style="font-size:1.2rem; font-weight:900;" id="cartTotal">$0</div>
-      </div>
-      <button class="btn btn-primary" id="checkoutBtn">Finalizar por WhatsApp</button>
-    </div>
-  </aside>
-
-  <div class="toast" id="toast">Listo</div>
+  <a class="floating-whatsapp" href="#" aria-label="Escribinos por WhatsApp" onclick="abrirWhatsApp('Hola Casa Mecha, quiero hacer una consulta.')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 11.5a7.5 7.5 0 1 1-3-6"/><path d="M9 9c.2 1.4 1 2.6 2 3.5.8.7 1.8 1.3 3 1.5"/></svg></a>
 
   <script>
-    const waNumber = "5491134309610";
-    const whatsappBase = `https://wa.me/${waNumber}?text=`;
-    const cart = JSON.parse(localStorage.getItem("cm_cart") || "[]");
+    const WHATSAPP_NUMBER = '5491134309610';
 
-    const cartCount = document.getElementById("cartCount");
-    const cartDrawer = document.getElementById("cartDrawer");
-    const cartItems = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const toast = document.getElementById("toast");
-    const mobileMenu = document.getElementById("mobileMenu");
-
-    function money(n){
-      return new Intl.NumberFormat("es-AR",{style:"currency",currency:"ARS",maximumFractionDigits:0}).format(n);
-    }
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.classList.add("show");
-      clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(()=>toast.classList.remove("show"), 2200);
-    }
-    function saveCart(){
-      localStorage.setItem("cm_cart", JSON.stringify(cart));
-      renderCart();
-    }
-    function renderCart(){
-      cartCount.textContent = cart.reduce((acc,it)=>acc+it.qty,0);
-      const total = cart.reduce((acc,it)=>acc+it.qty*it.price,0);
-      cartTotal.textContent = money(total);
-      if(!cart.length){
-        cartItems.innerHTML = '<div class="cart-empty">El carrito está vacío.</div>';
-        return;
-      }
-      cartItems.innerHTML = cart.map((item, idx)=>`
-        <div class="cart-item">
-          <img src="${item.img}" alt="${item.name}">
-          <div>
-            <h5>${item.name}</h5>
-            <p>${money(item.price)} · Cantidad: ${item.qty}</p>
-          </div>
-          <button class="icon-btn remove-item" data-idx="${idx}" aria-label="Eliminar">🗑</button>
-        </div>
-      `).join("");
-      document.querySelectorAll(".remove-item").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          cart.splice(Number(btn.dataset.idx),1);
-          saveCart();
-          showToast("Producto eliminado");
-        });
-      });
+    function abrirWhatsApp(texto) {
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener,noreferrer');
     }
 
-    function addToCart(name, price, img){
-      const found = cart.find(i => i.name === name);
-      if(found){ found.qty += 1; }
-      else cart.push({name, price: Number(price), img, qty: 1});
-      saveCart();
-      cartDrawer.classList.add("open");
-      showToast(`Agregado: ${name}`);
+    function irAProductos() {
+      document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    document.querySelectorAll(".add-to-cart").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        addToCart(btn.dataset.name, btn.dataset.price, btn.dataset.img);
-      });
-    });
-
-    document.querySelectorAll("[data-message]").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        const item = btn.dataset.message;
-        const text = `Hola Casa Mecha, quiero consultar por: ${item}`;
-        window.open(whatsappBase + encodeURIComponent(text), "_blank", "noopener");
-      });
-    });
-
-    document.getElementById("waFloat").addEventListener("click", ()=>{
-      const text = "Hola Casa Mecha, quiero hacer una consulta.";
-      window.open(whatsappBase + encodeURIComponent(text), "_blank", "noopener");
-    });
-
-    document.getElementById("checkoutBtn").addEventListener("click", ()=>{
-      const items = cart.map(i => `${i.qty} x ${i.name}`).join("%0A");
-      const total = cart.reduce((acc,it)=>acc+it.qty*it.price,0);
-      const text = `Hola Casa Mecha, quiero comprar:%0A${items}%0ATotal: ${money(total)}`;
-      window.open(whatsappBase + encodeURIComponent(text), "_blank", "noopener");
-    });
-
-    document.getElementById("cartToggle").addEventListener("click", ()=>{
-      cartDrawer.classList.add("open");
-    });
-    document.getElementById("closeCart").addEventListener("click", ()=>{
-      cartDrawer.classList.remove("open");
-    });
-
-    document.getElementById("menuToggle").addEventListener("click", ()=>{
-      mobileMenu.classList.toggle("open");
-    });
-
-    function filterProducts(term){
-      const q = term.trim().toLowerCase();
-      document.querySelectorAll(".product-item").forEach(card=>{
-        const text = card.dataset.name.toLowerCase() + " " + card.dataset.category.toLowerCase();
-        card.classList.toggle("hidden", q && !text.includes(q));
-      });
+    function abrirCarrito() {
+      abrirWhatsApp('Hola Casa Mecha, quiero consultar por productos del catálogo.');
     }
 
-    document.getElementById("searchInput").addEventListener("input", e => filterProducts(e.target.value));
-    document.getElementById("searchInputMobile").addEventListener("input", e => filterProducts(e.target.value));
-    document.getElementById("searchClear").addEventListener("click", ()=>{
-      document.getElementById("searchInput").value = "";
-      filterProducts("");
-    });
-    document.getElementById("searchClearMobile").addEventListener("click", ()=>{
-      document.getElementById("searchInputMobile").value = "";
-      filterProducts("");
-    });
-
-    document.querySelectorAll(".category-card").forEach(card=>{
-      card.addEventListener("click", ()=>{
-        const filter = card.dataset.filter;
-        filterProducts(filter);
-        document.getElementById("productos").scrollIntoView({behavior:"smooth"});
-        showToast(`Filtrado: ${filter}`);
-      });
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach(link=>{
-      link.addEventListener("click", ()=>{
-        mobileMenu.classList.remove("open");
-      });
-    });
-
-    document.getElementById("newsletterForm").addEventListener("submit", (e)=>{
-      e.preventDefault();
-      const email = document.getElementById("newsletterEmail").value.trim();
-      if(!email){ showToast("Escribí tu correo"); return; }
-      showToast("Gracias por suscribirte");
-      e.target.reset();
-    });
-
-    renderCart();
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Store",
-    "name":"Casa Mecha Bazar",
-    "description":"Bazar online con envíos a todo el país.",
-    "url":"https://example.com",
-    "sameAs":[
-      "https://www.instagram.com/casamechabazar"
-    ]
-  }
+    function suscribir(event) {
+      event.preventDefault();
+      const input = event.target.querySelector('input[type="email"]');
+      const mail = input?.value?.trim() || '';
+      alert(`Gracias por suscribirte: ${mail}`);
+      event.target.reset();
+    }
   </script>
 </body>
 </html>
