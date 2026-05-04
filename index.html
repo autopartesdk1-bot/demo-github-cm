@@ -1,0 +1,3301 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Casa Mecha Bazar - Todo lo que necesitás, en un solo lugar</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --green-dark: #1a4a2e;
+        --green-mid: #2d6a45;
+        --green-light: #3d8a5a;
+        --green-accent: #4caf6f;
+        --cream: #f9f5ef;
+        --white: #ffffff;
+        --gray-light: #f4f4f4;
+        --gray-mid: #e8e8e8;
+        --gray-text: #666;
+        --dark: #1a1a1a;
+        --gold: #e8b84b;
+        --red-sale: #e74c3c;
+        --font-display: "Playfair Display", serif;
+        --font-body: "DM Sans", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-body);
+        color: var(--dark);
+        background: var(--white);
+        overflow-x: hidden;
+      }
+
+      /* ── TOP BAR ── */
+      .topbar {
+        background: var(--green-dark);
+        color: white;
+        font-size: 12px;
+        padding: 8px 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .topbar span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .topbar svg {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+      }
+
+      /* ── NAVBAR ── */
+      nav {
+        background: white;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--green-dark);
+      }
+      .logo-icon {
+        width: 44px;
+        height: 44px;
+        background: var(--green-dark);
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-weight: 700;
+        font-size: 11px;
+        text-align: center;
+        line-height: 1.1;
+        letter-spacing: 0.5px;
+        padding: 4px;
+      }
+      .brand-img {
+        width: 44px;
+        height: 44px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      .logo-text {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1;
+      }
+      .logo-text span {
+        display: block;
+        font-size: 9px;
+        font-family: var(--font-body);
+        letter-spacing: 3px;
+        font-style: normal;
+        font-weight: 400;
+        color: var(--green-mid);
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        list-style: none;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: var(--dark);
+        font-size: 13px;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--green-mid);
+      }
+      .nav-links a.active {
+        color: var(--green-dark);
+        font-weight: 700;
+        border-bottom: 2px solid var(--green-dark);
+        padding-bottom: 2px;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .search-box {
+        display: flex;
+        align-items: center;
+        border: 1.5px solid var(--gray-mid);
+        border-radius: 24px;
+        padding: 6px 14px;
+        gap: 8px;
+        font-size: 12px;
+        color: var(--gray-text);
+        background: var(--gray-light);
+      }
+      .search-box input {
+        border: none;
+        background: transparent;
+        outline: none;
+        font-family: var(--font-body);
+        font-size: 12px;
+        width: 120px;
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--dark);
+        border-radius: 2px;
+      }
+
+      /* ── HERO ── */
+      .hero {
+        background:
+          linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.95) 35%,
+            rgba(255, 255, 255, 0.7) 55%,
+            rgba(255, 255, 255, 0.2) 75%
+          ),
+          url("/img/home.png") right center / cover no-repeat;
+        padding: 60px 5% 50px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 40px;
+        min-height: 420px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 70% 50%,
+          rgba(77, 175, 111, 0.08) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-content h1 {
+        font-family: var(--font-display);
+        font-size: clamp(32px, 5vw, 58px);
+        color: var(--green-dark);
+        line-height: 1.05;
+        margin-bottom: 10px;
+      }
+      .hero-content h1 em {
+        display: block;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 0.75em;
+        color: var(--green-mid);
+      }
+      .hero-content p {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.6;
+        margin: 14px 0 28px;
+        max-width: 360px;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .btn-primary {
+        background: var(--green-dark);
+        color: white;
+        padding: 13px 26px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+        text-decoration: none;
+      }
+      .btn-primary:hover {
+        background: var(--green-mid);
+        transform: translateY(-1px);
+      }
+      .btn-outline {
+        border: 2px solid var(--green-dark);
+        color: var(--green-dark);
+        padding: 11px 22px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        background: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s;
+        text-decoration: none;
+      }
+      .btn-outline:hover {
+        background: var(--green-dark);
+        color: white;
+      }
+
+      /* ── TRUST BAR ── */
+      .trust-bar {
+        background: white;
+        border-top: 1px solid var(--gray-mid);
+        padding: 18px 5%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .trust-icon {
+        width: 36px;
+        height: 36px;
+        background: var(--green-dark);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: white;
+        font-size: 16px;
+        flex-shrink: 0;
+      }
+      .trust-text strong {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--dark);
+      }
+      .trust-text span {
+        font-size: 11px;
+        color: var(--gray-text);
+      }
+
+      /* ── SECTIONS ── */
+      section {
+        padding: 52px 5%;
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 36px;
+      }
+      .section-header h2 {
+        font-family: var(--font-display);
+        font-size: clamp(22px, 3vw, 30px);
+        color: var(--dark);
+        margin-bottom: 6px;
+      }
+      .section-header p {
+        font-size: 13px;
+        color: var(--gray-text);
+      }
+
+      /* ── CAROUSEL SECTION ── */
+      .carousel-section {
+        padding: 52px 5%;
+        background: white;
+      }
+      .carousel-outer {
+        position: relative;
+        overflow: hidden;
+      }
+      .carousel-track {
+        display: flex;
+        gap: 16px;
+        transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+        padding: 10px 2px 16px;
+      }
+
+      /* ── FLIP CARD ── */
+      .flip-card {
+        flex: 0 0 calc(25% - 12px);
+        min-width: 0;
+        height: 370px;
+        perspective: 1000px;
+        cursor: pointer;
+      }
+      .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 14px;
+      }
+      .flip-card.flipped .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+      .flip-front,
+      .flip-back {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--gray-mid);
+      }
+
+      /* FRONT */
+      .flip-front {
+        background: white;
+        display: flex;
+        flex-direction: column;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .flip-card:hover .flip-front {
+        border-color: #bbb;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+      }
+      .badge-sale {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--red-sale);
+        color: white;
+        border-radius: 50%;
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 700;
+        z-index: 2;
+        line-height: 1.1;
+        text-align: center;
+      }
+      .badge-new {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: var(--green-dark);
+        color: white;
+        border-radius: 6px;
+        padding: 3px 8px;
+        font-size: 10px;
+        font-weight: 700;
+        z-index: 2;
+        letter-spacing: 0.5px;
+      }
+      .product-img-wrap {
+        height: 180px;
+        overflow: hidden;
+        background: #f4f4f4;
+        flex-shrink: 0;
+        position: relative;
+      }
+      .product-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.35s ease;
+      }
+      .flip-card:hover .product-img-wrap img {
+        transform: scale(1.05);
+      }
+      .product-info {
+        padding: 13px 14px 14px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .product-cat {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--green-mid);
+        margin-bottom: 4px;
+      }
+      .product-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--dark);
+        line-height: 1.35;
+        margin-bottom: 6px;
+        flex: 1;
+      }
+      .product-stars {
+        color: var(--gold);
+        font-size: 11px;
+        margin-bottom: 8px;
+      }
+      .product-stars span {
+        color: var(--gray-text);
+        font-size: 11px;
+        margin-left: 2px;
+      }
+      .product-price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+      .price-now {
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--green-dark);
+      }
+      .price-old {
+        font-size: 12px;
+        color: var(--gray-text);
+        text-decoration: line-through;
+      }
+      .btn-ver-detalles {
+        width: 100%;
+        padding: 9px 0;
+        background: transparent;
+        color: var(--green-dark);
+        border: 2px solid var(--green-dark);
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.2s,
+          color 0.2s;
+        font-family: var(--font-body);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+      }
+      .btn-ver-detalles:hover {
+        background: var(--green-dark);
+        color: white;
+      }
+
+      /* BACK */
+      .flip-back {
+        background: var(--green-dark);
+        transform: rotateY(180deg);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 18px 18px;
+        color: white;
+      }
+      .back-img {
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 0 auto 12px;
+        flex-shrink: 0;
+        border: 2px solid rgba(255, 255, 255, 0.25);
+      }
+      .back-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .back-name {
+        font-family: var(--font-display);
+        font-size: 14px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 10px;
+        line-height: 1.3;
+      }
+      .back-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2);
+        margin-bottom: 10px;
+      }
+      .back-details {
+        font-size: 11.5px;
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.6;
+        flex: 1;
+        overflow: hidden;
+      }
+      .back-detail-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 7px;
+        margin-bottom: 5px;
+      }
+      .back-detail-row svg {
+        flex-shrink: 0;
+        margin-top: 2px;
+        opacity: 0.75;
+      }
+      .back-price-big {
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        text-align: center;
+        margin: 10px 0 12px;
+      }
+      .back-price-big span {
+        font-size: 13px;
+        font-weight: 400;
+        text-decoration: line-through;
+        color: rgba(255, 255, 255, 0.5);
+        margin-left: 6px;
+      }
+      .back-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .btn-wa {
+        width: 100%;
+        padding: 9px 0;
+        background: #25d366;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: var(--font-body);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        text-decoration: none;
+        transition: background 0.2s;
+        letter-spacing: 0.3px;
+      }
+      .btn-wa:hover {
+        background: #1daf55;
+      }
+      .btn-volver {
+        width: 100%;
+        padding: 8px 0;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: var(--font-body);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .btn-volver:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* CAROUSEL CONTROLS */
+      .carousel-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .ctrl-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1.5px solid var(--gray-mid);
+        background: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--dark);
+        transition:
+          background 0.2s,
+          border-color 0.2s,
+          color 0.2s;
+        flex-shrink: 0;
+      }
+      .ctrl-btn:hover {
+        background: var(--green-dark);
+        color: white;
+        border-color: var(--green-dark);
+      }
+      .ctrl-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+      .ctrl-btn:disabled:hover {
+        background: white;
+        color: var(--dark);
+        border-color: var(--gray-mid);
+      }
+      .cdots-wrap {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .cdot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gray-mid);
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          width 0.25s,
+          border-radius 0.25s;
+      }
+      .cdot.active {
+        background: var(--green-dark);
+        width: 18px;
+        border-radius: 4px;
+      }
+
+      /* ── CATEGORIES ── */
+      .categories-section {
+        background: var(--cream);
+      }
+      .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 16px;
+      }
+      .cat-card {
+        background: white;
+        border-radius: 14px;
+        overflow: hidden;
+        text-align: center;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .cat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+      .cat-img {
+        height: 110px;
+        display: grid;
+        place-items: center;
+        background: var(--gray-light);
+        font-size: 42px;
+        transition: transform 0.3s;
+      }
+      .cat-card:hover .cat-img {
+        transform: scale(1.05);
+      }
+      .cat-name {
+        padding: 10px 8px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: var(--dark);
+      }
+
+      /* ── OFFERS ── */
+      .offers-section {
+        background: var(--green-dark);
+        border-radius: 20px;
+        margin: 0 5% 52px;
+        padding: 40px 36px !important;
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 32px;
+        align-items: center;
+      }
+      .offers-left h2 {
+        font-family: var(--font-display);
+        color: white;
+        font-size: 28px;
+        line-height: 1.1;
+        margin-bottom: 10px;
+      }
+      .offers-left p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+      .offers-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+        gap: 14px;
+      }
+      .offer-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        transition: transform 0.2s;
+      }
+      .offer-card:hover {
+        transform: translateY(-3px);
+      }
+      .sale-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--red-sale);
+        color: white;
+        border-radius: 50%;
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .offer-img {
+        height: 110px;
+        display: grid;
+        place-items: center;
+        background: var(--gray-light);
+        font-size: 44px;
+      }
+      .offer-info {
+        padding: 10px 12px 14px;
+      }
+      .offer-info h4 {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 6px;
+        line-height: 1.3;
+      }
+      .offer-price {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+      .offer-price .price-now {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--green-dark);
+      }
+      .offer-price .price-old {
+        font-size: 11px;
+        color: var(--gray-text);
+        text-decoration: line-through;
+      }
+      .btn-outline-white {
+        border: 2px solid white;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        background: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+        text-decoration: none;
+        width: fit-content;
+      }
+      .btn-outline-white:hover {
+        background: white;
+        color: var(--green-dark);
+      }
+
+      /* ── PROMO STRIP ── */
+      .promo-strip {
+        background: white;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border: 1px solid var(--gray-mid);
+        border-radius: 14px;
+        margin: 0 5% 52px;
+        overflow: hidden;
+      }
+      .promo-item {
+        padding: 28px 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        border-right: 1px solid var(--gray-mid);
+      }
+      .promo-item:last-child {
+        border-right: none;
+      }
+      .promo-icon {
+        font-size: 36px;
+        flex-shrink: 0;
+      }
+      .promo-text strong {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 4px;
+      }
+      .promo-text span {
+        font-size: 12px;
+        color: var(--gray-text);
+      }
+
+      /* ── WHY US ── */
+      .why-section {
+        background: var(--cream);
+      }
+      .why-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        align-items: start;
+      }
+      .why-features {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .why-feature {
+        text-align: center;
+        padding: 24px 16px;
+      }
+      .why-icon {
+        font-size: 36px;
+        margin-bottom: 12px;
+      }
+      .why-feature h4 {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 6px;
+      }
+      .why-feature p {
+        font-size: 12px;
+        color: var(--gray-text);
+        line-height: 1.5;
+      }
+      .review-box {
+        background: white;
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .review-box h3 {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 16px;
+      }
+      .stars {
+        color: var(--gold);
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+      .review-text {
+        font-size: 13px;
+        color: #444;
+        line-height: 1.6;
+        font-style: italic;
+        margin-bottom: 10px;
+      }
+      .reviewer {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--green-dark);
+      }
+      .dots {
+        display: flex;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gray-mid);
+        cursor: pointer;
+      }
+      .dot.active {
+        background: var(--green-dark);
+      }
+
+      /* ── INSTAGRAM ── */
+      .insta-section {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        background: white;
+        padding: 40px 5%;
+        border-top: 1px solid var(--gray-mid);
+        border-bottom: 1px solid var(--gray-mid);
+      }
+      .insta-handle {
+        flex-shrink: 0;
+      }
+      .insta-handle strong {
+        display: block;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--dark);
+        margin-bottom: 4px;
+      }
+      .insta-handle span {
+        font-size: 12px;
+        color: var(--gray-text);
+      }
+      .insta-grid {
+        display: flex;
+        gap: 8px;
+        flex: 1;
+        overflow: hidden;
+      }
+      .insta-thumb {
+        flex: 1;
+        min-width: 60px;
+        height: 70px;
+        border-radius: 10px;
+        background: var(--gray-light);
+        display: grid;
+        place-items: center;
+        font-size: 24px;
+        overflow: hidden;
+      }
+      .btn-insta {
+        background: var(--green-dark);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .btn-insta:hover {
+        background: var(--green-mid);
+      }
+
+      /* ── NEWSLETTER ── */
+      .newsletter {
+        background: var(--green-dark);
+        padding: 40px 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      .newsletter-left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .newsletter-left svg {
+        color: white;
+        flex-shrink: 0;
+      }
+      .newsletter-left h3 {
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .newsletter-left p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 12px;
+        max-width: 300px;
+      }
+      .newsletter-form {
+        display: flex;
+        gap: 0;
+        flex: 1;
+        max-width: 440px;
+      }
+      .newsletter-form input {
+        flex: 1;
+        padding: 13px 18px;
+        border: none;
+        border-radius: 8px 0 0 8px;
+        font-family: var(--font-body);
+        font-size: 13px;
+        outline: none;
+      }
+      .newsletter-form button {
+        background: var(--dark);
+        color: white;
+        border: none;
+        padding: 13px 22px;
+        border-radius: 0 8px 8px 0;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.2s;
+        letter-spacing: 0.5px;
+      }
+      .newsletter-form button:hover {
+        background: #333;
+      }
+
+      /* ── FOOTER TOP ── */
+      .footer-trust {
+        background: #f7f7f7;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 24px 5%;
+        gap: 16px;
+        border-top: 1px solid var(--gray-mid);
+      }
+      .ft-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .ft-icon {
+        font-size: 22px;
+        color: var(--green-dark);
+        flex-shrink: 0;
+      }
+      .ft-item strong {
+        display: block;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--dark);
+      }
+      .ft-item span {
+        font-size: 10px;
+        color: var(--gray-text);
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        background: var(--green-dark);
+        color: white;
+        padding: 52px 5% 28px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr 1.4fr 1fr;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+      .footer-brand .logo-icon {
+        margin-bottom: 14px;
+      }
+      .footer-brand p {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.7;
+        margin-top: 10px;
+      }
+      footer h5 {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+      footer ul {
+        list-style: none;
+      }
+      footer ul li {
+        margin-bottom: 8px;
+      }
+      footer ul li a {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 12px;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      footer ul li a:hover {
+        color: white;
+      }
+      .contact-item {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .contact-item svg {
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .payment-icons {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .pay-badge {
+        background: white;
+        border-radius: 6px;
+        padding: 4px 10px;
+        font-size: 11px;
+        color: var(--dark);
+        font-weight: 700;
+      }
+      .pay-mercadopago {
+        background: #009ee3;
+        color: white;
+        border-radius: 6px;
+        padding: 5px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .transfer-badge {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border-radius: 6px;
+        padding: 6px 10px;
+        font-size: 11px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+        width: fit-content;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .footer-bottom span {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .footer-bottom a {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 11px;
+        text-decoration: none;
+      }
+      .footer-bottom a:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      /* ── WHATSAPP ── */
+      .wa-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 200;
+        background: #25d366;
+        color: white;
+        border-radius: 50px;
+        padding: 12px 20px;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+        text-decoration: none;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .wa-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5);
+      }
+
+      /* ── MOBILE NAV DRAWER ── */
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .mobile-menu.open {
+        display: block;
+      }
+      .mobile-drawer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 260px;
+        background: white;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        animation: slideIn 0.25s ease;
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+      .mobile-drawer a {
+        text-decoration: none;
+        color: var(--dark);
+        font-size: 15px;
+        font-weight: 500;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--gray-mid);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .mobile-drawer a:hover {
+        color: var(--green-dark);
+      }
+      .close-menu {
+        background: none;
+        border: none;
+        font-size: 22px;
+        cursor: pointer;
+        margin-bottom: 16px;
+        text-align: right;
+        align-self: flex-end;
+        color: var(--dark);
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 960px) {
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-grid > *:first-child {
+          grid-column: span 2;
+        }
+        .footer-trust {
+          grid-template-columns: 1fr 1fr;
+        }
+        .flip-card {
+          flex: 0 0 calc(33.333% - 11px);
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .search-box {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          padding: 40px 5% 32px;
+        }
+        .offers-section {
+          grid-template-columns: 1fr;
+          margin: 0 4% 40px;
+          padding: 28px 24px !important;
+        }
+        .promo-strip {
+          grid-template-columns: 1fr;
+          margin: 0 4% 40px;
+        }
+        .promo-item {
+          border-right: none;
+          border-bottom: 1px solid var(--gray-mid);
+        }
+        .promo-item:last-child {
+          border-bottom: none;
+        }
+        .why-grid {
+          grid-template-columns: 1fr;
+        }
+        .insta-section {
+          flex-wrap: wrap;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid > *:first-child {
+          grid-column: auto;
+        }
+        .footer-trust {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          text-align: center;
+        }
+        .newsletter {
+          flex-direction: column;
+        }
+        .newsletter-form {
+          max-width: 100%;
+          width: 100%;
+        }
+        .flip-card {
+          flex: 0 0 calc(50% - 8px);
+          height: 360px;
+        }
+      }
+      @media (max-width: 480px) {
+        .topbar {
+          font-size: 10px;
+          padding: 6px 10px;
+        }
+        .categories-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .footer-trust {
+          grid-template-columns: 1fr;
+        }
+        .offers-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .hero-btns {
+          flex-direction: column;
+        }
+        .hero-btns .btn-primary,
+        .hero-btns .btn-outline {
+          justify-content: center;
+        }
+        .flip-card {
+          flex: 0 0 calc(50% - 8px);
+          height: 340px;
+        }
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
+      }
+      .fade-in.visible {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <a href="#" class="logo">
+        <img src="/img/brand.png" alt="Casa Mecha" class="brand-img" />
+      </a>
+      <ul class="nav-links">
+        <li><a href="#" class="active">INICIO</a></li>
+        <li><a href="#">PRODUCTOS ▾</a></li>
+        <li><a href="#">CATEGORÍAS ▾</a></li>
+        <li><a href="#">OFERTAS</a></li>
+        <li><a href="#">NOSOTROS</a></li>
+        <li><a href="#">CONTACTO</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="search-box">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#999"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+          <input type="text" placeholder="Buscar productos..." />
+        </div>
+        <div
+          class="hamburger"
+          onclick="document.getElementById('mobileMenu').classList.add('open')"
+        >
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div
+      class="mobile-menu"
+      id="mobileMenu"
+      onclick="if (event.target === this) this.classList.remove('open');"
+    >
+      <div class="mobile-drawer">
+        <button
+          class="close-menu"
+          onclick="
+            document.getElementById('mobileMenu').classList.remove('open')
+          "
+        >
+          ✕
+        </button>
+        <a href="#">🏠 Inicio</a>
+        <a href="#">📦 Productos</a>
+        <a href="#">📂 Categorías</a>
+        <a href="#">🏷️ Ofertas</a>
+        <a href="#">ℹ️ Nosotros</a>
+        <a href="#">📞 Contacto</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero" style="padding: 60px 5% 50px">
+      <div class="hero-content fade-in">
+        <h1>TODO LO QUE<br />NECESITÁS,<em>en un solo lugar</em></h1>
+        <p>
+          Descubrí miles de productos para tu hogar, con la mejor calidad,
+          precios increíbles y envíos a todo el país.
+        </p>
+        <div class="hero-btns">
+          <a href="#" class="btn-primary">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="2" y="7" width="20" height="14" rx="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+            VER PRODUCTOS
+          </a>
+          <a href="#" class="btn-outline">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+              />
+            </svg>
+            VER OFERTAS
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar fade-in">
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <div class="trust-text">
+          <strong>Envíos rápidos</strong><span>A todo el país</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🔒</div>
+        <div class="trust-text">
+          <strong>Compra segura</strong><span>Tus datos protegidos</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <div class="trust-text">
+          <strong>Hasta 6 cuotas</strong><span>Sin interés</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🎧</div>
+        <div class="trust-text">
+          <strong>Atención personalizada</strong
+          ><span>Estamos para ayudarte</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- CARRUSEL DE PRODUCTOS CON FLIP                  -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="carousel-section fade-in">
+      <div class="section-header">
+        <h2>PRODUCTOS DESTACADOS</h2>
+        <p>
+          Los más elegidos de Casa Mecha Bazar — hacé click en "Ver detalles"
+          para saber más
+        </p>
+      </div>
+
+      <div class="carousel-outer">
+        <div class="carousel-track" id="carTrack">
+          <!-- CARD 1 -->
+          <div class="flip-card" id="fc0">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <div class="badge-sale">-20%</div>
+                <div class="badge-new">NUEVO</div>
+                <div class="product-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop&auto=format"
+                    alt="Frasco hermético"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <div class="product-cat">Organización</div>
+                  <div class="product-name">
+                    Frasco hermético de vidrio 1.2 L
+                  </div>
+                  <div class="product-stars">★★★★★ <span>(48)</span></div>
+                  <div class="product-price-row">
+                    <span class="price-now">$4.990</span>
+                    <span class="price-old">$6.200</span>
+                  </div>
+                  <button class="btn-ver-detalles" onclick="flipCard('fc0')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    VER DETALLES
+                  </button>
+                </div>
+              </div>
+              <div class="flip-back">
+                <div class="back-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=200&h=200&fit=crop&auto=format"
+                    alt=""
+                  />
+                </div>
+                <div class="back-name">Frasco hermético de vidrio 1.2 L</div>
+                <div class="back-divider"></div>
+                <div class="back-details">
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                      />
+                    </svg>
+                    Vidrio borosilicato de alta resistencia
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Cierre hermético con clip metálico
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Apto lavavajillas y microondas
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Capacidad: 1.2 litros
+                  </div>
+                </div>
+                <div class="back-price-big">$4.990 <span>$6.200</span></div>
+                <div class="back-btns">
+                  <a
+                    href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%20el%20Frasco%20herm%C3%A9tico%20de%20vidrio%201.2L"
+                    class="btn-wa"
+                    target="_blank"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                      />
+                    </svg>
+                    Consultar por WhatsApp
+                  </a>
+                  <button class="btn-volver" onclick="flipCard('fc0')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Volver
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="flip-card" id="fc1">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <div class="badge-sale">-15%</div>
+                <div class="product-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1544982503-9f984c14501a?w=400&h=300&fit=crop&auto=format"
+                    alt="Termo acero"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <div class="product-cat">Termos y Botellas</div>
+                  <div class="product-name">Termo acero inoxidable 1 L</div>
+                  <div class="product-stars">★★★★★ <span>(92)</span></div>
+                  <div class="product-price-row">
+                    <span class="price-now">$14.990</span>
+                    <span class="price-old">$17.600</span>
+                  </div>
+                  <button class="btn-ver-detalles" onclick="flipCard('fc1')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    VER DETALLES
+                  </button>
+                </div>
+              </div>
+              <div class="flip-back">
+                <div class="back-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1544982503-9f984c14501a?w=200&h=200&fit=crop&auto=format"
+                    alt=""
+                  />
+                </div>
+                <div class="back-name">Termo acero inoxidable 1 L</div>
+                <div class="back-divider"></div>
+                <div class="back-details">
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Doble pared con vacío térmico
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Mantiene calor 12 hs / frío 24 hs
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Tapa con válvula antigoteo
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Acero 18/8 libre de BPA
+                  </div>
+                </div>
+                <div class="back-price-big">$14.990 <span>$17.600</span></div>
+                <div class="back-btns">
+                  <a
+                    href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%20el%20Termo%20acero%20inoxidable%201L"
+                    class="btn-wa"
+                    target="_blank"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                      />
+                    </svg>
+                    Consultar por WhatsApp
+                  </a>
+                  <button class="btn-volver" onclick="flipCard('fc1')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Volver
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div class="flip-card" id="fc2">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <div class="badge-new">NUEVO</div>
+                <div class="product-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format"
+                    alt="Sartén"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <div class="product-cat">Cocina</div>
+                  <div class="product-name">
+                    Sartén antiadherente 28 cm premium
+                  </div>
+                  <div class="product-stars">★★★★☆ <span>(37)</span></div>
+                  <div class="product-price-row">
+                    <span class="price-now">$11.500</span>
+                  </div>
+                  <button class="btn-ver-detalles" onclick="flipCard('fc2')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    VER DETALLES
+                  </button>
+                </div>
+              </div>
+              <div class="flip-back">
+                <div class="back-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&h=200&fit=crop&auto=format"
+                    alt=""
+                  />
+                </div>
+                <div class="back-name">Sartén antiadherente 28 cm premium</div>
+                <div class="back-divider"></div>
+                <div class="back-details">
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Revestimiento cerámico antiadherente
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Apta para todo tipo de cocina
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Mango ergonómico antideslizante
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Diámetro 28 cm, sin PFOA
+                  </div>
+                </div>
+                <div class="back-price-big">$11.500</div>
+                <div class="back-btns">
+                  <a
+                    href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%20la%20Sart%C3%A9n%20antiadherente%2028cm"
+                    class="btn-wa"
+                    target="_blank"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                      />
+                    </svg>
+                    Consultar por WhatsApp
+                  </a>
+                  <button class="btn-volver" onclick="flipCard('fc2')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Volver
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="flip-card" id="fc3">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <div class="badge-sale">-20%</div>
+                <div class="product-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format"
+                    alt="Lámpara"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <div class="product-cat">Decoración</div>
+                  <div class="product-name">
+                    Lámpara de mesa minimalista LED
+                  </div>
+                  <div class="product-stars">★★★★★ <span>(21)</span></div>
+                  <div class="product-price-row">
+                    <span class="price-now">$15.990</span>
+                    <span class="price-old">$19.900</span>
+                  </div>
+                  <button class="btn-ver-detalles" onclick="flipCard('fc3')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    VER DETALLES
+                  </button>
+                </div>
+              </div>
+              <div class="flip-back">
+                <div class="back-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop&auto=format"
+                    alt=""
+                  />
+                </div>
+                <div class="back-name">Lámpara de mesa minimalista LED</div>
+                <div class="back-divider"></div>
+                <div class="back-details">
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Luz LED cálida regulable
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Base metálica antivuelco
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Puerto USB carga rápida integrado
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    3 modos de temperatura de color
+                  </div>
+                </div>
+                <div class="back-price-big">$15.990 <span>$19.900</span></div>
+                <div class="back-btns">
+                  <a
+                    href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%20la%20L%C3%A1mpara%20de%20mesa%20minimalista%20LED"
+                    class="btn-wa"
+                    target="_blank"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                      />
+                    </svg>
+                    Consultar por WhatsApp
+                  </a>
+                  <button class="btn-volver" onclick="flipCard('fc3')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Volver
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="flip-card" id="fc4">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <div class="product-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=400&h=300&fit=crop&auto=format"
+                    alt="Contenedores"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <div class="product-cat">Organización</div>
+                  <div class="product-name">Set contenedores herméticos x3</div>
+                  <div class="product-stars">★★★★★ <span>(64)</span></div>
+                  <div class="product-price-row">
+                    <span class="price-now">$6.990</span>
+                    <span class="price-old">$8.200</span>
+                  </div>
+                  <button class="btn-ver-detalles" onclick="flipCard('fc4')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    VER DETALLES
+                  </button>
+                </div>
+              </div>
+              <div class="flip-back">
+                <div class="back-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=200&h=200&fit=crop&auto=format"
+                    alt=""
+                  />
+                </div>
+                <div class="back-name">Set contenedores herméticos x3</div>
+                <div class="back-divider"></div>
+                <div class="back-details">
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Plástico libre de BPA certificado
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    3 tamaños: 500ml, 1L y 1.8L
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Apilables, ahorran espacio
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Aptos lavavajillas y freezer
+                  </div>
+                </div>
+                <div class="back-price-big">$6.990 <span>$8.200</span></div>
+                <div class="back-btns">
+                  <a
+                    href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%20el%20Set%20contenedores%20herm%C3%A9ticos%20x3"
+                    class="btn-wa"
+                    target="_blank"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                      />
+                    </svg>
+                    Consultar por WhatsApp
+                  </a>
+                  <button class="btn-volver" onclick="flipCard('fc4')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Volver
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 6 -->
+          <div class="flip-card" id="fc5">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <div class="badge-new">NUEVO</div>
+                <div class="product-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=300&fit=crop&auto=format"
+                    alt="Jabón"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <div class="product-cat">Cuidado Personal</div>
+                  <div class="product-name">Jabón natural artesanal set x4</div>
+                  <div class="product-stars">★★★★☆ <span>(18)</span></div>
+                  <div class="product-price-row">
+                    <span class="price-now">$3.490</span>
+                  </div>
+                  <button class="btn-ver-detalles" onclick="flipCard('fc5')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    VER DETALLES
+                  </button>
+                </div>
+              </div>
+              <div class="flip-back">
+                <div class="back-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=200&h=200&fit=crop&auto=format"
+                    alt=""
+                  />
+                </div>
+                <div class="back-name">Jabón natural artesanal set x4</div>
+                <div class="back-divider"></div>
+                <div class="back-details">
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    100% ingredientes naturales
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Aromas: lavanda, rosa, menta y coco
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Apto piel sensible, sin parabenos
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Ideal como regalo
+                  </div>
+                </div>
+                <div class="back-price-big">$3.490</div>
+                <div class="back-btns">
+                  <a
+                    href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%20el%20Jab%C3%B3n%20natural%20artesanal%20set%20x4"
+                    class="btn-wa"
+                    target="_blank"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                      />
+                    </svg>
+                    Consultar por WhatsApp
+                  </a>
+                  <button class="btn-volver" onclick="flipCard('fc5')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Volver
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 7 -->
+          <div class="flip-card" id="fc6">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <div class="badge-sale">-10%</div>
+                <div class="product-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=400&h=300&fit=crop&auto=format"
+                    alt="Escoba"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <div class="product-cat">Limpieza</div>
+                  <div class="product-name">
+                    Set escoba y recogedor diseño moderno
+                  </div>
+                  <div class="product-stars">★★★★★ <span>(55)</span></div>
+                  <div class="product-price-row">
+                    <span class="price-now">$5.900</span>
+                    <span class="price-old">$6.560</span>
+                  </div>
+                  <button class="btn-ver-detalles" onclick="flipCard('fc6')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    VER DETALLES
+                  </button>
+                </div>
+              </div>
+              <div class="flip-back">
+                <div class="back-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=200&h=200&fit=crop&auto=format"
+                    alt=""
+                  />
+                </div>
+                <div class="back-name">
+                  Set escoba y recogedor diseño moderno
+                </div>
+                <div class="back-divider"></div>
+                <div class="back-details">
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Cerdas de alta densidad antiestáticas
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Mango telescópico hasta 130 cm
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Sistema de enganche magnético
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Con gancho para colgar
+                  </div>
+                </div>
+                <div class="back-price-big">$5.900 <span>$6.560</span></div>
+                <div class="back-btns">
+                  <a
+                    href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%20el%20Set%20escoba%20y%20recogedor"
+                    class="btn-wa"
+                    target="_blank"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                      />
+                    </svg>
+                    Consultar por WhatsApp
+                  </a>
+                  <button class="btn-volver" onclick="flipCard('fc6')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Volver
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 8 -->
+          <div class="flip-card" id="fc7">
+            <div class="flip-card-inner">
+              <div class="flip-front">
+                <div class="badge-new">NUEVO</div>
+                <div class="product-img-wrap">
+                  <img
+                    src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=300&fit=crop&auto=format"
+                    alt="Botella"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="product-info">
+                  <div class="product-cat">Termos y Botellas</div>
+                  <div class="product-name">
+                    Botella deportiva 750 ml con filtro
+                  </div>
+                  <div class="product-stars">★★★★★ <span>(41)</span></div>
+                  <div class="product-price-row">
+                    <span class="price-now">$4.200</span>
+                  </div>
+                  <button class="btn-ver-detalles" onclick="flipCard('fc7')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M12 16v-4M12 8h.01" />
+                    </svg>
+                    VER DETALLES
+                  </button>
+                </div>
+              </div>
+              <div class="flip-back">
+                <div class="back-img">
+                  <img
+                    src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=200&h=200&fit=crop&auto=format"
+                    alt=""
+                  />
+                </div>
+                <div class="back-name">Botella deportiva 750 ml con filtro</div>
+                <div class="back-divider"></div>
+                <div class="back-details">
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Tritan libre de BPA ultra liviana
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Filtro de carbón activado incluido
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Tapa con pico abatible antigoteo
+                  </div>
+                  <div class="back-detail-row">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="9 11 12 14 22 4" />
+                      <path
+                        d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                      />
+                    </svg>
+                    Ideal para gym, trekking y oficina
+                  </div>
+                </div>
+                <div class="back-price-big">$4.200</div>
+                <div class="back-btns">
+                  <a
+                    href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%20la%20Botella%20deportiva%20750ml%20con%20filtro"
+                    class="btn-wa"
+                    target="_blank"
+                  >
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+                      />
+                    </svg>
+                    Consultar por WhatsApp
+                  </a>
+                  <button class="btn-volver" onclick="flipCard('fc7')">
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    Volver
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /track -->
+      </div>
+      <!-- /outer -->
+
+      <div class="carousel-controls">
+        <button class="ctrl-btn" id="carPrev" disabled>
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <div class="cdots-wrap" id="carDots"></div>
+        <button class="ctrl-btn" id="carNext">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </div>
+    </section>
+    <!-- ── FIN CARRUSEL ── -->
+
+    <!-- CATEGORIES -->
+    <section class="categories-section fade-in">
+      <div class="section-header">
+        <h2>COMPRÁ POR CATEGORÍA</h2>
+        <p>Explorá nuestras categorías y encontrá lo que necesitás</p>
+      </div>
+      <div class="categories-grid">
+        <div class="cat-card">
+          <div class="cat-img">🗂️</div>
+          <div class="cat-name">Organización</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-img">🍽️</div>
+          <div class="cat-name">Cocina</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-img">🍶</div>
+          <div class="cat-name">Termos y Botellas</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-img">🧹</div>
+          <div class="cat-name">Limpieza</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-img">🕯️</div>
+          <div class="cat-name">Decoración</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-img">🛁</div>
+          <div class="cat-name">Cuidado Personal</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFERS -->
+    <div class="offers-section fade-in" style="padding: 40px 36px">
+      <div class="offers-left">
+        <h2>OFERTAS QUE CONVIENEN</h2>
+        <p>Los mejores productos a precios increíbles</p>
+        <a href="#" class="btn-outline-white">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+            />
+          </svg>
+          VER TODAS LAS OFERTAS
+        </a>
+      </div>
+      <div class="offers-grid">
+        <div class="offer-card">
+          <div class="sale-badge">-20%</div>
+          <div class="offer-img">🫙</div>
+          <div class="offer-info">
+            <h4>Frasco de Vidrio Hermético 1.2L</h4>
+            <div class="offer-price">
+              <span class="price-now">$4.990</span
+              ><span class="price-old">$6.200</span>
+            </div>
+          </div>
+        </div>
+        <div class="offer-card">
+          <div class="sale-badge">-15%</div>
+          <div class="offer-img">📦</div>
+          <div class="offer-info">
+            <h4>Set Contenedores Herméticos x3</h4>
+            <div class="offer-price">
+              <span class="price-now">$6.990</span
+              ><span class="price-old">$8.200</span>
+            </div>
+          </div>
+        </div>
+        <div class="offer-card">
+          <div class="sale-badge">-15%</div>
+          <div class="offer-img">♨️</div>
+          <div class="offer-info">
+            <h4>Termo Acero Inoxidable 1L</h4>
+            <div class="offer-price">
+              <span class="price-now">$14.990</span
+              ><span class="price-old">$19.000</span>
+            </div>
+          </div>
+        </div>
+        <div class="offer-card">
+          <div class="sale-badge">-20%</div>
+          <div class="offer-img">💡</div>
+          <div class="offer-info">
+            <h4>Lámpara de Mesa Minimalista</h4>
+            <div class="offer-price">
+              <span class="price-now">$15.990</span
+              ><span class="price-old">$19.900</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROMO STRIP -->
+    <div class="promo-strip fade-in">
+      <div class="promo-item">
+        <div class="promo-icon">🏷️</div>
+        <div class="promo-text">
+          <strong>10% OFF<br />EN TU PRIMERA COMPRA</strong
+          ><span>Suscribite y recibí tu cupón</span>
+        </div>
+      </div>
+      <div class="promo-item">
+        <div class="promo-icon">📦</div>
+        <div class="promo-text">
+          <strong>NUEVOS INGRESOS<br />TODAS LAS SEMANAS</strong
+          ><span>Productos seleccionados para vos</span>
+        </div>
+      </div>
+      <div class="promo-item">
+        <div class="promo-icon">👥</div>
+        <div class="promo-text">
+          <strong>SUMATE A NUESTRA<br />COMUNIDAD</strong
+          ><span>Y enterate de todas las novedades</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY US -->
+    <section class="why-section fade-in">
+      <div class="section-header"><h2>¿POR QUÉ ELEGIR CASA MECHA?</h2></div>
+      <div class="why-grid">
+        <div class="why-features">
+          <div class="why-feature">
+            <div class="why-icon">✨</div>
+            <h4>Productos de calidad</h4>
+            <p>Seleccionamos lo mejor para tu hogar</p>
+          </div>
+          <div class="why-feature">
+            <div class="why-icon">💰</div>
+            <h4>Precios justos</h4>
+            <p>La mejor relación calidad-precio</p>
+          </div>
+          <div class="why-feature">
+            <div class="why-icon">🎧</div>
+            <h4>Atención personalizada</h4>
+            <p>Te acompañamos en cada compra</p>
+          </div>
+          <div class="why-feature">
+            <div class="why-icon">🛡️</div>
+            <h4>Confianza</h4>
+            <p>Miles de clientes satisfechos</p>
+          </div>
+        </div>
+        <div class="review-box">
+          <h3>LO QUE DICEN NUESTROS CLIENTES</h3>
+          <div class="stars">★★★★★</div>
+          <p class="review-text">
+            "Excelente atención y productos de calidad. Me llegó todo perfecto y
+            rapidísimo. ¡Muy recomendable!"
+          </p>
+          <div class="reviewer">— María G.</div>
+          <div class="dots">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <div class="insta-section fade-in">
+      <div class="insta-handle">
+        <strong>SEGUINOS EN INSTAGRAM</strong><span>@casamechabazar</span>
+      </div>
+      <div class="insta-grid">
+        <div class="insta-thumb">🍶</div>
+        <div class="insta-thumb">🌿</div>
+        <div class="insta-thumb">🏺</div>
+        <div class="insta-thumb">🧴</div>
+        <div class="insta-thumb">🕯️</div>
+      </div>
+      <a href="#" class="btn-insta">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <circle cx="12" cy="12" r="5" />
+          <circle
+            cx="17.5"
+            cy="6.5"
+            r="1.5"
+            fill="currentColor"
+            stroke="none"
+          />
+        </svg>
+        VER MÁS EN INSTAGRAM
+      </a>
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter fade-in">
+      <div class="newsletter-left">
+        <svg
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+          />
+          <polyline points="22,6 12,13 2,6" />
+        </svg>
+        <div>
+          <h3>NO TE PIERDAS NADA</h3>
+          <p>
+            Suscribite a nuestro newsletter y recibí ofertas exclusivas y
+            novedades en tu correo.
+          </p>
+        </div>
+      </div>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Tu correo electrónico" />
+        <button>SUSCRIBIRME</button>
+      </div>
+    </div>
+
+    <!-- FOOTER TRUST BAR -->
+    <div class="footer-trust">
+      <div class="ft-item">
+        <div class="ft-icon">🚚</div>
+        <div>
+          <strong>ENVÍOS A TODO EL PAÍS</strong
+          ><span>Llegamos a donde estés</span>
+        </div>
+      </div>
+      <div class="ft-item">
+        <div class="ft-icon">💳</div>
+        <div>
+          <strong>PAGÁ COMO QUIERAS</strong
+          ><span>Tarjetas, Transferencias y más</span>
+        </div>
+      </div>
+      <div class="ft-item">
+        <div class="ft-icon">📅</div>
+        <div>
+          <strong>HASTA 6 CUOTAS</strong
+          ><span>Sin interés en productos seleccionados</span>
+        </div>
+      </div>
+      <div class="ft-item">
+        <div class="ft-icon">🔒</div>
+        <div>
+          <strong>COMPRA 100% SEGURA</strong
+          ><span>Tus datos siempre protegidos</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div
+            class="logo-icon"
+            style="width: 50px; height: 50px; font-size: 12px"
+          >
+            CASA<br />MECHA
+          </div>
+          <p>
+            Tu bazar online de confianza.<br />Miles de productos para tu
+            hogar,<br />al mejor precio y con envíos<br />a todo el país.
+          </p>
+        </div>
+        <div>
+          <h5>Navegación</h5>
+          <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Productos</a></li>
+            <li><a href="#">Categorías</a></li>
+            <li><a href="#">Ofertas</a></li>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Categorías</h5>
+          <ul>
+            <li><a href="#">Organización</a></li>
+            <li><a href="#">Cocina</a></li>
+            <li><a href="#">Termos y Botellas</a></li>
+            <li><a href="#">Limpieza</a></li>
+            <li><a href="#">Decoración</a></li>
+            <li><a href="#">Cuidado Personal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contacto</h5>
+          <div class="contact-item">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.93 3.26 2 2 0 0 1 3.91 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+              /></svg
+            >362 456-7890
+          </div>
+          <div class="contact-item">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" /></svg
+            >@casamechabazar
+          </div>
+          <div class="contact-item">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              />
+              <polyline points="22,6 12,13 2,6" /></svg
+            >hola@casamecha.com.ar
+          </div>
+          <div class="contact-item">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" /></svg
+            >Resistencia, Chaco
+          </div>
+        </div>
+        <div>
+          <h5>Medios de Pago</h5>
+          <div class="payment-icons">
+            <div class="pay-badge">VISA</div>
+            <div class="pay-badge">MC</div>
+            <div class="pay-badge">AMEX</div>
+            <div class="pay-badge">CABAL</div>
+          </div>
+          <div class="transfer-badge" style="margin-top: 10px">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg
+            >TRANSFERENCIA BANCARIA
+          </div>
+          <div class="pay-mercadopago">💙 MercadoPago</div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 Casa Mecha Bazar. Todos los derechos reservados.</span>
+        <div style="display: flex; gap: 20px">
+          <a href="#">Términos y Condiciones</a
+          ><a href="#">Política de Privacidad</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/543624567890" class="wa-btn" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+        />
+      </svg>
+      Escribinos por WhatsApp
+    </a>
+
+    <script>
+      // ── FADE IN ──
+      const fadeEls = document.querySelectorAll(".fade-in");
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              obs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      fadeEls.forEach((el) => obs.observe(el));
+
+      // ── DOTS (review) ──
+      document.querySelectorAll(".dot").forEach((dot, i, dots) => {
+        dot.addEventListener("click", () => {
+          dots.forEach((d) => d.classList.remove("active"));
+          dot.classList.add("active");
+        });
+      });
+
+      // ── FLIP CARDS ──
+      function flipCard(id) {
+        const card = document.getElementById(id);
+        card.classList.toggle("flipped");
+      }
+
+      // ── CAROUSEL ──
+      (function () {
+        const track = document.getElementById("carTrack");
+        const prevBtn = document.getElementById("carPrev");
+        const nextBtn = document.getElementById("carNext");
+        const dotsWrap = document.getElementById("carDots");
+        const cards = Array.from(track.querySelectorAll(".flip-card"));
+        const total = cards.length;
+        let perPage =
+          window.innerWidth < 768 ? 2 : window.innerWidth < 960 ? 3 : 4;
+        let current = 0;
+
+        function pages() {
+          return Math.ceil(total / perPage);
+        }
+
+        function buildDots() {
+          dotsWrap.innerHTML = "";
+          for (let i = 0; i < pages(); i++) {
+            const d = document.createElement("div");
+            d.className = "cdot" + (i === current ? " active" : "");
+            d.addEventListener("click", () => goTo(i));
+            dotsWrap.appendChild(d);
+          }
+        }
+
+        function updateDots() {
+          Array.from(dotsWrap.children).forEach((d, i) => {
+            d.className = "cdot" + (i === current ? " active" : "");
+          });
+        }
+
+        function goTo(page) {
+          current = Math.max(0, Math.min(page, pages() - 1));
+          const cardW = cards[0].getBoundingClientRect().width + 16;
+          track.style.transform = `translateX(-${current * perPage * cardW}px)`;
+          prevBtn.disabled = current === 0;
+          nextBtn.disabled = current === pages() - 1;
+          updateDots();
+        }
+
+        prevBtn.addEventListener("click", () => goTo(current - 1));
+        nextBtn.addEventListener("click", () => goTo(current + 1));
+        buildDots();
+        goTo(0);
+
+        window.addEventListener("resize", () => {
+          const np =
+            window.innerWidth < 768 ? 2 : window.innerWidth < 960 ? 3 : 4;
+          if (np !== perPage) {
+            perPage = np;
+            current = 0;
+            buildDots();
+            goTo(0);
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
