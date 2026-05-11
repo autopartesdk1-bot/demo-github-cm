@@ -6,7 +6,10 @@
     <title>Casa Mecha | Catálogo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         --green-dark: #1a4a2e;
@@ -22,235 +25,796 @@
         --font-display: "Playfair Display", serif;
         --font-body: "DM Sans", sans-serif;
       }
-      *{ box-sizing:border-box;margin:0;padding:0 }
-      html{ scroll-behavior:smooth }
-      html,body{ max-width:100%;overflow-x:hidden }
-      body{ font-family:var(--font-body);color:var(--text);background:linear-gradient(180deg,#fbfaf7 0%,#f7f4ee 100%) }
-      a{ text-decoration:none;color:inherit }
-      img{ display:block;max-width:100% }
-      button,input,select{ font:inherit }
-      .shell{ width:min(1200px,calc(100% - 32px));margin:0 auto }
 
-      header{
-        position:sticky;top:0;z-index:20;
-        background:rgba(249,245,239,.95);
-        backdrop-filter:blur(10px); 
-        
-        border-bottom:1px solid rgba(26,74,46,.08);
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-      .header-inner{
-        min-height:78px;display:grid;
-        grid-template-columns:auto minmax(240px,1fr) auto;
-        align-items:center;gap:16px;padding:12px 0;
+      html {
+        scroll-behavior: smooth;
       }
-      .brand{ display:flex;align-items:center;gap:12px;min-width:0 }
-      .brand-badge{
-        width:54px;height:54px;border-radius:50%;background:#fff;
-        box-shadow:var(--shadow);overflow:hidden;flex-shrink:0;
-        display:grid;place-items:center;border:1px solid rgba(26,74,46,.08);
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
       }
-      .brand-badge img{ width:100%;height:100%;object-fit:contain;padding:4px }
-      .brand-text{ line-height:1 }
-      .brand-text h1{ font-family:var(--font-display);font-size:18px;color:var(--green-dark);margin-bottom:4px }
-      .brand-text span{ display:block;font-size:10px;letter-spacing:3px;color:var(--green-mid);text-transform:uppercase }
-
-      .search-wrap{ display:flex;justify-content:center }
-      .search-wrap input{
-        width:min(100%,480px);border:1px solid rgba(26,74,46,.14);background:#fff;
-        border-radius:999px;padding:12px 16px;outline:none;
-        font-family:var(--font-body);font-size:14px;color:var(--text);
-        box-shadow:0 6px 18px rgba(0,0,0,.04);
-      }
-      .search-wrap input::placeholder{ color:#999 }
-      .search-wrap input:focus{ border-color:var(--green-mid);box-shadow:0 0 0 4px rgba(45,106,69,.08) }
-      .status{ display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px;white-space:nowrap }
-      .dot{ width:10px;height:10px;border-radius:50%;background:#d8a63a;box-shadow:0 0 0 4px rgba(216,166,58,.14) }
-
-      .hero{ padding:22px 0 10px }
-      .hero-card{
-        position:relative;border:1px solid rgba(26,74,46,.08);border-radius:24px;
-        box-shadow:var(--shadow);overflow:hidden;min-height:340px;
-        display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;
-      }
-      .hero-card .hero-bg{ position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0 }
-      .hero-card::after{
-        content:"";position:absolute;inset:0;z-index:1;
-        background:linear-gradient(100deg,rgba(251,244,234,.92) 0%,rgba(241,231,217,.8) 55%,rgba(241,231,217,.1) 100%);
-      }
-      .hero-content{ position:relative;z-index:2;padding:32px 28px }
-      .hero h2{ font-family:var(--font-display);font-size:clamp(28px,4.8vw,54px);color:var(--green-dark);line-height:1.03;margin-bottom:10px }
-      .hero h2 em{ display:block;font-style:italic;color:var(--green-mid);font-weight:400;font-size:.78em }
-      .hero p{ color:var(--muted);line-height:1.7;font-size:15px;max-width:560px;margin-bottom:18px }
-      .hero-actions{ display:flex;gap:10px;flex-wrap:wrap }
-      .btn{ display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:12px;font-weight:700;font-size:14px;transition:.2s;border:2px solid transparent }
-      .btn-primary{ background:var(--green-dark);color:#fff;border-color:var(--green-dark) }
-      .btn-primary:hover{ background:var(--green-mid);border-color:var(--green-mid) }
-      .btn-outline{ background:#fff;color:var(--green-dark);border-color:rgba(26,74,46,.18) }
-      .btn-outline:hover{ border-color:var(--green-dark) }
-      .hero-spacer{ position:relative;z-index:2 }
-
-      .layout{ display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;padding:10px 0 34px;align-items:start }
-      .sidebar{
-        position:sticky;top:88px;align-self:start;
-        background:rgba(255,255,255,.88);backdrop-filter:blur(8px);
-        border:1px solid var(--line);border-radius:20px;padding:16px;
-        box-shadow:var(--shadow);max-height:calc(100vh - 104px);
-        overflow-y:auto;scrollbar-width:none;
-      }
-      .sidebar::-webkit-scrollbar{ display:none }
-      .sidebar h3{ font-family:var(--font-display);color:var(--green-dark);font-size:22px;margin-bottom:6px }
-      .sidebar p{ color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:14px }
-      .cat-list{ display:grid;gap:8px }
-      .cat-pill{
-        width:100%;background:var(--green-soft);border:1px solid rgba(26,74,46,.08);
-        padding:11px 12px;border-radius:999px;font-size:13px;font-weight:700;color:var(--green-dark);
-        display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:.2s;
-      }
-      .cat-pill:hover{ transform:translateX(2px);background:#fff }
-      .cat-pill.active{ background:var(--green-dark);color:#fff }
-      .content{ min-width:0 }
-      .toolbar{
-        display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
-        margin-bottom:16px;padding:8px 0 14px;border-bottom:1px solid var(--line);
-      }
-      .toolbar h3{ font-family:var(--font-display);font-size:26px;color:var(--green-dark);margin-bottom:4px }
-      .toolbar p{ color:var(--muted);font-size:13px }
-      .sort{
-        display:inline-flex;align-items:center;gap:8px;background:#fff;
-        border:1px solid var(--line);border-radius:12px;padding:10px 12px;
-        font-size:13px;color:var(--muted);box-shadow:0 4px 12px rgba(0,0,0,.03);
-      }
-      .sort select{ border:none;outline:none;background:transparent;font-family:var(--font-body);font-size:13px;color:var(--text);cursor:pointer }
-
-      .grid{ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px }
-      .card{
-        background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;
-        box-shadow:0 6px 20px rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;
-        width:100%;cursor:pointer;
-      }
-      .card:hover{ transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.08) }
-      .card-img{ position:relative;height:220px;background:var(--cream) }
-      .card-img img{ width:100%;height:100%;object-fit:cover }
-      .badge{
-        position:absolute;top:12px;left:12px;background:var(--green-dark);color:#fff;
-        padding:6px 10px;border-radius:999px;font-size:11px;font-weight:700;
-      }
-      .card-body{ padding:14px 14px 16px }
-      .card-cat{ color:var(--green-mid);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px }
-      .card h4{ font-size:15px;line-height:1.35;margin-bottom:8px;color:var(--text) }
-      .stars{ color:var(--gold);font-size:12px;margin-bottom:10px }
-      .price-row{ display:flex;align-items:baseline;gap:8px;margin-bottom:12px }
-      .price-now{ font-size:22px;font-weight:700;color:var(--green-dark) }
-      .price-old{ font-size:13px;color:var(--muted);text-decoration:line-through }
-      .btn-wa{
-        display:inline-flex;align-items:center;justify-content:center;width:100%;
-        padding:11px 14px;border-radius:12px;background:#25d366;color:#fff;
-        font-size:13px;font-weight:700;transition:.2s;
-      }
-      .btn-wa:hover{ background:#1daf55 }
-
-      .info-strip{ margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px }
-      .info-box{ background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,.04) }
-      .info-box strong{ display:block;color:var(--green-dark);font-size:14px;margin-bottom:4px }
-      .info-box span{ display:block;color:var(--muted);font-size:13px;line-height:1.5 }
-
-      .footer-cta{
-        margin-top:10px;background:var(--green-dark);color:#fff;padding:28px 0;
-        border-top-left-radius:28px;border-top-right-radius:28px;
-      }
-      .footer-cta-inner{ display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap }
-      .footer-cta h3{ font-family:var(--font-display);font-size:24px;margin-bottom:4px }
-      .footer-cta p{ color:rgba(255,255,255,.72);font-size:14px }
-      .footer-cta .btn-outline{ color:#fff;background:transparent;border-color:#fff }
-      footer{ background:#163d26;color:rgba(255,255,255,.72);font-size:12px;padding:18px 0 }
-      .wa-float{
-        position:fixed;right:18px;bottom:18px;z-index:30;
-        background:#25d366;color:#fff;padding:12px 16px;border-radius:999px;
-        font-size:13px;font-weight:700;box-shadow:0 10px 22px rgba(37,211,102,.34);
+      body {
+        font-family: var(--font-body);
+        color: var(--text);
+        background: linear-gradient(180deg, #fbfaf7 0%, #f7f4ee 100%);
       }
 
-      /* ── MODAL ── */
-      #previewModal{ display:none!important }
-      #previewModal.open{ display:flex!important }
-      @keyframes modalIn{
-        from{opacity:0;transform:scale(.94) translateY(12px)}
-        to{opacity:1;transform:none}
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      button,
+      input,
+      select {
+        font: inherit;
       }
 
-      /* ── RESPONSIVE ── */
-      @media(max-width:1024px){
-        .hero-card{ grid-template-columns:1fr }
-        .hero-spacer{ display:none }
-        .layout{ grid-template-columns:1fr }
-        .sidebar{ position:relative;top:auto;max-height:none;overflow-y:visible }
-        .grid{ grid-template-columns:repeat(2,minmax(0,1fr)) }
-        .info-strip{ grid-template-columns:repeat(2,1fr) }
+      .shell {
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
       }
-      @media(max-width:768px){
-        .shell{ width:calc(100% - 32px) }
-        .header-inner{ grid-template-columns:1fr;gap:10px;text-align:center;padding:10px 0 }
-        .brand{ justify-content:center }
-        .search-wrap{ width:100%;justify-content:stretch }
-        .search-wrap input{ width:100% }
-        .status{ display:none }
-        .hero{ padding:14px 0 10px }
-        .hero-card{ border-radius:20px;gap:14px;min-height:280px }
-        .hero-content{ padding:24px 20px }
-        .hero h2{ font-size:32px;line-height:1.08 }
-        .hero p{ font-size:14px }
-        .hero-actions{ flex-direction:column }
-        .hero-actions .btn{ width:100% }
-        .layout{ grid-template-columns:1fr;gap:14px }
-        .sidebar{ width:100%;position:static;padding:12px;border-radius:18px;max-height:none }
-        .sidebar h3,.sidebar p{ display:none }
-        .cat-list{ display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:4px }
-        .cat-list::-webkit-scrollbar{ display:none }
-        .cat-pill{ flex:0 0 auto;width:auto;min-width:max-content;border-radius:999px;padding:10px 14px;justify-content:center;font-size:12px;white-space:nowrap }
-        .cat-pill span:last-child{ display:none }
-        .toolbar{ flex-direction:column;align-items:flex-start;gap:10px }
-        .toolbar h3{ font-size:24px }
-        .sort{ width:100%;justify-content:space-between }
-        .sort select{ width:100% }
-        .grid{ grid-template-columns:1fr;gap:14px }
-        .card-img{ height:240px }
-        .card-body{ padding:12px }
-        .price-now{ font-size:22px }
-        .info-strip{ grid-template-columns:1fr }
-        .footer-cta{ border-top-left-radius:22px;border-top-right-radius:22px;padding-left:16px;padding-right:16px }
-        .footer-cta-inner{ flex-direction:column;align-items:flex-start }
-        .footer-cta .btn{ width:100% }
-        .wa-float{ right:12px;bottom:12px }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(249, 245, 239, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(26, 74, 46, 0.08);
       }
-      @media(max-width:480px){
-        .brand-badge{ width:48px;height:48px }
-        .brand-text h1{ font-size:16px }
-        .hero h2{ font-size:28px }
-        .hero-card{ min-height:240px }
-        .hero-content{ padding:20px 16px }
-        .toolbar h3{ font-size:22px }
-        .card-img{ height:210px }
-        .card h4{ font-size:14px }
-        .price-now{ font-size:20px }
-        .btn,.btn-wa{ min-height:44px }
+      .header-inner {
+        min-height: 78px;
+        display: grid;
+        grid-template-columns: auto minmax(240px, 1fr) auto;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 0;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+      .brand-badge {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(26, 74, 46, 0.08);
+      }
+      .brand-badge img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 6px;
+      }
+      .brand-text {
+        line-height: 1;
+      }
+      .brand-text h1 {
+        font-family: var(--font-display);
+        font-size: 18px;
+        color: var(--green-dark);
+        margin-bottom: 4px;
+      }
+      .brand-text span {
+        display: block;
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--green-mid);
+        text-transform: uppercase;
+      }
+
+      .search-wrap {
+        display: flex;
+        justify-content: center;
+      }
+      .search-wrap input {
+        width: min(100%, 480px);
+        border: 1px solid rgba(26, 74, 46, 0.14);
+        background: #fff;
+        border-radius: 999px;
+        padding: 12px 16px;
+        outline: none;
+        font-family: var(--font-body);
+        font-size: 14px;
+        color: var(--text);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+      }
+      .search-wrap input::placeholder {
+        color: #999;
+      }
+      .search-wrap input:focus {
+        border-color: var(--green-mid);
+        box-shadow: 0 0 0 4px rgba(45, 106, 69, 0.08);
+      }
+
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #d8a63a;
+        box-shadow: 0 0 0 4px rgba(216, 166, 58, 0.14);
+      }
+
+      .hero {
+        padding: 22px 0 10px;
+      }
+
+      .hero-card {
+        position: relative;
+        border: 1px solid rgba(26, 74, 46, 0.08);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        min-height: 340px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .hero-card .hero-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: 0;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          100deg,
+          rgba(251, 244, 234, 0.92) 0%,
+          rgba(241, 231, 217, 0.8) 55%,
+          rgba(241, 231, 217, 0.1) 100%
+        );
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 32px 28px;
+      }
+
+      .hero h2 {
+        font-family: var(--font-display);
+        font-size: clamp(28px, 4.8vw, 54px);
+        color: var(--green-dark);
+        line-height: 1.03;
+        margin-bottom: 10px;
+      }
+      .hero h2 em {
+        display: block;
+        font-style: italic;
+        color: var(--green-mid);
+        font-weight: 400;
+        font-size: 0.78em;
+      }
+      .hero p {
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 15px;
+        max-width: 560px;
+        margin-bottom: 18px;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 11px 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        transition: 0.2s;
+        border: 2px solid transparent;
+      }
+      .btn-primary {
+        background: var(--green-dark);
+        color: #fff;
+        border-color: var(--green-dark);
+      }
+      .btn-primary:hover {
+        background: var(--green-mid);
+        border-color: var(--green-mid);
+      }
+      .btn-outline {
+        background: #fff;
+        color: var(--green-dark);
+        border-color: rgba(26, 74, 46, 0.18);
+      }
+      .btn-outline:hover {
+        border-color: var(--green-dark);
+      }
+
+      .hero-spacer {
+        position: relative;
+        z-index: 2;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 230px minmax(0, 1fr);
+        gap: 18px;
+        padding: 10px 0 34px;
+        align-items: start;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 88px;
+        align-self: start;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+        max-height: calc(100vh - 104px);
+        overflow-y: auto;
+        scrollbar-width: none;
+      }
+      .sidebar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .sidebar h3 {
+        font-family: var(--font-display);
+        color: var(--green-dark);
+        font-size: 22px;
+        margin-bottom: 6px;
+      }
+      .sidebar p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+        margin-bottom: 14px;
+      }
+
+      .cat-list {
+        display: grid;
+        gap: 8px;
+      }
+      .cat-pill {
+        width: 100%;
+        background: var(--green-soft);
+        border: 1px solid rgba(26, 74, 46, 0.08);
+        padding: 11px 12px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--green-dark);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .cat-pill:hover {
+        transform: translateX(2px);
+        background: #fff;
+      }
+      .cat-pill.active {
+        background: var(--green-dark);
+        color: #fff;
+      }
+
+      .content {
+        min-width: 0;
+      }
+      .toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+        padding: 8px 0 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      .toolbar h3 {
+        font-family: var(--font-display);
+        font-size: 26px;
+        color: var(--green-dark);
+        margin-bottom: 4px;
+      }
+      .toolbar p {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .sort {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-size: 13px;
+        color: var(--muted);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      }
+      .sort select {
+        border: none;
+        outline: none;
+        background: transparent;
+        font-family: var(--font-body);
+        font-size: 13px;
+        color: var(--text);
+        cursor: pointer;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+        width: 100%;
+        cursor: pointer;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      }
+      .card-img {
+        position: relative;
+        height: 220px;
+        background: var(--cream);
+        overflow: hidden;
+      }
+      .card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: var(--green-dark);
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .card-body {
+        padding: 14px 14px 16px;
+      }
+      .card-cat {
+        color: var(--green-mid);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+      .card h4 {
+        font-size: 15px;
+        line-height: 1.35;
+        margin-bottom: 8px;
+        color: var(--text);
+      }
+      .stars {
+        color: var(--gold);
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+      .price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+      }
+      .price-now {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--green-dark);
+      }
+      .price-old {
+        font-size: 13px;
+        color: var(--muted);
+        text-decoration: line-through;
+      }
+      .btn-wa {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 12px;
+        background: #25d366;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        transition: 0.2s;
+      }
+      .btn-wa:hover {
+        background: #1daf55;
+      }
+
+      .info-strip {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+      .info-box {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+      }
+      .info-box strong {
+        display: block;
+        color: var(--green-dark);
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .info-box span {
+        display: block;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .footer-cta {
+        margin-top: 10px;
+        background: var(--green-dark);
+        color: #fff;
+        padding: 28px 0;
+        border-top-left-radius: 28px;
+        border-top-right-radius: 28px;
+      }
+      .footer-cta-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .footer-cta h3 {
+        font-family: var(--font-display);
+        font-size: 24px;
+        margin-bottom: 4px;
+      }
+      .footer-cta p {
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 14px;
+      }
+      .footer-cta .btn-outline {
+        color: #fff;
+        background: transparent;
+        border-color: #fff;
+      }
+
+      footer {
+        background: #163d26;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 12px;
+        padding: 18px 0;
+      }
+
+      .wa-float {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 30;
+        background: #25d366;
+        color: #fff;
+        padding: 12px 16px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        box-shadow: 0 10px 22px rgba(37, 211, 102, 0.34);
+      }
+
+      #previewModal {
+        display: none !important;
+      }
+      #previewModal.open {
+        display: flex !important;
+      }
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: scale(0.94) translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .hero-card {
+          grid-template-columns: 1fr;
+        }
+        .hero-spacer {
+          display: none;
+        }
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          position: relative;
+          top: auto;
+          max-height: none;
+          overflow-y: visible;
+        }
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .info-strip {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .shell {
+          width: calc(100% - 32px);
+        }
+
+        .header-inner {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          text-align: center;
+          padding: 10px 0;
+        }
+        .brand {
+          justify-content: center;
+        }
+        .search-wrap {
+          width: 100%;
+          justify-content: stretch;
+        }
+        .search-wrap input {
+          width: 100%;
+        }
+        .status {
+          display: none;
+        }
+
+        .hero {
+          padding: 14px 0 10px;
+        }
+        .hero-card {
+          border-radius: 20px;
+          gap: 14px;
+          min-height: 280px;
+        }
+        .hero-content {
+          padding: 24px 20px;
+        }
+        .hero h2 {
+          font-size: 32px;
+          line-height: 1.08;
+        }
+        .hero p {
+          font-size: 14px;
+        }
+        .hero-actions {
+          flex-direction: column;
+        }
+        .hero-actions .btn {
+          width: 100%;
+        }
+
+        .layout {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .sidebar {
+          width: 100%;
+          position: static;
+          padding: 12px;
+          border-radius: 18px;
+          overflow: hidden;
+          max-height: none;
+        }
+        .sidebar h3,
+        .sidebar p {
+          display: none;
+        }
+
+        .cat-list {
+          display: flex;
+          flex-wrap: nowrap;
+          gap: 8px;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 4px;
+        }
+        .cat-list::-webkit-scrollbar {
+          display: none;
+        }
+        .cat-pill {
+          flex: 0 0 auto;
+          width: auto;
+          min-width: max-content;
+          border-radius: 999px;
+          padding: 10px 14px;
+          justify-content: center;
+          font-size: 12px;
+          white-space: nowrap;
+        }
+        .cat-pill span:last-child {
+          display: none;
+        }
+
+        .content {
+          min-width: 0;
+        }
+
+        .toolbar {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .toolbar h3 {
+          font-size: 24px;
+          line-height: 1.05;
+        }
+        .sort {
+          width: 100%;
+          justify-content: space-between;
+        }
+        .sort select {
+          width: 100%;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+        .card-img {
+          height: 240px;
+        }
+        .card-body {
+          padding: 12px;
+        }
+        .price-now {
+          font-size: 22px;
+        }
+
+        .info-strip {
+          grid-template-columns: 1fr;
+        }
+        .footer-cta {
+          border-top-left-radius: 22px;
+          border-top-right-radius: 22px;
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        .footer-cta-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .footer-cta .btn {
+          width: 100%;
+        }
+        footer {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+        .wa-float {
+          right: 12px;
+          bottom: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .brand-badge {
+          width: 48px;
+          height: 48px;
+        }
+        .brand-text h1 {
+          font-size: 16px;
+        }
+        .brand-text span {
+          letter-spacing: 2px;
+        }
+        .hero h2 {
+          font-size: 28px;
+        }
+        .hero-card {
+          min-height: 240px;
+        }
+        .hero-content {
+          padding: 20px 16px;
+        }
+        .toolbar h3 {
+          font-size: 22px;
+        }
+        .card-img {
+          height: 210px;
+        }
+        .card h4 {
+          font-size: 14px;
+        }
+        .price-now {
+          font-size: 20px;
+        }
+        .btn,
+        .btn-wa {
+          min-height: 44px;
+        }
       }
     </style>
   </head>
   <body>
-
     <header>
       <div class="shell header-inner">
         <a class="brand" href="#inicio">
           <div class="brand-badge">
-          <img src="img-1/ChatGPT Image 30 abr 2026, 07_19_56 p.m..png" alt="logo">
-        </div>
+            <img
+              src="img-1/ChatGPT Image 30 abr 2026, 07_19_56 p.m..png"
+              alt="Casa Mecha"
+            />
+          </div>
           <div class="brand-text">
             <h1>Casa Mecha</h1>
             <span>BAZAR &amp; DECO</span>
           </div>
         </a>
+
         <div class="search-wrap">
-          <input type="search" id="searchInput" placeholder="Buscar productos..." aria-label="Buscar productos" />
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Buscar productos..."
+            aria-label="Buscar productos"
+          />
         </div>
+
         <div class="status">
           <span class="dot"></span>
           Abierto
@@ -262,14 +826,24 @@
       <section class="hero">
         <div class="hero-card">
           <img class="hero-bg" src="img/home.png" alt="" aria-hidden="true" />
+
           <div class="hero-content">
             <h2>Todo para tu hogar,<em>ordenado y fácil de comprar</em></h2>
-            <p>Bazar &amp; Deco. Encontrá todo lo que necesitás con la mejor calidad y precio.</p>
+            <p>
+              Bazar &amp; Deco. Encontrá todo lo que necesitás con la mejor
+              calidad y precio.
+            </p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#productos">Ver catálogo</a>
-              <a class="btn btn-outline" href="https://wa.me/543624567890" target="_blank">Consultar por WhatsApp</a>
+              <a
+                class="btn btn-outline"
+                href="https://wa.me/543624567890"
+                target="_blank"
+                >Consultar por WhatsApp</a
+              >
             </div>
           </div>
+
           <div class="hero-spacer"></div>
         </div>
       </section>
@@ -279,13 +853,24 @@
           <h3>Categorías</h3>
           <p>Filtrá por categoría para encontrar lo que buscás.</p>
           <div class="cat-list" id="catList">
-            <!-- Los contadores se calculan automáticamente al cargar -->
-            <button class="cat-pill active" type="button" data-cat="all"><span>Todo</span><span>0</span></button>
-            <button class="cat-pill" type="button" data-cat="organizador"><span>Organizador</span><span>0</span></button>
-            <button class="cat-pill" type="button" data-cat="organizacion"><span>Organización</span><span>0</span></button>
-            <button class="cat-pill" type="button" data-cat="cocina"><span>Cocina</span><span>0</span></button>
-            <button class="cat-pill" type="button" data-cat="hogar"><span>Hogar</span><span>0</span></button>
-            <button class="cat-pill" type="button" data-cat="tecnologia"><span>Tecnología</span><span>0</span></button>
+            <button class="cat-pill active" type="button" data-cat="all">
+              <span>Todo</span><span>0</span>
+            </button>
+            <button class="cat-pill" type="button" data-cat="organizador">
+              <span>Organizador</span><span>0</span>
+            </button>
+            <button class="cat-pill" type="button" data-cat="organizacion">
+              <span>Organización</span><span>0</span>
+            </button>
+            <button class="cat-pill" type="button" data-cat="cocina">
+              <span>Cocina</span><span>0</span>
+            </button>
+            <button class="cat-pill" type="button" data-cat="hogar">
+              <span>Hogar</span><span>0</span>
+            </button>
+            <button class="cat-pill" type="button" data-cat="tecnologia">
+              <span>Tecnología</span><span>0</span>
+            </button>
           </div>
         </aside>
 
@@ -306,354 +891,960 @@
           </div>
 
           <div class="grid" id="productGrid">
-
-            <article class="card" data-name="organizador zapatillas" data-price="27900" data-cat="organizador">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/zapatero de 10 niveles.jpeg" alt="organizador zapatillas" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="organizador zapatillas"
+              data-price="27900"
+              data-cat="organizador"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/zapatero de 10 niveles.jpeg"
+                  alt="organizador zapatillas"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Organizador</div>
-                <h4>Organizador de zapatillas · capacidad 30 pares · aluminio y frizelina</h4>
+                <h4>
+                  Organizador de zapatillas · capacidad 30 pares · aluminio y
+                  frizelina
+                </h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$27.900</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Organizador%20de%20zapatillas%2010%20niveles" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$27.900</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20de%20zapatillas%2010%20niveles"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="organizador perchero esquinero" data-price="20000" data-cat="organizador">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/organizador multifuncional.jpeg" alt="organizador multifuncional" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="organizador perchero esquinero"
+              data-price="20000"
+              data-cat="organizador"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/organizador multifuncional.jpeg"
+                  alt="organizador multifuncional"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Organizador</div>
                 <h4>Organizador + perchero esquinero</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$20.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Organizador%20perchero%20esquinero" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$20.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20perchero%20esquinero"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="zapatero 3 niveles" data-price="8900" data-cat="organizador">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/zapatero de 3 niveles.jpeg" alt="zapatero 3 niveles" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="zapatero 3 niveles"
+              data-price="8900"
+              data-cat="organizador"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/zapatero de 3 niveles.jpeg"
+                  alt="zapatero 3 niveles"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Organizador</div>
                 <h4>Zapatero de 3 niveles</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$8.900</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Zapatero%203%20niveles" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$8.900</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Zapatero%203%20niveles"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="organizador ropa sucia 2 divisiones" data-price="15000" data-cat="organizador">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/canasto x2 de ropa.jpeg" alt="canasto ropa" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="organizador ropa sucia 2 divisiones"
+              data-price="15000"
+              data-cat="organizador"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/canasto x2 de ropa.jpeg"
+                  alt="canasto ropa"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Organizador</div>
                 <h4>Organizador de ropa sucia 2 divisiones</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$15.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Organizador%20ropa%20sucia%202%20divisiones" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$15.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20ropa%20sucia%202%20divisiones"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="organizador ropa sucia x3" data-price="26000" data-cat="organizador">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/canasto x3 de ropa.jpeg" alt="canasto x3" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="organizador ropa sucia x3"
+              data-price="26000"
+              data-cat="organizador"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/canasto x3 de ropa.jpeg"
+                  alt="canasto x3"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Organizador</div>
                 <h4>Organizador de ropa sucia x3</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$26.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Organizador%20ropa%20sucia%20x3" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$26.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20ropa%20sucia%20x3"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="tacho bambu 50x35cm" data-price="24000" data-cat="organizador">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/canasto para la ropa.jpeg" alt="tacho bambu" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="tacho bambu 50x35cm"
+              data-price="24000"
+              data-cat="organizador"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/canasto para la ropa.jpeg"
+                  alt="tacho bambu"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Organizador</div>
                 <h4>Tacho de bambú 50x35cm</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$24.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Tacho%20bambu%2050x35cm" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$24.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Tacho%20bambu%2050x35cm"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="escurridor plegable" data-price="12500" data-cat="organizacion">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/escurrido plegable.jpeg" alt="escurridor plegable" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="escurridor plegable"
+              data-price="12500"
+              data-cat="organizacion"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/escurrido plegable.jpeg"
+                  alt="escurridor plegable"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Organización</div>
                 <h4>Escurridor plegable</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$12.500</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Escurridor%20plegable" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$12.500</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Escurridor%20plegable"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="hermetico de vidrio set x3" data-price="20000" data-cat="organizacion">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/set de x3 tpper + vidrio 368.jpeg" alt="hermetico vidrio" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="hermetico de vidrio set x3"
+              data-price="20000"
+              data-cat="organizacion"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/set de x3 tpper + vidrio 368.jpeg"
+                  alt="hermetico vidrio"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Organización</div>
                 <h4>Set x3 hermético de vidrio · 470ml / 700ml / 1040ml</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$20.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Set%20hermetico%20vidrio%20x3" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$20.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20hermetico%20vidrio%20x3"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="set bowls con tapa" data-price="12500" data-cat="organizacion">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/set de bowls con tapa.jpeg" alt="bowls con tapa" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="set bowls con tapa"
+              data-price="12500"
+              data-cat="organizacion"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/set de bowls con tapa.jpeg"
+                  alt="bowls con tapa"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Organización</div>
                 <h4>Set de bowls con tapa</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$12.500</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Set%20bowls%20con%20tapa" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$12.500</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20bowls%20con%20tapa"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="seca platos simple" data-price="15000" data-cat="cocina">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/seca platos simples.jpeg" alt="seca platos" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="seca platos simple"
+              data-price="15000"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/seca platos simples.jpeg"
+                  alt="seca platos"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
                 <h4>Seca platos simple</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$15.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Seca%20platos%20simple" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$15.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Seca%20platos%20simple"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="sarten world carol 26cm antiadherente" data-price="23999" data-cat="cocina">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/sarten work carol 26 cm.jpeg" alt="sarten carol" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="sarten world carol 26cm antiadherente"
+              data-price="23999"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/sarten work carol 26 cm.jpeg"
+                  alt="sarten carol"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
                 <h4>Sartén World Carol 26cm antiadherente</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$23.999</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Sarten%20World%20Carol%2026cm" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$23.999</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Sarten%20World%20Carol%2026cm"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="sarten antiadherente 4 huevos tapa vidrio" data-price="25000" data-cat="cocina">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/sarten antiadherente 4 huevos.jpeg" alt="sarten huevos" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="sarten antiadherente 4 huevos tapa vidrio"
+              data-price="25000"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/sarten antiadherente 4 huevos.jpeg"
+                  alt="sarten huevos"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
                 <h4>Sartén antiadherente 4 huevos con tapa de vidrio</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$25.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Sarten%20antiadherente%204%20huevos" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$25.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Sarten%20antiadherente%204%20huevos"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="organizador multifuncional cocina utensilios" data-price="8900" data-cat="cocina">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/organizador de utencillos.jpeg" alt="organizador cocina" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="organizador multifuncional cocina utensilios"
+              data-price="8900"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/organizador de utencillos.jpeg"
+                  alt="organizador cocina"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
                 <h4>Organizador multifuncional para cocina</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$8.900</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Organizador%20multifuncional%20cocina" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$8.900</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20multifuncional%20cocina"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="set cubiertos carol x24 piezas" data-price="26000" data-cat="cocina">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/set de cubiertos carol.jpeg" alt="cubiertos carol" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="set cubiertos carol x24 piezas"
+              data-price="26000"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/set de cubiertos carol.jpeg"
+                  alt="cubiertos carol"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
                 <h4>Set x24 piezas marca Carol</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$26.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Set%20cubiertos%20Carol%20x24" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$26.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20cubiertos%20Carol%20x24"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="bowls plastico carol x4" data-price="22500" data-cat="cocina">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/set de bowls 5 piezas.jpeg" alt="bowls carol" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="bowls plastico carol x4"
+              data-price="22500"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/set de bowls 5 piezas.jpeg"
+                  alt="bowls carol"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
-                <h4>Set x4 bowl de plástico marca Carol · 0.3L / 0.7L / 1.3L / 2L</h4>
+                <h4>
+                  Set x4 bowl de plástico marca Carol · 0.3L / 0.7L / 1.3L / 2L
+                </h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$22.500</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Set%20bowls%20Carol%20x4" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$22.500</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20bowls%20Carol%20x4"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="sarten granito antiadherente" data-price="35000" data-cat="cocina">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/sarten granito antiadherente.jpeg" alt="sarten granito" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="sarten granito antiadherente"
+              data-price="35000"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/sarten granito antiadherente.jpeg"
+                  alt="sarten granito"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
                 <h4>Sartén granito antiadherente · 20cm o 22cm</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$35.000 / $40.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Sarten%20granito%20antiadherente" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$35.000 / $40.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Sarten%20granito%20antiadherente"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="tamiz harina" data-price="15000" data-cat="cocina">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/tamiz de harina.jpeg" alt="tamiz harina" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="tamiz harina"
+              data-price="15000"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/tamiz de harina.jpeg"
+                  alt="tamiz harina"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
                 <h4>Tamiz de harina</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$15.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Tamiz%20de%20harina" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$15.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Tamiz%20de%20harina"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="cafetera express suono" data-price="50500" data-cat="cocina">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/cafetera express.jpeg" alt="cafetera express" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="cafetera express suono"
+              data-price="50500"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/cafetera express.jpeg"
+                  alt="cafetera express"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
                 <h4>Cafetera express Suono</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$50.500</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Cafetera%20express%20Suono" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$50.500</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Cafetera%20express%20Suono"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="ollas" data-price="5800" data-cat="cocina">
-              <div class="card-img"><img src="img-1/olla anti...jpeg" alt="ollas" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="ollas"
+              data-price="5800"
+              data-cat="cocina"
+            >
+              <div class="card-img">
+                <img src="img-1/olla anti...jpeg" alt="ollas" loading="lazy" />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Cocina</div>
                 <h4>Ollas</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$5.800</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Ollas" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$5.800</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Ollas"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="canilla monocomando suono 290" data-price="27000" data-cat="hogar">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/canilla mono......jpeg" alt="canilla" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="canilla monocomando suono 290"
+              data-price="27000"
+              data-cat="hogar"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/canilla mono......jpeg"
+                  alt="canilla"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Hogar</div>
                 <h4>Canilla monocomando modelo Suono 290</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$27.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Canilla%20monocomando%20Suono%20290" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$27.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Canilla%20monocomando%20Suono%20290"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="dispensador doble jabon" data-price="15000" data-cat="hogar">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/dispensador doble de jabon.jpeg" alt="dispensador jabon" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="dispensador doble jabon"
+              data-price="15000"
+              data-cat="hogar"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/dispensador doble de jabon.jpeg"
+                  alt="dispensador jabon"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Hogar</div>
                 <h4>Dispensador doble para jabón</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$15.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Dispensador%20doble%20jabon" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$15.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Dispensador%20doble%20jabon"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="set de baño premium" data-price="9000" data-cat="hogar">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/set de baño premiun.jpeg" alt="set baño" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="set de baño premium"
+              data-price="9000"
+              data-cat="hogar"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/set de baño premiun.jpeg"
+                  alt="set baño"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Hogar</div>
                 <h4>Set de baño premium</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$9.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Set%20de%20bano%20premium" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$9.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20de%20bano%20premium"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="yogurtera" data-price="35000" data-cat="hogar">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/yogurtera.jpeg" alt="yogurtera" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="yogurtera"
+              data-price="35000"
+              data-cat="hogar"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/yogurtera.jpeg"
+                  alt="yogurtera"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Hogar</div>
                 <h4>Yogurtera</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$35.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Yogurtera" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$35.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Yogurtera"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="tostadora" data-price="30000" data-cat="hogar">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/tostadora.jpeg" alt="tostadora" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="tostadora"
+              data-price="30000"
+              data-cat="hogar"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/tostadora.jpeg"
+                  alt="tostadora"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Hogar</div>
                 <h4>Tostadora</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$30.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Tostadora" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$30.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Tostadora"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="estufa electrica" data-price="10000" data-cat="hogar">
-              <div class="card-img"><img src="img-1/estufa 2.jpeg" alt="estufa" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="estufa electrica"
+              data-price="10000"
+              data-cat="hogar"
+            >
+              <div class="card-img">
+                <img src="img-1/estufa 2.jpeg" alt="estufa" loading="lazy" />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Hogar</div>
                 <h4>Estufa</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$10.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Estufa" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$10.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Estufa"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="estufa chica" data-price="4800" data-cat="hogar">
-              <div class="card-img"><img src="img-1/estufa.jpeg" alt="estufa chica" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="estufa chica"
+              data-price="4800"
+              data-cat="hogar"
+            >
+              <div class="card-img">
+                <img
+                  src="img-1/estufa.jpeg"
+                  alt="estufa chica"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Hogar</div>
                 <h4>Estufa</h4>
                 <div class="stars">★★★★☆</div>
-                <div class="price-row"><span class="price-now">$4.800</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Estufa%20chica" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$4.800</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Estufa%20chica"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="tensiometro digital lambotech" data-price="21000" data-cat="tecnologia">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/tensiometro digital.jpeg" alt="tensiometro" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="tensiometro digital lambotech"
+              data-price="21000"
+              data-cat="tecnologia"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/tensiometro digital.jpeg"
+                  alt="tensiometro"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Tecnología</div>
                 <h4>Tensiómetro digital Lambotech</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$21.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Tensiometro%20digital%20Lambotech" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$21.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Tensiometro%20digital%20Lambotech"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="batidora de mano 7 velocidades" data-price="20000" data-cat="tecnologia">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-1/batidora de mano.jpeg" alt="batidora" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="batidora de mano 7 velocidades"
+              data-price="20000"
+              data-cat="tecnologia"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/batidora de mano.jpeg"
+                  alt="batidora"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Tecnología</div>
                 <h4>Batidora de mano 7 velocidades</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$20.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Batidora%20de%20mano%207%20velocidades" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$20.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Batidora%20de%20mano%207%20velocidades"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="auriculares" data-price="8000" data-cat="tecnologia">
-              <div class="card-img"><span class="badge">Nuevo</span><img src="img-dos/auriculares.jpg" alt="auriculares" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="auriculares"
+              data-price="8000"
+              data-cat="tecnologia"
+            >
+              <div class="card-img">
+                <span class="badge">Nuevo</span>
+                <img
+                  src="img-1/auriculares.jpg"
+                  alt="auriculares"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Tecnología</div>
                 <h4>Auriculares</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$8.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Auriculares" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$8.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Auriculares"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="camara de seguridad" data-price="20100" data-cat="tecnologia">
-              <div class="card-img"><img src="img-1/camara de seguridad.jpeg" alt="camara seguridad" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="camara de seguridad"
+              data-price="20100"
+              data-cat="tecnologia"
+            >
+              <div class="card-img">
+                <img
+                  src="img-1/camara de seguridad.jpeg"
+                  alt="camara seguridad"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Tecnología</div>
                 <h4>Cámara de seguridad</h4>
                 <div class="stars">★★★★☆</div>
-                <div class="price-row"><span class="price-now">$20.100</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Camara%20de%20seguridad" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$20.100</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Camara%20de%20seguridad"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
 
-            <article class="card" data-name="aspiradora de mano" data-price="13200" data-cat="tecnologia">
-              <div class="card-img"><span class="badge">Oferta</span><img src="img-1/aspiradora de mano.jpeg" alt="aspiradora" loading="lazy"/></div>
+            <article
+              class="card"
+              data-name="aspiradora de mano"
+              data-price="13200"
+              data-cat="tecnologia"
+            >
+              <div class="card-img">
+                <span class="badge">Oferta</span>
+                <img
+                  src="img-1/aspiradora de mano.jpeg"
+                  alt="aspiradora"
+                  loading="lazy"
+                />
+              </div>
               <div class="card-body">
                 <div class="card-cat">Tecnología</div>
                 <h4>Aspiradora de mano</h4>
                 <div class="stars">★★★★★</div>
-                <div class="price-row"><span class="price-now">$13.200</span><span class="price-old">$15.000</span></div>
-                <a class="btn-wa" href="https://wa.me/543624567890?text=Hola!%20Me%20interesa%3A%20Aspiradora%20de%20mano" target="_blank" onclick="event.stopPropagation()">Consultar</a>
+                <div class="price-row">
+                  <span class="price-now">$13.200</span
+                  ><span class="price-old">$15.000</span>
+                </div>
+                <a
+                  class="btn-wa"
+                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Aspiradora%20de%20mano"
+                  target="_blank"
+                  onclick="event.stopPropagation()"
+                  >Consultar</a
+                >
               </div>
             </article>
-
-            <!-- ========================= -->
-            <!-- AGREGAR NUEVOS PRODUCTOS AQUÍ -->
-            <!-- Copiá un <article class="card"> y modificá los datos -->
-            <!-- data-cat: organizador / organizacion / cocina / hogar / tecnologia -->
-            <!-- ========================= -->
-
           </div>
         </section>
       </section>
@@ -663,65 +1854,193 @@
       <div class="shell footer-cta-inner">
         <div>
           <h3>Consultá por WhatsApp</h3>
-          <p>Encontrá lo que necesitás o pedinos lo que no ves en el catálogo.</p>
+          <p>
+            Encontrá lo que necesitás o pedinos lo que no ves en el catálogo.
+          </p>
         </div>
-        <a class="btn btn-outline" href="https://wa.me/543624567890" target="_blank">Escribinos</a>
+        <a
+          class="btn btn-outline"
+          href="https://wa.me/5491157572467"
+          target="_blank"
+          >Escribinos</a
+        >
       </div>
     </section>
 
     <footer>
-      <div class="shell">© 2025 Casa Mecha Bazar · Envíos a todo el país · Compra segura</div>
+      <div class="shell">
+        © 2025 Casa Mecha Bazar · Envíos a todo el país · Compra segura
+      </div>
     </footer>
 
-    <a class="wa-float" href="https://wa.me/543624567890" target="_blank">WhatsApp</a>
+    <a class="wa-float" href="https://wa.me/5491157572467" target="_blank"
+      >WhatsApp</a
+    >
 
-    <!-- ══════════════════ MODAL DE PREVIEW ══════════════════ -->
-    <div id="previewModal"
-      style="position:fixed;inset:0;z-index:200;background:rgba(26,20,14,.65);
-             backdrop-filter:blur(6px);align-items:center;justify-content:center;
-             padding:16px;overflow-y:auto;">
-      <div style="background:#fff;border-radius:22px;max-width:460px;width:100%;
-                  box-shadow:0 20px 60px rgba(0,0,0,.28);overflow:hidden;
-                  animation:modalIn .25s cubic-bezier(.4,0,.2,1);
-                  position:relative;margin:auto;">
-        <!-- Cerrar -->
-        <button id="modalClose"
-          style="position:absolute;top:12px;right:12px;z-index:5;
-                 width:34px;height:34px;border-radius:50%;border:none;
-                 background:rgba(255,255,255,.92);cursor:pointer;font-size:18px;
-                 display:grid;place-items:center;
-                 box-shadow:0 2px 8px rgba(0,0,0,.14);color:#333;line-height:1;">✕</button>
-        <!-- Imagen -->
-        <div style="background:#f3ebe0;display:flex;align-items:center;justify-content:center;max-height:70vh;overflow:hidden;">
-          <img id="modalImg" src="" alt=""
-            style="width:100%;height:auto;max-height:70vh;object-fit:contain;display:block;transition:opacity .2s"/>
-          <span id="modalBadge"
-            style="position:absolute;top:12px;left:12px;background:#1a4a2e;color:#fff;
-                   padding:6px 12px;border-radius:999px;font-size:11px;font-weight:700;"></span>
+    <div
+      id="previewModal"
+      style="
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(26, 20, 14, 0.65);
+        backdrop-filter: blur(6px);
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+        overflow-y: auto;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          border-radius: 22px;
+          max-width: 460px;
+          width: 100%;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+          overflow: hidden;
+          animation: modalIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          margin: auto;
+        "
+      >
+        <button
+          id="modalClose"
+          style="
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 5;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.92);
+            cursor: pointer;
+            font-size: 18px;
+            display: grid;
+            place-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+            color: #333;
+            line-height: 1;
+          "
+        >
+          ✕
+        </button>
+        <div
+          style="
+            background: #f3ebe0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-height: 70vh;
+            overflow: hidden;
+            position: relative;
+          "
+        >
+          <img
+            id="modalImg"
+            src=""
+            alt=""
+            style="
+              width: 100%;
+              height: auto;
+              max-height: 70vh;
+              object-fit: contain;
+              display: block;
+              transition: opacity 0.2s;
+            "
+          />
+          <span
+            id="modalBadge"
+            style="
+              position: absolute;
+              top: 12px;
+              left: 12px;
+              background: #1a4a2e;
+              color: #fff;
+              padding: 6px 12px;
+              border-radius: 999px;
+              font-size: 11px;
+              font-weight: 700;
+            "
+          ></span>
         </div>
-        <!-- Info -->
-        <div style="padding:20px 22px 22px">
-          <div id="modalCat" style="font-size:10px;font-weight:700;letter-spacing:1px;
-               text-transform:uppercase;color:#2d6a45;margin-bottom:4px;"></div>
-          <div id="modalName"
-            style="font-family:'Playfair Display',serif;font-size:21px;font-weight:700;
-                   color:#1a1a1a;line-height:1.2;margin-bottom:6px;"></div>
-          <div id="modalStars" style="color:#c99a4b;font-size:15px;margin-bottom:10px;"></div>
-          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:18px;flex-wrap:wrap;">
-            <span id="modalPrice"
-              style="font-size:28px;font-weight:700;color:#1a4a2e;"></span>
-            <span id="modalOld"
-              style="font-size:14px;color:#6c6c6c;text-decoration:line-through;"></span>
+        <div style="padding: 20px 22px 22px">
+          <div
+            id="modalCat"
+            style="
+              font-size: 10px;
+              font-weight: 700;
+              letter-spacing: 1px;
+              text-transform: uppercase;
+              color: #2d6a45;
+              margin-bottom: 4px;
+            "
+          ></div>
+          <div
+            id="modalName"
+            style="
+              font-family: &quot;Playfair Display&quot;, serif;
+              font-size: 21px;
+              font-weight: 700;
+              color: #1a1a1a;
+              line-height: 1.2;
+              margin-bottom: 6px;
+            "
+          ></div>
+          <div
+            id="modalStars"
+            style="color: #c99a4b; font-size: 15px; margin-bottom: 10px"
+          ></div>
+          <div
+            style="
+              display: flex;
+              align-items: baseline;
+              gap: 10px;
+              margin-bottom: 18px;
+              flex-wrap: wrap;
+            "
+          >
+            <span
+              id="modalPrice"
+              style="font-size: 28px; font-weight: 700; color: #1a4a2e"
+            ></span>
+            <span
+              id="modalOld"
+              style="
+                font-size: 14px;
+                color: #6c6c6c;
+                text-decoration: line-through;
+              "
+            ></span>
           </div>
-          <a id="modalWa" href="#" target="_blank"
-            style="display:flex;align-items:center;justify-content:center;gap:8px;
-                   width:100%;padding:14px;border-radius:12px;
-                   background:#25d366;color:#fff;font-size:14px;font-weight:700;
-                   text-decoration:none;transition:background .2s;"
-            onmouseover="this.style.background='#1daf55'"
-            onmouseout="this.style.background='#25d366'">
+          <a
+            id="modalWa"
+            href="#"
+            target="_blank"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              width: 100%;
+              padding: 14px;
+              border-radius: 12px;
+              background: #25d366;
+              color: #fff;
+              font-size: 14px;
+              font-weight: 700;
+              text-decoration: none;
+              transition: background 0.2s;
+            "
+            onmouseover="this.style.background = '#1daf55'"
+            onmouseout="this.style.background = '#25d366'"
+          >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+              />
             </svg>
             Consultar por WhatsApp
           </a>
@@ -729,183 +2048,134 @@
       </div>
     </div>
 
-    <style>
-      #previewModal { display:none!important }
-      #previewModal.open { display:flex!important }
-      @keyframes modalIn {
-        from { opacity:0;transform:scale(.93) translateY(14px) }
-        to   { opacity:1;transform:none }
-      }
-    </style>
-
     <script>
-      // ══════════════════════════════════════════════════════════════════
-      // NORMALIZAR: búsqueda sin tildes
-      // ══════════════════════════════════════════════════════════════════
-      function norm(s) {
-        return (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
-      }
-
-      // Parsear precio desde "27.900" o "27900" → número
-      function parsePrice(s) {
-        return parseFloat((s||'0').toString().replace(/\./g,'').replace(',','.')) || 0;
-      }
-
-      // ══════════════════════════════════════════════════════════════════
-      // CONTADORES POR CATEGORÍA — calculados desde el DOM real
-      // ══════════════════════════════════════════════════════════════════
-      function getCards() {
-        return Array.from(document.querySelectorAll('#productGrid .card'));
-      }
-
-      function computeCounts() {
-        const counts = {};
-        counts['all'] = 0;
-        getCards().forEach(c => {
-          const cat = (c.dataset.cat||'').toLowerCase();
-          counts['all']++;
-          counts[cat] = (counts[cat]||0) + 1;
-        });
-        return counts;
-      }
-
-      function updateBadges() {
-        const counts = computeCounts();
-        document.querySelectorAll('.cat-pill').forEach(pill => {
-          const cat = pill.dataset.cat;
-          const badge = pill.querySelector('span:last-child');
-          if (badge) {
-            badge.textContent = (counts[cat] !== undefined) ? counts[cat] : 0;
-          }
-        });
-      }
-
-      // ══════════════════════════════════════════════════════════════════
-      // FILTROS + ORDEN + BÚSQUEDA
-      // ══════════════════════════════════════════════════════════════════
-      const sortSel  = document.getElementById('sortSelect');
-      const searchIn = document.getElementById('searchInput');
-      const countEl  = document.getElementById('visibleCount');
+      const pills = Array.from(document.querySelectorAll(".cat-pill"));
+      const cards = Array.from(document.querySelectorAll("#productGrid .card"));
+      const sortSelect = document.getElementById("sortSelect");
+      const searchInput = document.getElementById("searchInput");
+      const countEl = document.getElementById("visibleCount");
 
       function currentCategory() {
-        return (document.querySelector('.cat-pill.active')||{}).dataset?.cat || 'all';
+        return document.querySelector(".cat-pill.active")?.dataset.cat || "all";
       }
 
-      function matchesCat(card, cat) {
-        if (cat === 'all') return true;
-        return (card.dataset.cat||'').toLowerCase() === cat.toLowerCase();
+      function matchesCategory(card, cat) {
+        const cardCat = (card.dataset.cat || "").toLowerCase();
+        if (cat === "all") return true;
+        return cardCat === cat;
       }
 
-      function compareCards(a, b, sortVal) {
-        const ap = parsePrice(a.dataset.price);
-        const bp = parsePrice(b.dataset.price);
-        if (sortVal === 'price-asc')  return ap - bp;
-        if (sortVal === 'price-desc') return bp - ap;
-        if (sortVal === 'name')       return norm(a.dataset.name||'').localeCompare(norm(b.dataset.name||''), 'es');
+      function compareCards(a, b, sortValue) {
+        const ap = Number(a.dataset.price || 0);
+        const bp = Number(b.dataset.price || 0);
+        const an = (a.dataset.name || "").toLowerCase();
+        const bn = (b.dataset.name || "").toLowerCase();
+
+        if (sortValue === "price-asc") return ap - bp;
+        if (sortValue === "price-desc") return bp - ap;
+        if (sortValue === "name") return an.localeCompare(bn);
         return bp - ap;
       }
 
-      function applyFilters() {
-        const q       = norm(searchIn.value || '');
-        const cat     = currentCategory();
-        const sortVal = sortSel.value;
-        const allCards = getCards();
+      function updateBadges() {
+        const counts = { all: cards.length };
+        cards.forEach((c) => {
+          const cat = (c.dataset.cat || "").toLowerCase();
+          counts[cat] = (counts[cat] || 0) + 1;
+        });
+        pills.forEach((pill) => {
+          const cat = pill.dataset.cat;
+          const badge = pill.querySelector("span:last-child");
+          if (badge) badge.textContent = counts[cat] || 0;
+        });
+      }
 
-        const visible = allCards.filter(card => {
-          const haystack = norm(card.innerText);
-          const okCat    = matchesCat(card, cat);
+      function applyFilters() {
+        const q = (searchInput.value || "").trim().toLowerCase();
+        const cat = currentCategory();
+        const sortValue = sortSelect.value;
+
+        const visibleCards = cards.filter((card) => {
+          const name = (card.dataset.name || "").toLowerCase();
+          const haystack = `${name} ${(card.dataset.cat || "").toLowerCase()} ${card.innerText.toLowerCase()}`;
+          const okCat = matchesCategory(card, cat);
           const okSearch = !q || haystack.includes(q);
-          const show     = okCat && okSearch;
-          card.style.display = show ? '' : 'none';
+          const show = okCat && okSearch;
+          card.style.display = show ? "" : "none";
           return show;
         });
 
-        visible.sort((a, b) => compareCards(a, b, sortVal));
-        const grid = document.getElementById('productGrid');
-        visible.forEach(c => grid.appendChild(c));
-
-        if (countEl) countEl.textContent = visible.length;
+        visibleCards.sort((a, b) => compareCards(a, b, sortValue));
+        visibleCards.forEach((card) => card.parentElement.appendChild(card));
+        if (countEl) countEl.textContent = visibleCards.length;
       }
 
-      // Pills
-      function bindPills() {
-        document.querySelectorAll('.cat-pill').forEach(pill => {
-          pill.onclick = function() {
-            document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-            pill.classList.add('active');
-            applyFilters();
-          };
+      pills.forEach((pill) => {
+        pill.addEventListener("click", () => {
+          pills.forEach((p) => p.classList.remove("active"));
+          pill.classList.add("active");
+          applyFilters();
         });
-      }
+      });
 
-      sortSel.value = 'price-desc';
-      sortSel.addEventListener('change', applyFilters);
-      searchIn.addEventListener('input', applyFilters);
-      bindPills();
+      sortSelect.value = "price-desc";
+      sortSelect.addEventListener("change", applyFilters);
+      searchInput.addEventListener("input", applyFilters);
 
-      // Inicializar
       updateBadges();
       applyFilters();
 
-      /* Observar si se agregan productos dinámicamente
-      const gridObs = new MutationObserver(() => {
-        updateBadges();
-        applyFilters();
-        bindPills();
-      });
-      gridObs.observe(document.getElementById('productGrid'), { childList: true });
-*/
-      // ══════════════════════════════════════════════════════════════════
-      // MODAL DE PREVIEW
-      // ══════════════════════════════════════════════════════════════════
-      const modal     = document.getElementById('previewModal');
-      const modalImg  = document.getElementById('modalImg');
-      const modalName = document.getElementById('modalName');
-      const modalCat  = document.getElementById('modalCat');
-      const modalPric = document.getElementById('modalPrice');
-      const modalOld  = document.getElementById('modalOld');
-      const modalStar = document.getElementById('modalStars');
-      const modalWa   = document.getElementById('modalWa');
-      const modalBdg  = document.getElementById('modalBadge');
-      const modalClose= document.getElementById('modalClose');
+      const modal = document.getElementById("previewModal");
+      const modalImg = document.getElementById("modalImg");
+      const modalName = document.getElementById("modalName");
+      const modalCat = document.getElementById("modalCat");
+      const modalPric = document.getElementById("modalPrice");
+      const modalOld = document.getElementById("modalOld");
+      const modalStar = document.getElementById("modalStars");
+      const modalWa = document.getElementById("modalWa");
+      const modalBdg = document.getElementById("modalBadge");
+      const modalClose = document.getElementById("modalClose");
 
       function openModal(card) {
-        const img   = card.querySelector('.card-img img');
-        const badge = card.querySelector('.badge');
-        const pNow  = card.querySelector('.price-now');
-        const pOld  = card.querySelector('.price-old');
-        const waBtn = card.querySelector('.btn-wa');
-
-        modalImg.src  = img  ? img.src  : '';
-        modalImg.alt  = img  ? img.alt  : '';
-        modalName.textContent  = (card.querySelector('h4')||{}).textContent?.trim() || '';
-        modalCat.textContent   = (card.querySelector('.card-cat')||{}).textContent?.trim() || '';
-        modalStar.textContent  = (card.querySelector('.stars')||{}).textContent?.trim() || '';
-        modalPric.textContent  = pNow ? pNow.textContent.trim() : '';
-        modalOld.textContent   = pOld ? pOld.textContent.trim() : '';
-        modalOld.style.display = pOld ? '' : 'none';
-        modalBdg.textContent   = badge ? badge.textContent.trim() : '';
-        modalBdg.style.display = badge ? '' : 'none';
-        modalWa.href = waBtn ? waBtn.href : 'https://wa.me/543624567890';
-
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
+        const img = card.querySelector(".card-img img");
+        const badge = card.querySelector(".badge");
+        const pNow = card.querySelector(".price-now");
+        const pOld = card.querySelector(".price-old");
+        const waBtn = card.querySelector(".btn-wa");
+        modalImg.src = img ? img.src : "";
+        modalImg.alt = img ? img.alt : "";
+        modalName.textContent =
+          (card.querySelector("h4") || {}).textContent?.trim() || "";
+        modalCat.textContent =
+          (card.querySelector(".card-cat") || {}).textContent?.trim() || "";
+        modalStar.textContent =
+          (card.querySelector(".stars") || {}).textContent?.trim() || "";
+        modalPric.textContent = pNow ? pNow.textContent.trim() : "";
+        modalOld.textContent = pOld ? pOld.textContent.trim() : "";
+        modalOld.style.display = pOld ? "" : "none";
+        modalBdg.textContent = badge ? badge.textContent.trim() : "";
+        modalBdg.style.display = badge ? "" : "none";
+        modalWa.href = waBtn ? waBtn.href : "https://wa.me/5491157572467";
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
       }
 
       function closeModal() {
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
+        modal.classList.remove("open");
+        document.body.style.overflow = "";
       }
 
-      modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-      // Click en cualquier card (delegado, funciona con las que se agreguen después)
-      document.getElementById('productGrid').addEventListener('click', e => {
-        const card = e.target.closest('.card');
+      modalClose.addEventListener("click", closeModal);
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+      document.getElementById("productGrid").addEventListener("click", (e) => {
+        const card = e.target.closest(".card");
         if (!card) return;
-        if (e.target.closest('.btn-wa')) return; // no abrir si clickeó WA
+        if (e.target.closest(".btn-wa")) return;
         openModal(card);
       });
     </script>
