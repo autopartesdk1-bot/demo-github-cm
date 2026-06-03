@@ -1,2183 +1,1593 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Casa Mecha | Catálogo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --green-dark: #1a4a2e;
-        --green-mid: #2d6a45;
-        --green-soft: #eef5ef;
-        --cream: #f9f5ef;
-        --text: #1a1a1a;
-        --muted: #6c6c6c;
-        --line: #e8e3da;
-        --white: #ffffff;
-        --gold: #c99a4b;
-        --shadow: 0 10px 28px rgba(26, 74, 46, 0.08);
-        --font-display: "Playfair Display", serif;
-        --font-body: "DM Sans", sans-serif;
-      }
-
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      html,
-      body {
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-      body {
-        font-family: var(--font-body);
-        color: var(--text);
-        background: linear-gradient(180deg, #fbfaf7 0%, #f7f4ee 100%);
-      }
-
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-      img {
-        display: block;
-        max-width: 100%;
-      }
-      button,
-      input,
-      select {
-        font: inherit;
-      }
-
-      .shell {
-        width: min(1200px, calc(100% - 32px));
-        margin: 0 auto;
-      }
-
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        background: rgba(249, 245, 239, 0.95);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(26, 74, 46, 0.08);
-      }
-      .header-inner {
-        min-height: 78px;
-        display: grid;
-        grid-template-columns: auto minmax(240px, 1fr) auto;
-        align-items: center;
-        gap: 16px;
-        padding: 12px 0;
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        min-width: 0;
-      }
-      .brand-badge {
-        width: 54px;
-        height: 54px;
-        border-radius: 50%;
-        background: #fff;
-        box-shadow: var(--shadow);
-        overflow: hidden;
-        flex-shrink: 0;
-        display: grid;
-        place-items: center;
-        border: 1px solid rgba(26, 74, 46, 0.08);
-      }
-      .brand-badge img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        padding: 6px;
-      }
-      .brand-text {
-        line-height: 1;
-      }
-      .brand-text h1 {
-        font-family: var(--font-display);
-        font-size: 18px;
-        color: var(--green-dark);
-        margin-bottom: 4px;
-      }
-      .brand-text span {
-        display: block;
-        font-size: 10px;
-        letter-spacing: 3px;
-        color: var(--green-mid);
-        text-transform: uppercase;
-      }
-
-      .search-wrap {
-        display: flex;
-        justify-content: center;
-      }
-      .search-wrap input {
-        width: min(100%, 480px);
-        border: 1px solid rgba(26, 74, 46, 0.14);
-        background: #fff;
-        border-radius: 999px;
-        padding: 12px 16px;
-        outline: none;
-        font-family: var(--font-body);
-        font-size: 14px;
-        color: var(--text);
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-      }
-      .search-wrap input::placeholder {
-        color: #999;
-      }
-      .search-wrap input:focus {
-        border-color: var(--green-mid);
-        box-shadow: 0 0 0 4px rgba(45, 106, 69, 0.08);
-      }
-
-      .status {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--muted);
-        font-size: 13px;
-        white-space: nowrap;
-      }
-      .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #d8a63a;
-        box-shadow: 0 0 0 4px rgba(216, 166, 58, 0.14);
-      }
-
-      .hero {
-        padding: 22px 0 10px;
-      }
-
-      .hero-card {
-        position: relative;
-        border: 1px solid rgba(26, 74, 46, 0.08);
-        border-radius: 24px;
-        box-shadow: var(--shadow);
-        overflow: hidden;
-        min-height: 340px;
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 20px;
-        align-items: center;
-      }
-
-      .hero-card .hero-bg {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-        z-index: 0;
-      }
-
-      .hero-card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          100deg,
-          rgba(251, 244, 234, 0.92) 0%,
-          rgba(241, 231, 217, 0.8) 55%,
-          rgba(241, 231, 217, 0.1) 100%
-        );
-        z-index: 1;
-      }
-
-      .hero-content {
-        position: relative;
-        z-index: 2;
-        padding: 32px 28px;
-      }
-
-      .hero h2 {
-        font-family: var(--font-display);
-        font-size: clamp(28px, 4.8vw, 54px);
-        color: var(--green-dark);
-        line-height: 1.03;
-        margin-bottom: 10px;
-      }
-      .hero h2 em {
-        display: block;
-        font-style: italic;
-        color: var(--green-mid);
-        font-weight: 400;
-        font-size: 0.78em;
-      }
-      .hero p {
-        color: var(--muted);
-        line-height: 1.7;
-        font-size: 15px;
-        max-width: 560px;
-        margin-bottom: 18px;
-      }
-      .hero-actions {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 11px 16px;
-        border-radius: 12px;
-        font-weight: 700;
-        font-size: 14px;
-        transition: 0.2s;
-        border: 2px solid transparent;
-      }
-      .btn-primary {
-        background: var(--green-dark);
-        color: #fff;
-        border-color: var(--green-dark);
-      }
-      .btn-primary:hover {
-        background: var(--green-mid);
-        border-color: var(--green-mid);
-      }
-      .btn-outline {
-        background: #fff;
-        color: var(--green-dark);
-        border-color: rgba(26, 74, 46, 0.18);
-      }
-      .btn-outline:hover {
-        border-color: var(--green-dark);
-      }
-
-      .hero-spacer {
-        position: relative;
-        z-index: 2;
-      }
-
-      .layout {
-        display: grid;
-        grid-template-columns: 230px minmax(0, 1fr);
-        gap: 18px;
-        padding: 10px 0 34px;
-        align-items: start;
-      }
-
-      .sidebar {
-        position: sticky;
-        top: 88px;
-        align-self: start;
-        background: rgba(255, 255, 255, 0.88);
-        backdrop-filter: blur(8px);
-        border: 1px solid var(--line);
-        border-radius: 20px;
-        padding: 16px;
-        box-shadow: var(--shadow);
-        max-height: calc(100vh - 104px);
-        overflow-y: auto;
-        scrollbar-width: none;
-      }
-      .sidebar::-webkit-scrollbar {
-        display: none;
-      }
-
-      .sidebar h3 {
-        font-family: var(--font-display);
-        color: var(--green-dark);
-        font-size: 22px;
-        margin-bottom: 6px;
-      }
-      .sidebar p {
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.6;
-        margin-bottom: 14px;
-      }
-
-      .cat-list {
-        display: grid;
-        gap: 8px;
-      }
-      .cat-pill {
-        width: 100%;
-        background: var(--green-soft);
-        border: 1px solid rgba(26, 74, 46, 0.08);
-        padding: 11px 12px;
-        border-radius: 999px;
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--green-dark);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        cursor: pointer;
-        transition: 0.2s;
-      }
-      .cat-pill:hover {
-        transform: translateX(2px);
-        background: #fff;
-      }
-      .cat-pill.active {
-        background: var(--green-dark);
-        color: #fff;
-      }
-
-      .content {
-        min-width: 0;
-      }
-      .toolbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-bottom: 16px;
-        padding: 8px 0 14px;
-        border-bottom: 1px solid var(--line);
-      }
-      .toolbar h3 {
-        font-family: var(--font-display);
-        font-size: 26px;
-        color: var(--green-dark);
-        margin-bottom: 4px;
-      }
-      .toolbar p {
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .sort {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 10px 12px;
-        font-size: 13px;
-        color: var(--muted);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-      }
-      .sort select {
-        border: none;
-        outline: none;
-        background: transparent;
-        font-family: var(--font-body);
-        font-size: 13px;
-        color: var(--text);
-        cursor: pointer;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-      }
-      .card {
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        overflow: hidden;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-        transition:
-          transform 0.2s,
-          box-shadow 0.2s;
-        width: 100%;
-        cursor: pointer;
-      }
-      .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-      }
-      .card-img {
-        position: relative;
-        height: 220px;
-        background: var(--cream);
-        overflow: hidden;
-      }
-      .card-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .badge {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        background: var(--green-dark);
-        color: #fff;
-        padding: 6px 10px;
-        border-radius: 999px;
-        font-size: 11px;
-        font-weight: 700;
-      }
-      .card-body {
-        padding: 14px 14px 16px;
-      }
-      .card-cat {
-        color: var(--green-mid);
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        margin-bottom: 4px;
-      }
-      .card h4 {
-        font-size: 15px;
-        line-height: 1.35;
-        margin-bottom: 8px;
-        color: var(--text);
-      }
-      .stars {
-        color: var(--gold);
-        font-size: 12px;
-        margin-bottom: 10px;
-      }
-      .price-row {
-        display: flex;
-        align-items: baseline;
-        gap: 8px;
-        margin-bottom: 12px;
-        flex-wrap: wrap;
-      }
-      .price-now {
-        font-size: 22px;
-        font-weight: 700;
-        color: var(--green-dark);
-      }
-      .price-old {
-        font-size: 13px;
-        color: var(--muted);
-        text-decoration: line-through;
-      }
-      .btn-wa {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        padding: 11px 14px;
-        border-radius: 12px;
-        background: #25d366;
-        color: #fff;
-        font-size: 13px;
-        font-weight: 700;
-        transition: 0.2s;
-      }
-      .btn-wa:hover {
-        background: #1daf55;
-      }
-
-      .info-strip {
-        margin-top: 18px;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 12px;
-      }
-      .info-box {
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 16px;
-        padding: 14px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
-      }
-      .info-box strong {
-        display: block;
-        color: var(--green-dark);
-        font-size: 14px;
-        margin-bottom: 4px;
-      }
-      .info-box span {
-        display: block;
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1.5;
-      }
-
-      .footer-cta {
-        margin-top: 10px;
-        background: var(--green-dark);
-        color: #fff;
-        padding: 28px 0;
-        border-top-left-radius: 28px;
-        border-top-right-radius: 28px;
-      }
-      .footer-cta-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        flex-wrap: wrap;
-      }
-      .footer-cta h3 {
-        font-family: var(--font-display);
-        font-size: 24px;
-        margin-bottom: 4px;
-      }
-      .footer-cta p {
-        color: rgba(255, 255, 255, 0.72);
-        font-size: 14px;
-      }
-      .footer-cta .btn-outline {
-        color: #fff;
-        background: transparent;
-        border-color: #fff;
-      }
-
-      footer {
-        background: #163d26;
-        color: rgba(255, 255, 255, 0.72);
-        font-size: 12px;
-        padding: 18px 0;
-      }
-
-      .wa-float {
-        position: fixed;
-        right: 18px;
-        bottom: 18px;
-        z-index: 30;
-        background: #25d366;
-        color: #fff;
-        padding: 12px 16px;
-        border-radius: 999px;
-        font-size: 13px;
-        font-weight: 700;
-        box-shadow: 0 10px 22px rgba(37, 211, 102, 0.34);
-      }
-
-      #previewModal {
-        display: none !important;
-      }
-      #previewModal.open {
-        display: flex !important;
-      }
-      @keyframes modalIn {
-        from {
-          opacity: 0;
-          transform: scale(0.94) translateY(12px);
-        }
-        to {
-          opacity: 1;
-          transform: none;
-        }
-      }
-
-      @media (max-width: 1024px) {
-        .hero-card {
-          grid-template-columns: 1fr;
-        }
-        .hero-spacer {
-          display: none;
-        }
-        .layout {
-          grid-template-columns: 1fr;
-        }
-        .sidebar {
-          position: relative;
-          top: auto;
-          max-height: none;
-          overflow-y: visible;
-        }
-        .grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-        .info-strip {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (max-width: 768px) {
-        .shell {
-          width: calc(100% - 32px);
-        }
-
-        .header-inner {
-          grid-template-columns: 1fr;
-          gap: 10px;
-          text-align: center;
-          padding: 10px 0;
-        }
-        .brand {
-          justify-content: center;
-        }
-        .search-wrap {
-          width: 100%;
-          justify-content: stretch;
-        }
-        .search-wrap input {
-          width: 100%;
-        }
-        .status {
-          display: none;
-        }
-
-        .hero {
-          padding: 14px 0 10px;
-        }
-        .hero-card {
-          border-radius: 20px;
-          gap: 14px;
-          min-height: 280px;
-        }
-        .hero-content {
-          padding: 24px 20px;
-        }
-        .hero h2 {
-          font-size: 32px;
-          line-height: 1.08;
-        }
-        .hero p {
-          font-size: 14px;
-        }
-        .hero-actions {
-          flex-direction: column;
-        }
-        .hero-actions .btn {
-          width: 100%;
-        }
-
-        .layout {
-          grid-template-columns: 1fr;
-          gap: 14px;
-        }
-
-        .sidebar {
-          width: 100%;
-          position: static;
-          padding: 12px;
-          border-radius: 18px;
-          overflow: hidden;
-          max-height: none;
-        }
-        .sidebar h3,
-        .sidebar p {
-          display: none;
-        }
-
-        .cat-list {
-          display: flex;
-          flex-wrap: nowrap;
-          gap: 8px;
-          overflow-x: auto;
-          scrollbar-width: none;
-          -webkit-overflow-scrolling: touch;
-          padding-bottom: 4px;
-        }
-        .cat-list::-webkit-scrollbar {
-          display: none;
-        }
-        .cat-pill {
-          flex: 0 0 auto;
-          width: auto;
-          min-width: max-content;
-          border-radius: 999px;
-          padding: 10px 14px;
-          justify-content: center;
-          font-size: 12px;
-          white-space: nowrap;
-        }
-        .cat-pill span:last-child {
-          display: none;
-        }
-
-        .content {
-          min-width: 0;
-        }
-
-        .toolbar {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 10px;
-        }
-        .toolbar h3 {
-          font-size: 24px;
-          line-height: 1.05;
-        }
-        .sort {
-          width: 100%;
-          justify-content: space-between;
-        }
-        .sort select {
-          width: 100%;
-        }
-
-        .grid {
-          grid-template-columns: 1fr;
-          gap: 14px;
-        }
-        .card-img {
-          height: 240px;
-        }
-        .card-body {
-          padding: 12px;
-        }
-        .price-now {
-          font-size: 22px;
-        }
-
-        .info-strip {
-          grid-template-columns: 1fr;
-        }
-        .footer-cta {
-          border-top-left-radius: 22px;
-          border-top-right-radius: 22px;
-          padding-left: 16px;
-          padding-right: 16px;
-        }
-        .footer-cta-inner {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        .footer-cta .btn {
-          width: 100%;
-        }
-        footer {
-          padding-left: 16px;
-          padding-right: 16px;
-        }
-        .wa-float {
-          right: 12px;
-          bottom: 12px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .brand-badge {
-          width: 48px;
-          height: 48px;
-        }
-        .brand-text h1 {
-          font-size: 16px;
-        }
-        .brand-text span {
-          letter-spacing: 2px;
-        }
-        .hero h2 {
-          font-size: 28px;
-        }
-        .hero-card {
-          min-height: 240px;
-        }
-        .hero-content {
-          padding: 20px 16px;
-        }
-        .toolbar h3 {
-          font-size: 22px;
-        }
-        .card-img {
-          height: 210px;
-        }
-        .card h4 {
-          font-size: 14px;
-        }
-        .price-now {
-          font-size: 20px;
-        }
-        .btn,
-        .btn-wa {
-          min-height: 44px;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="shell header-inner">
-        <a class="brand" href="#inicio">
-          <div class="brand-badge">
-            <img
-              src="img-1/ChatGPT Image 30 abr 2026, 07_19_56 p.m..png"
-              alt="Casa Mecha"
-            />
-          </div>
-          <div class="brand-text">
-            <h1>Casa Mecha</h1>
-            <span>BAZAR &amp; DECO</span>
-          </div>
-        </a>
-
-        <div class="search-wrap">
-          <input
-            type="search"
-            id="searchInput"
-            placeholder="Buscar productos..."
-            aria-label="Buscar productos"
-          />
-        </div>
-
-        <div class="status">
-          <span class="dot"></span>
-          Abierto
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Casa Mecha — Catálogo online con los mejores productos para el hogar, cocina, tecnología y más. Pedidos por WhatsApp." />
+  <meta name="theme-color" content="#c8441a" />
+  <meta property="og:title" content="Casa Mecha | Catálogo Online" />
+  <meta property="og:description" content="Catálogo online profesional con carrito, panel admin protegido, importación CSV/Excel y pedidos por WhatsApp." />
+  <meta property="og:type" content="website" />
+  <title>Casa Mecha | Catálogo Online</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='14' width='64' height='64' fill='%23c8441a'/%3E%3Ctext x='32' y='44' font-size='32' text-anchor='middle' fill='white' font-family='Georgia,serif'%3Em%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js" defer></script>
+  <style>
+    :root{
+      --accent:#c8441a; --accent2:#e05a2b; --accent3:#a33210;
+      --gold:#c9922a; --gold2:#f0c060;
+      --bg:#f5f2ed; --surface:#fdfcfa; --surface2:#ede9e3; --border:#ddd7ce;
+      --text:#1a1714; --text2:#6e655a; --text3:#b0a698;
+      --success:#16a34a; --warning:#c97a06; --danger:#c62828;
+      --radius:16px; --radius-sm:10px;
+      --shadow:0 2px 4px rgba(0,0,0,.04),0 8px 28px rgba(0,0,0,.07);
+      --shadow-hover:0 8px 20px rgba(0,0,0,.10),0 24px 48px rgba(0,0,0,.09);
+      --font-head:'Playfair Display',serif;
+      --font-body:'Lato',sans-serif;
+      --container:1320px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-height:100vh;font-size:15px;line-height:1.55;font-weight:400}
+    img{max-width:100%;display:block}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer;border:0;outline:0}
+ 
+    /* ─── SKIP LINK ─── */
+    .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+    .skip-link:focus{left:12px;top:12px;width:auto;height:auto;z-index:10000;background:#000;color:#fff;padding:10px 16px;border-radius:8px}
+ 
+    /* ─── HEADER ─── */
+    .site-header{
+      position:sticky;top:0;z-index:60;background:var(--surface);
+      border-bottom:1px solid var(--border);
+      box-shadow:0 1px 14px rgba(0,0,0,.06)
+    }
+    .header-inner{
+      max-width:var(--container);margin:0 auto;
+      height:70px;display:flex;align-items:center;gap:14px;padding:0 20px
+    }
+    .logo-block{flex:1;min-width:0}
+    .logo-name{
+      font-family:var(--font-head);font-weight:900;font-size:1.45rem;
+      letter-spacing:-.5px;line-height:1;color:var(--text)
+    }
+    .logo-name em{color:var(--accent);font-style:normal}
+    .store-tagline{font-size:11px;color:var(--text3);margin-top:3px;letter-spacing:.6px;text-transform:uppercase;font-weight:700}
+    .store-status{display:flex;align-items:center;gap:6px;margin-top:2px;color:var(--text2);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+    .status-dot{width:7px;height:7px;border-radius:50%;background:var(--danger);flex:0 0 auto}
+    .status-dot.open{background:var(--success)}
+    .header-actions{display:flex;gap:8px;align-items:center;flex:0 0 auto}
+ 
+    .btn-admin,.cart-btn{
+      display:flex;align-items:center;gap:7px;white-space:nowrap;
+      font-family:var(--font-body);font-weight:700;font-size:13px;
+      padding:9px 16px;border-radius:var(--radius-sm);
+      transition:.18s ease;letter-spacing:.2px
+    }
+    .btn-admin{background:var(--text);color:#fff}
+    .btn-admin:hover{background:#2d2520}
+    .cart-btn{background:var(--accent);color:#fff}
+    .cart-btn:hover{background:var(--accent3)}
+    .cart-badge{
+      min-width:18px;height:18px;padding:0 5px;border-radius:999px;
+      background:#fff;color:var(--accent);
+      display:none;align-items:center;justify-content:center;
+      font-size:11px;font-weight:800;line-height:1
+    }
+    .cart-badge.visible{display:inline-flex}
+ 
+    /* ─── SEARCH ─── */
+    .search-wrap{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 20px}
+    .search-inner{max-width:var(--container);margin:0 auto;position:relative}
+    .search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
+    .search-input{
+      width:100%;border:1.5px solid var(--border);border-radius:999px;
+      background:var(--surface2);color:var(--text);
+      padding:11px 44px 11px 44px;transition:.18s ease;outline:none;font-weight:400
+    }
+    .search-input:focus{border-color:var(--accent);background:#fff}
+    .search-input::placeholder{color:var(--text3)}
+    .search-clear{
+      position:absolute;right:12px;top:50%;transform:translateY(-50%);
+      width:24px;height:24px;border-radius:50%;background:var(--text3);color:#fff;
+      font-size:12px;display:none;align-items:center;justify-content:center;border:0
+    }
+    .search-clear.visible{display:flex}
+ 
+    /* ─── CATEGORIES ─── */
+    .cats-wrap{background:var(--surface);border-bottom:1px solid var(--border)}
+    .cats-inner{max-width:var(--container);margin:0 auto;display:flex;gap:8px;overflow-x:auto;padding:10px 20px;scrollbar-width:none}
+    .cats-inner::-webkit-scrollbar{display:none}
+    .cat-chip{
+      flex:0 0 auto;background:transparent;border:1.5px solid var(--border);
+      color:var(--text2);padding:6px 14px;border-radius:999px;
+      font-weight:700;font-size:12px;transition:.18s ease;white-space:nowrap;letter-spacing:.1px
+    }
+    .cat-chip:hover{border-color:var(--accent);color:var(--accent);background:#fff8f5}
+    .cat-chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+ 
+    /* ─── TOOLBAR ─── */
+    .toolbar{max-width:var(--container);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px}
+    .results-count{font-size:13px;color:var(--text2);font-weight:400}
+    .results-count strong{color:var(--text);font-weight:700}
+    .sort-select{
+      background:var(--surface);border:1.5px solid var(--border);
+      border-radius:var(--radius-sm);padding:8px 12px;color:var(--text);
+      outline:none;transition:.18s ease;font-size:13px;font-weight:700
+    }
+    .sort-select:focus{border-color:var(--accent)}
+ 
+    /* ─── GRID ─── */
+    .grid-section{max-width:var(--container);margin:0 auto;padding:0 20px 100px}
+    .products-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    @media(min-width:640px){.products-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}}
+    @media(min-width:1024px){.products-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
+ 
+    /* ─── PRODUCT CARD ─── */
+    .product-card{
+      background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);
+      overflow:hidden;display:flex;flex-direction:column;transition:.22s ease;position:relative
+    }
+    .product-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+    .card-img-wrap{position:relative;aspect-ratio:1;background:var(--surface2);overflow:hidden;cursor:pointer}
+    .card-img-wrap img{width:100%;height:100%;object-fit:cover;transition:.3s ease}
+    .product-card:hover .card-img-wrap img{transform:scale(1.04)}
+    .card-placeholder{
+      width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,#ece7df,#d9d0c5);font-size:2.8rem
+    }
+    .badge-offer{
+      position:absolute;top:10px;left:10px;
+      background:var(--accent);color:#fff;
+      padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;
+      letter-spacing:.6px;text-transform:uppercase
+    }
+    .badge-featured{
+      position:absolute;top:10px;right:10px;
+      background:var(--gold);color:#fff;
+      padding:4px 10px;border-radius:999px;font-size:10px;font-weight:700;
+      letter-spacing:.6px;text-transform:uppercase
+    }
+    .sku-badge{
+      position:absolute;bottom:8px;right:8px;
+      background:rgba(0,0,0,.44);color:rgba(255,255,255,.88);
+      padding:3px 7px;border-radius:6px;font-size:9px;font-weight:700;
+      letter-spacing:.6px;backdrop-filter:blur(4px)
+    }
+    .card-body{padding:13px 14px;display:flex;flex-direction:column;gap:5px;flex:1}
+    .card-cat{font-size:10px;font-weight:700;text-transform:uppercase;color:var(--accent);letter-spacing:.8px}
+    .card-name{font-family:var(--font-head);font-weight:700;font-size:14px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}
+    .card-name:hover{color:var(--accent)}
+    .card-desc-short{font-size:11.5px;color:var(--text2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .card-price-row{display:flex;align-items:baseline;gap:8px;margin-top:2px}
+    .card-price{font-family:var(--font-head);font-weight:700;font-size:18px;color:var(--text)}
+    .card-stock{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700}
+    .stock-dot{width:6px;height:6px;border-radius:50%;flex:0 0 auto}
+    .in-stock{color:var(--success)}.in-stock .stock-dot{background:var(--success)}
+    .low-stock{color:var(--warning)}.low-stock .stock-dot{background:var(--warning)}
+    .out-stock{color:var(--text3)}.out-stock .stock-dot{background:var(--text3)}
+    .card-footer{display:flex;gap:8px;padding:0 14px 14px}
+    .btn-detail,.btn-add{
+      flex:1;padding:9px 8px;font-size:12px;font-weight:700;
+      border-radius:var(--radius-sm);transition:.18s ease;letter-spacing:.1px
+    }
+    .btn-detail{background:var(--surface2);color:var(--text);border:1.5px solid var(--border)}
+    .btn-detail:hover{border-color:var(--text)}
+    .btn-add{background:var(--accent);color:#fff;border:0}
+    .btn-add:hover{background:var(--accent3)}
+    .btn-add:disabled{background:var(--text3);cursor:not-allowed}
+ 
+    /* ─── SKELETONS ─── */
+    .empty-state,.skeleton-state{grid-column:1/-1;text-align:center;padding:60px 20px}
+    .empty-state .icon{font-size:3.2rem;margin-bottom:12px}
+    .empty-state h3{font-family:var(--font-head);font-size:1.2rem;margin-bottom:8px}
+    .empty-state p{color:var(--text2)}
+    .skeleton-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    @media(min-width:640px){.skeleton-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}}
+    @media(min-width:1024px){.skeleton-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}}
+    .skeleton-card{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .skeleton-box{background:linear-gradient(90deg,#e8e2da,#f5f1ec,#e8e2da);background-size:200% 100%;animation:sheen 1.3s infinite}
+    @keyframes sheen{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .sk-img{aspect-ratio:1}
+    .sk-body{padding:13px;display:grid;gap:9px}
+    .sk-line{height:10px;border-radius:999px}
+    .sk-line.lg{height:14px;width:75%}
+    .sk-line.md{width:50%}
+    .sk-line.sm{width:60%}
+    .sk-actions{display:flex;gap:8px;padding:0 13px 13px}
+    .sk-btn{height:36px;border-radius:10px;flex:1}
+ 
+    /* ─── FAB ─── */
+    .fab-wa{
+      position:fixed;right:22px;bottom:26px;z-index:40;width:58px;height:58px;border-radius:50%;
+      background:#25d366;box-shadow:0 8px 28px rgba(37,211,102,.38);
+      display:flex;align-items:center;justify-content:center;transition:.2s ease;border:0
+    }
+    .fab-wa:hover{transform:scale(1.07)}
+    .fab-wa svg{width:30px;height:30px;fill:#fff}
+ 
+    /* ─── FOOTER ─── */
+    .site-footer{background:#1a1714;color:rgba(255,255,255,.65);padding:44px 20px 24px}
+    .footer-inner{max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:1fr;gap:32px}
+    @media(min-width:640px){.footer-inner{grid-template-columns:repeat(3,1fr)}}
+    .footer-logo{font-family:var(--font-head);font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:8px}
+    .footer-logo em{color:var(--accent2);font-style:normal}
+    .footer-desc{font-size:13px;line-height:1.65;max-width:260px}
+    .footer-h{font-family:var(--font-body);font-size:12px;font-weight:700;color:#fff;margin-bottom:10px;letter-spacing:.8px;text-transform:uppercase}
+    .footer-list{list-style:none;display:grid;gap:7px}
+    .footer-list li{font-size:13px;display:flex;gap:8px;align-items:flex-start}
+    .footer-bottom{max-width:var(--container);margin:28px auto 0;border-top:1px solid rgba(255,255,255,.08);padding-top:16px;text-align:center;font-size:11.5px;color:rgba(255,255,255,.3)}
+ 
+    /* ─── MODALS ─── */
+    .modal-overlay{
+      position:fixed;inset:0;background:rgba(20,15,10,.62);backdrop-filter:blur(5px);z-index:80;
+      opacity:0;pointer-events:none;transition:.22s ease;display:flex;align-items:flex-end;justify-content:center
+    }
+    .modal-overlay.open{opacity:1;pointer-events:auto}
+    @media(min-width:640px){.modal-overlay{align-items:center}}
+    .detail-modal,.cart-modal{
+      width:100%;max-width:560px;max-height:92vh;overflow-y:auto;overflow-x:hidden;
+      background:var(--surface);box-shadow:var(--shadow-hover);
+      border-radius:22px 22px 0 0;padding:26px 22px 28px;position:relative;
+      transform:translateY(30px);transition:.26s ease
+    }
+    .admin-modal{
+      width:100%;max-width:1160px;max-height:92vh;overflow:auto;
+      background:var(--surface);box-shadow:var(--shadow-hover);
+      border-radius:22px;transform:translateY(24px);transition:.26s ease
+    }
+    .modal-overlay.open .detail-modal,.modal-overlay.open .cart-modal,.modal-overlay.open .admin-modal{transform:translateY(0)}
+    @media(min-width:640px){.detail-modal,.cart-modal,.admin-modal{border-radius:22px}}
+    .drag-bar{width:44px;height:4px;border-radius:999px;background:var(--border);margin:0 auto 20px}
+    @media(min-width:640px){.drag-bar{display:none}}
+    .modal-close{
+      position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;
+      background:var(--surface2);color:var(--text2);display:flex;align-items:center;justify-content:center;font-size:15px;border:0
+    }
+    .modal-close:hover{background:var(--border);color:var(--text)}
+ 
+    /* ─── DETAIL ─── */
+    .detail-gallery{display:grid;gap:10px;margin-bottom:14px}
+    .detail-main-wrap{position:relative;width:100%;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;background:var(--surface2)}
+    .detail-main{width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+    .detail-img-count{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,.48);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;backdrop-filter:blur(4px)}
+    .detail-thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
+    .thumb{width:70px;height:70px;flex:0 0 auto;border-radius:10px;border:2px solid transparent;background:var(--surface2);overflow:hidden;padding:0;cursor:pointer}
+    .thumb.active{border-color:var(--accent)}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .detail-cat{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--accent);letter-spacing:.8px}
+    .detail-name{font-family:var(--font-head);font-size:1.5rem;font-weight:700;line-height:1.2;margin:5px 0 4px}
+    .detail-sku{font-size:11.5px;color:var(--text3);font-weight:700;margin-bottom:6px}
+    .detail-short{font-size:13.5px;color:var(--text2);line-height:1.55;margin-bottom:8px;font-style:italic}
+    .detail-desc{font-size:13.5px;color:var(--text2);line-height:1.65;margin-bottom:10px}
+    .detail-features{margin:10px 0;padding:14px;background:var(--surface2);border-radius:var(--radius-sm);display:grid;gap:6px}
+    .detail-features h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--text3);margin-bottom:4px}
+    .detail-feature-item{font-size:13px;color:var(--text2);display:flex;gap:8px;align-items:flex-start}
+    .detail-feature-item::before{content:"•";color:var(--accent);font-weight:900;flex:0 0 auto;margin-top:1px}
+    .detail-price{font-family:var(--font-head);font-size:2rem;font-weight:700;margin:12px 0 10px}
+    .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .tag{background:#fff8f4;color:var(--accent3);border:1px solid #f0d0c0;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700}
+    .detail-actions{display:flex;gap:10px;margin-top:18px}
+    .btn-wa{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      background:#25d366;color:#fff;padding:14px 16px;border:0;flex:1;
+      border-radius:var(--radius-sm);font-weight:700;font-size:14px;transition:.18s ease
+    }
+    .btn-wa:hover{background:#1eb85a}
+    .btn-add.big{padding:14px 16px;font-size:14px}
+    .btn-primary,.btn-secondary,.btn-save,.btn-export{
+      font-weight:700;border-radius:var(--radius-sm);transition:.18s ease;font-size:13px;padding:11px 18px
+    }
+    .btn-primary,.btn-save,.btn-export{background:var(--accent);color:#fff;border:0}
+    .btn-primary:hover,.btn-save:hover,.btn-export:hover{background:var(--accent3)}
+    .btn-secondary{background:var(--surface2);color:var(--text);border:1.5px solid var(--border)}
+    .btn-secondary:hover{border-color:var(--text)}
+ 
+    /* ─── CART ─── */
+    .cart-title{font-family:var(--font-head);font-weight:700;font-size:1.25rem;margin-bottom:16px}
+    .cart-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}
+    .cart-item-img{width:56px;height:56px;border-radius:10px;background:var(--surface2);overflow:hidden;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+    .cart-item-img img{width:100%;height:100%;object-fit:cover}
+    .cart-item-info{flex:1;min-width:0}
+    .cart-item-name{font-weight:700;font-size:13px;line-height:1.3}
+    .cart-item-price{font-size:12.5px;color:var(--text2);margin-top:2px}
+    .cart-item-qty{display:flex;align-items:center;gap:6px}
+    .qty-btn{width:30px;height:30px;border-radius:8px;border:1.5px solid var(--border);background:#fff;color:var(--text);font-weight:700;display:flex;align-items:center;justify-content:center}
+    .qty-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .qty-num{min-width:22px;text-align:center;font-weight:700;font-size:14px}
+    .cart-total{display:flex;justify-content:space-between;align-items:center;padding:16px 0 0;font-size:1.05rem;font-weight:700}
+    .cart-total .total-label{color:var(--text2);font-size:14px;font-weight:700}
+    .btn-send-order{
+      width:100%;display:flex;align-items:center;justify-content:center;gap:8px;
+      background:#25d366;color:#fff;border:0;padding:15px;border-radius:var(--radius-sm);
+      font-size:15px;font-weight:700;margin-top:14px;transition:.18s ease
+    }
+    .btn-send-order:hover{background:#1eb85a}
+    .cart-empty{text-align:center;padding:44px 0;color:var(--text2)}
+    .cart-empty .icon{font-size:3rem;margin-bottom:10px}
+    .cart-actions{display:flex;gap:10px;margin-top:12px}
+ 
+    /* ─── ADMIN ─── */
+    .admin-header{
+      background:var(--text);color:#fff;height:64px;padding:0 20px;
+      display:flex;align-items:center;justify-content:space-between;
+      position:sticky;top:0;z-index:2;border-radius:22px 22px 0 0
+    }
+    .admin-title{font-family:var(--font-head);font-weight:700;font-size:1.1rem}
+    .btn-close-admin{background:rgba(255,255,255,.12);color:#fff;padding:9px 16px;border-radius:var(--radius-sm);font-weight:700;font-size:13px;border:0}
+    .btn-close-admin:hover{background:rgba(255,255,255,.22)}
+    .admin-body{padding:24px 20px 56px;max-width:var(--container);margin:0 auto}
+    .admin-tabs{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin-bottom:20px}
+    .admin-tabs::-webkit-scrollbar{display:none}
+    .admin-tab{
+      flex:0 0 auto;background:var(--surface);border:1.5px solid var(--border);color:var(--text2);
+      padding:9px 16px;border-radius:12px;font-weight:700;font-size:13px;transition:.18s ease
+    }
+    .admin-tab.active{background:var(--text);border-color:var(--text);color:#fff}
+    .admin-pane{display:none}
+    .admin-pane.active{display:block}
+    .admin-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin-bottom:20px}
+    .admin-card h3{font-family:var(--font-head);font-size:1.05rem;font-weight:700;margin-bottom:16px}
+    .admin-grid{display:grid;grid-template-columns:1fr;gap:13px}
+    @media(min-width:720px){.admin-grid{grid-template-columns:1fr 1fr}}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field.full{grid-column:1/-1}
+    .field.thirds{grid-column:1/-1}
+    @media(min-width:720px){.field.thirds{grid-column:span 1}}
+    .field label{font-size:12px;color:var(--text2);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+    .form-input,.form-select,.form-textarea,.edit-price{
+      background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-sm);
+      padding:9px 12px;color:var(--text);outline:none;transition:.18s ease
+    }
+    .form-input:focus,.form-select:focus,.form-textarea:focus,.edit-price:focus{border-color:var(--accent);background:#fff}
+    .form-textarea{min-height:90px;resize:vertical}
+    .form-input::placeholder,.form-textarea::placeholder{color:var(--text3);font-style:italic}
+    .field-hint{font-size:11px;color:var(--text3);margin-top:2px}
+    .toggle-row{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+    .toggle-wrap{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700}
+    .toggle{width:40px;height:22px;border-radius:999px;background:var(--border);position:relative;padding:0;border:0;transition:.2s ease}
+    .toggle::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s ease;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+    .toggle.on{background:var(--accent)}
+    .toggle.on::after{left:21px}
+    .save-confirm{display:none;align-items:center;gap:6px;color:var(--success);font-size:13px;font-weight:700}
+    .save-confirm.show{display:flex}
+    .form-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+    .admin-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    @media(min-width:720px){.stats-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    .stat{background:linear-gradient(160deg,#fff,#f8f5f0);border:1px solid var(--border);border-radius:14px;padding:16px}
+    .stat .k{font-size:11px;color:var(--text2);font-weight:700;text-transform:uppercase;letter-spacing:.7px}
+    .stat .v{font-family:var(--font-head);font-size:1.35rem;font-weight:700;margin-top:7px}
+    .admin-list{display:grid;gap:10px}
+    .admin-row{
+      display:grid;grid-template-columns:60px 1fr auto;gap:12px;align-items:center;
+      border:1.5px solid var(--border);border-radius:14px;padding:12px;background:var(--surface);transition:.18s ease
+    }
+    .admin-row:hover{border-color:var(--accent)}
+    .admin-row-img{width:60px;height:60px;border-radius:10px;background:var(--surface2);overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+    .admin-row-img img{width:100%;height:100%;object-fit:cover}
+    .admin-row-main{min-width:0}
+    .admin-row-name{font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .admin-row-meta{font-size:11.5px;color:var(--text2);margin-top:2px}
+    .admin-row-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .edit-price{width:100px;text-align:right;padding:8px 10px;font-size:13px}
+    .stock-controls{display:flex;align-items:center;gap:7px}
+    .stock-val{min-width:28px;text-align:center;font-weight:700;font-size:14px}
+    .icon-btn{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--border);background:#fff;color:var(--text2);display:flex;align-items:center;justify-content:center;transition:.18s ease}
+    .icon-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .icon-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+    .admin-searchbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+    .admin-searchbar .form-input{flex:1;min-width:180px}
+    .admin-searchbar .form-select{min-width:200px}
+    .admin-subtitle{font-size:13px;color:var(--text2);margin-top:10px}
+    .hint{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6}
+ 
+    /* ─── DROPZONE / BULK ─── */
+    .dropzone{border:2px dashed var(--border);background:var(--surface2);border-radius:var(--radius);padding:30px 20px;text-align:center;transition:.2s ease;cursor:pointer}
+    .dropzone:hover,.dropzone.dragover{border-color:var(--accent);background:#fff8f4}
+    .dropzone .icon{font-size:2.6rem;margin-bottom:10px}
+    .dropzone p{color:var(--text2);margin:0;font-size:14px}
+    .dropzone strong{color:var(--text)}
+    .preview{display:none;margin-top:12px;background:#111;color:#b6ffb6;border-radius:12px;padding:14px;font-family:monospace;font-size:12px;white-space:pre-wrap;max-height:200px;overflow:auto}
+    .preview.show{display:block}
+ 
+    /* ─── IMAGE UPLOAD ─── */
+    .img-dropzone{
+      border:2px dashed var(--border);background:var(--surface2);border-radius:var(--radius-sm);
+      padding:18px;text-align:center;cursor:pointer;transition:.18s ease;font-size:13px;color:var(--text2)
+    }
+    .img-dropzone:hover,.img-dropzone.dragover{border-color:var(--accent);background:#fff8f4}
+    .img-preview-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .img-thumb-wrap{position:relative;width:68px;height:68px;border-radius:10px;overflow:hidden;background:var(--surface2)}
+    .img-thumb-wrap img{width:100%;height:100%;object-fit:cover}
+    .img-thumb-remove{position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;border:0;cursor:pointer}
+    .img-filename{font-size:10px;color:var(--text3);text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:2px 2px 0}
+ 
+    /* ─── TOAST ─── */
+    .toast{
+      position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(16px);
+      background:var(--text);color:#fff;padding:11px 20px;border-radius:999px;
+      z-index:200;opacity:0;pointer-events:none;transition:.22s ease;white-space:nowrap;
+      box-shadow:0 10px 32px rgba(0,0,0,.2);font-weight:700;font-size:14px
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+ 
+    /* ─── RESPONSIVE ─── */
+    @media(max-width:420px){
+      .header-inner{gap:8px;padding:0 12px}
+      .btn-admin,.cart-btn{padding:8px 12px;font-size:12px}
+      .toolbar,.grid-section,.search-wrap,.search-inner,.cats-inner{padding-left:12px;padding-right:12px}
+      .products-grid{gap:12px}
+      .card-footer{flex-direction:column}
+      .detail-actions,.cart-actions{flex-direction:column}
+      .admin-row{grid-template-columns:52px 1fr}
+      .admin-row-controls{grid-column:1/-1;justify-content:flex-start}
+    }
+  </style>
+</head>
+<body>
+<a href="#main" class="skip-link">Saltar al contenido</a>
+ 
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-block">
+      <div class="logo-name">casa <em>mecha</em></div>
+      <div class="store-status"><span id="statusDot" class="status-dot"></span><span id="statusText">Cargando...</span></div>
+    </div>
+    <div class="header-actions">
+      <button id="adminBtn" class="btn-admin" type="button" style="display:none">⚙ Admin</button>
+      <button id="cartBtn" class="cart-btn" type="button">🛒 Pedido <span id="cartBadge" class="cart-badge">0</span></button>
+    </div>
+  </div>
+</header>
+ 
+<div class="search-wrap">
+  <div class="search-inner">
+    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="searchInput" class="search-input" type="search" placeholder="Buscar productos, categorías, etiquetas..." autocomplete="off" />
+    <button id="searchClear" class="search-clear" type="button">✕</button>
+  </div>
+</div>
+ 
+<div class="cats-wrap">
+  <div id="catsContainer" class="cats-inner"></div>
+</div>
+ 
+<div class="toolbar">
+  <div id="resultsCount" class="results-count"><strong>0</strong> productos</div>
+  <select id="sortSelect" class="sort-select">
+    <option value="newest">Más recientes</option>
+    <option value="cheap">Menor precio</option>
+    <option value="expensive">Mayor precio</option>
+    <option value="nameAsc">A → Z</option>
+    <option value="nameDesc">Z → A</option>
+    <option value="featured">Destacados</option>
+    <option value="offer">En oferta</option>
+  </select>
+</div>
+ 
+<main id="main" class="grid-section">
+  <div id="productsGrid" class="products-grid" aria-live="polite"></div>
+</main>
+ 
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">casa <em>mecha</em></div>
+      <p class="footer-desc">Tu catálogo de confianza. Productos de calidad para el hogar, cocina, tecnología y mucho más.</p>
+    </div>
+    <div>
+      <div class="footer-h">Categorías</div>
+      <ul id="footerCats" class="footer-list"></ul>
+    </div>
+    <div>
+      <div class="footer-h">Contacto</div>
+      <ul class="footer-list">
+        <li>📲 Pedidos por WhatsApp</li>
+        <li>🕐 Lun–Vie 9:00–18:00 · Sáb 10:00–17:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Casa Mecha · Todos los derechos reservados</div>
+</footer>
+ 
+<button id="waFab" class="fab-wa" type="button" aria-label="Consultar por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</button>
+ 
+<!-- DETAIL MODAL -->
+<div id="detailOverlay" class="modal-overlay" aria-hidden="true">
+  <div class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="drag-bar"></div>
+    <button class="modal-close" type="button" data-close="detail">✕</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+ 
+<!-- CART MODAL -->
+<div id="cartOverlay" class="modal-overlay" aria-hidden="true">
+  <div class="cart-modal" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="drag-bar"></div>
+    <button class="modal-close" type="button" data-close="cart">✕</button>
+    <div id="cartContent"></div>
+  </div>
+</div>
+ 
+<!-- ADMIN MODAL -->
+<div id="adminOverlay" class="modal-overlay" aria-hidden="true">
+  <div class="admin-modal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+    <div class="admin-header">
+      <div id="adminTitle" class="admin-title">⚙ Panel de Administración</div>
+      <button id="closeAdminBtn" class="btn-close-admin" type="button">✕ Cerrar</button>
+    </div>
+    <div class="admin-body">
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="add" type="button">➕ Nuevo producto</button>
+        <button class="admin-tab" data-tab="list" type="button">📋 Productos</button>
+        <button class="admin-tab" data-tab="bulk" type="button">📤 Carga masiva</button>
+        <button class="admin-tab" data-tab="settings" type="button">⚙ Ajustes</button>
       </div>
-    </header>
-
-    <main id="inicio" class="shell">
-      <section class="hero">
-        <div class="hero-card">
-          <img class="hero-bg" src="img/home.png" alt="" aria-hidden="true" />
-
-          <div class="hero-content">
-            <h2>Todo para tu hogar,<em>ordenado y fácil de comprar</em></h2>
-            <p>
-              Bazar &amp; Deco. Encontrá todo lo que necesitás con la mejor
-              calidad y precio.
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#productos">Ver catálogo</a>
-              <a
-                class="btn btn-outline"
-                href="https://wa.me/5491157572467"
-                target="_blank"
-                >Consultar por WhatsApp</a
-              >
+ 
+      <!-- TAB: ADD/EDIT -->
+      <div class="admin-pane active" id="pane-add">
+        <div class="admin-card">
+          <h3 id="formTitle">Nuevo producto</h3>
+          <div class="admin-grid">
+            <div class="field">
+              <label for="f-name">Nombre del producto *</label>
+              <input id="f-name" class="form-input" type="text" placeholder="Ej: Bowl de cerámica 14 cm" maxlength="120" />
+            </div>
+            <div class="field">
+              <label for="f-sku">Código / SKU</label>
+              <input id="f-sku" class="form-input" type="text" placeholder="Ej: CM-HOG-001" maxlength="40" />
+              <span class="field-hint">Se genera automáticamente si se deja vacío</span>
+            </div>
+            <div class="field">
+              <label for="f-price">Precio *</label>
+              <input id="f-price" class="form-input" type="number" min="0" step="1" placeholder="0" />
+            </div>
+            <div class="field">
+              <label for="f-cat">Categoría *</label>
+              <select id="f-cat" class="form-select"></select>
+            </div>
+            <div class="field">
+              <label for="f-stock">Stock</label>
+              <input id="f-stock" class="form-input" type="number" min="0" step="1" placeholder="0" />
+            </div>
+            <div class="field">
+              <label for="f-variants">Variantes (opcional)</label>
+              <input id="f-variants" class="form-input" type="text" placeholder="Azul, Rojo, Verde" />
+            </div>
+            <div class="field full">
+              <label for="f-shortdesc">Descripción corta (máx. 150 caracteres)</label>
+              <input id="f-shortdesc" class="form-input" type="text" maxlength="150" placeholder="Frase breve y atractiva para la tarjeta del producto" />
+              <span id="shortDescCount" class="field-hint">0 / 150</span>
+            </div>
+            <div class="field full">
+              <label for="f-desc">Descripción completa</label>
+              <textarea id="f-desc" class="form-textarea form-input" maxlength="600" placeholder="Descripción detallada para el modal de detalle..."></textarea>
+            </div>
+            <div class="field full">
+              <label for="f-features">Características principales (una por línea)</label>
+              <textarea id="f-features" class="form-textarea form-input" style="min-height:80px" maxlength="400" placeholder="Material: cerámica esmaltada&#10;Capacidad: 400 ml&#10;Apto microondas y lavavajillas"></textarea>
+              <span class="field-hint">Aparecerán como lista de puntos en el detalle</span>
+            </div>
+            <div class="field full">
+              <label for="f-seo">Palabras clave SEO (separadas por coma)</label>
+              <input id="f-seo" class="form-input" type="text" placeholder="bowl cerámica, vajilla artesanal, desayuno" />
+            </div>
+            <div class="field full">
+              <label>Imágenes del producto</label>
+              <div id="imgDropzone" class="img-dropzone" tabindex="0" role="button">
+                📷 <strong>Arrastrá imágenes</strong> o hacé clic para subir<br>
+                <small>JPG, PNG, WEBP · hasta 5 imágenes</small>
+              </div>
+              <input id="imgFileInput" type="file" accept="image/*" multiple hidden />
+              <div id="imgPreviewGrid" class="img-preview-grid"></div>
+              <div class="field-hint" style="margin-top:8px">O pegá URLs separadas por coma:</div>
+              <input id="f-imgs" class="form-input" type="text" placeholder="https://... , https://..." style="margin-top:4px" />
+            </div>
+            <div class="field">
+              <label for="f-tags">Etiquetas (separadas por coma)</label>
+              <input id="f-tags" class="form-input" type="text" placeholder="nuevo, premium, combo" />
+            </div>
+            <div class="field full">
+              <div class="toggle-row">
+                <div class="toggle-wrap"><button id="tog-offer" class="toggle" type="button"></button><span>En oferta</span></div>
+                <div class="toggle-wrap"><button id="tog-feat" class="toggle" type="button"></button><span>Destacado</span></div>
+              </div>
             </div>
           </div>
-
-          <div class="hero-spacer"></div>
+          <div class="form-actions">
+            <button id="saveProductBtn" class="btn-save" type="button">💾 Guardar producto</button>
+            <button id="clearFormBtn" class="btn-secondary" type="button">🗑 Limpiar</button>
+            <div id="saveConfirm" class="save-confirm">✅ Producto guardado</div>
+          </div>
+          <div id="editHint" class="admin-subtitle" style="display:none"></div>
         </div>
-      </section>
-
-      <section class="layout" id="productos">
-        <aside class="sidebar">
-          <h3>Categorías</h3>
-          <p>Filtrá por categoría para encontrar lo que buscás.</p>
-          <div class="cat-list" id="catList">
-            <button class="cat-pill active" type="button" data-cat="all">
-              <span>Todo</span><span>0</span>
-            </button>
-            <button class="cat-pill" type="button" data-cat="organizador">
-              <span>Organizador</span><span>0</span>
-            </button>
-            <button class="cat-pill" type="button" data-cat="organizacion">
-              <span>Organización</span><span>0</span>
-            </button>
-            <button class="cat-pill" type="button" data-cat="cocina">
-              <span>Cocina</span><span>0</span>
-            </button>
-            <button class="cat-pill" type="button" data-cat="hogar">
-              <span>Hogar</span><span>0</span>
-            </button>
-            <button class="cat-pill" type="button" data-cat="tecnologia">
-              <span>Tecnología</span><span>0</span>
-            </button>
-          </div>
-        </aside>
-
-        <section class="content">
-          <div class="toolbar">
-            <div>
-              <h3>Productos</h3>
-              <p>Mostrando <strong id="visibleCount">0</strong> productos</p>
-            </div>
-            <div class="sort">
-              Orden
-              <select id="sortSelect" aria-label="Ordenar productos">
-                <option value="price-desc">Mayor precio</option>
-                <option value="price-asc">Menor precio</option>
-                <option value="name">A-Z</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="grid" id="productGrid">
-            <article
-              class="card"
-              data-name="organizador zapatillas"
-              data-price="27900"
-              data-cat="organizador"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/zapatero de 10 niveles.jpeg"
-                  alt="organizador zapatillas"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Organizador</div>
-                <h4>
-                  Organizador de zapatillas · capacidad 30 pares · aluminio y
-                  frizelina
-                </h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$27.900</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20de%20zapatillas%2010%20niveles"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="organizador perchero esquinero"
-              data-price="20000"
-              data-cat="organizador"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/organizador multifuncional.jpeg"
-                  alt="organizador multifuncional"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Organizador</div>
-                <h4>Organizador + perchero esquinero</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$20.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20perchero%20esquinero"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="zapatero 3 niveles"
-              data-price="8900"
-              data-cat="organizador"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/zapatero de 3 niveles.jpeg"
-                  alt="zapatero 3 niveles"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Organizador</div>
-                <h4>Zapatero de 3 niveles</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$8.900</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Zapatero%203%20niveles"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="organizador ropa sucia 2 divisiones"
-              data-price="15000"
-              data-cat="organizador"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/canasto x2 de ropa.jpeg"
-                  alt="canasto ropa"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Organizador</div>
-                <h4>Organizador de ropa sucia 2 divisiones</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$15.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20ropa%20sucia%202%20divisiones"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="organizador ropa sucia x3"
-              data-price="26000"
-              data-cat="organizador"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/canasto x3 de ropa.jpeg"
-                  alt="canasto x3"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Organizador</div>
-                <h4>Organizador de ropa sucia x3</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$26.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20ropa%20sucia%20x3"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="tacho bambu 50x35cm"
-              data-price="24000"
-              data-cat="organizador"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/canasto para la ropa.jpeg"
-                  alt="tacho bambu"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Organizador</div>
-                <h4>Tacho de bambú 50x35cm</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$24.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Tacho%20bambu%2050x35cm"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="escurridor plegable"
-              data-price="12500"
-              data-cat="organizacion"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/escurrido plegable.jpeg"
-                  alt="escurridor plegable"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Organización</div>
-                <h4>Escurridor plegable</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$12.500</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Escurridor%20plegable"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="hermetico de vidrio set x3"
-              data-price="20000"
-              data-cat="organizacion"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/set de x3 tpper + vidrio 368.jpeg"
-                  alt="hermetico vidrio"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Organización</div>
-                <h4>Set x3 hermético de vidrio · 470ml / 700ml / 1040ml</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$20.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20hermetico%20vidrio%20x3"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="set bowls con tapa"
-              data-price="12500"
-              data-cat="organizacion"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/set de bowls con tapa.jpeg"
-                  alt="bowls con tapa"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Organización</div>
-                <h4>Set de bowls con tapa</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$12.500</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20bowls%20con%20tapa"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="seca platos simple"
-              data-price="15000"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/seca platos simples.jpeg"
-                  alt="seca platos"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>Seca platos simple</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$15.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Seca%20platos%20simple"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="sarten world carol 26cm antiadherente"
-              data-price="23999"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/sarten work carol 26 cm.jpeg"
-                  alt="sarten carol"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>Sartén World Carol 26cm antiadherente</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$23.999</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Sarten%20World%20Carol%2026cm"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="sarten antiadherente 4 huevos tapa vidrio"
-              data-price="25000"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/sarten antiadherente 4 huevos.jpeg"
-                  alt="sarten huevos"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>Sartén antiadherente 4 huevos con tapa de vidrio</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$25.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Sarten%20antiadherente%204%20huevos"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="organizador multifuncional cocina utensilios"
-              data-price="8900"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/organizador de utencillos.jpeg"
-                  alt="organizador cocina"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>Organizador multifuncional para cocina</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$8.900</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Organizador%20multifuncional%20cocina"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="set cubiertos carol x24 piezas"
-              data-price="26000"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/set de cubiertos carol.jpeg"
-                  alt="cubiertos carol"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>Set x24 piezas marca Carol</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$26.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20cubiertos%20Carol%20x24"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="bowls plastico carol x4"
-              data-price="22500"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/set de bowls 5 piezas.jpeg"
-                  alt="bowls carol"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>
-                  Set x4 bowl de plástico marca Carol · 0.3L / 0.7L / 1.3L / 2L
-                </h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$22.500</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20bowls%20Carol%20x4"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="sarten granito antiadherente"
-              data-price="35000"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/sarten granito antiadherente.jpeg"
-                  alt="sarten granito"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>Sartén granito antiadherente · 20cm o 22cm</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$35.000 / $40.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Sarten%20granito%20antiadherente"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="tamiz harina"
-              data-price="15000"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/tamiz de harina.jpeg"
-                  alt="tamiz harina"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>Tamiz de harina</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$15.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Tamiz%20de%20harina"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="cafetera express suono"
-              data-price="50500"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/cafetera express.jpeg"
-                  alt="cafetera express"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>Cafetera express Suono</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$50.500</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Cafetera%20express%20Suono"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="ollas"
-              data-price="5800"
-              data-cat="cocina"
-            >
-              <div class="card-img">
-                <img src="img-1/olla anti...jpeg" alt="ollas" loading="lazy" />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Cocina</div>
-                <h4>Ollas</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$5.800</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Ollas"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="canilla monocomando suono 290"
-              data-price="27000"
-              data-cat="hogar"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/canilla mono......jpeg"
-                  alt="canilla"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Hogar</div>
-                <h4>Canilla monocomando modelo Suono 290</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$27.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Canilla%20monocomando%20Suono%20290"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="dispensador doble jabon"
-              data-price="15000"
-              data-cat="hogar"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/dispensador doble de jabon.jpeg"
-                  alt="dispensador jabon"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Hogar</div>
-                <h4>Dispensador doble para jabón</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$15.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Dispensador%20doble%20jabon"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="set de baño premium"
-              data-price="9000"
-              data-cat="hogar"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/set de baño premiun.jpeg"
-                  alt="set baño"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Hogar</div>
-                <h4>Set de baño premium</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$9.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Set%20de%20bano%20premium"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="yogurtera"
-              data-price="35000"
-              data-cat="hogar"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/yogurtera.jpeg"
-                  alt="yogurtera"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Hogar</div>
-                <h4>Yogurtera</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$35.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Yogurtera"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="tostadora"
-              data-price="30000"
-              data-cat="hogar"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/tostadora.jpeg"
-                  alt="tostadora"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Hogar</div>
-                <h4>Tostadora</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$30.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Tostadora"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="estufa electrica"
-              data-price="10000"
-              data-cat="hogar"
-            >
-              <div class="card-img">
-                <img src="img-1/estufa 2.jpeg" alt="estufa" loading="lazy" />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Hogar</div>
-                <h4>Estufa</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$10.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Estufa"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="estufa chica"
-              data-price="4800"
-              data-cat="hogar"
-            >
-              <div class="card-img">
-                <img
-                  src="img-1/estufa.jpeg"
-                  alt="estufa chica"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Hogar</div>
-                <h4>Estufa</h4>
-                <div class="stars">★★★★☆</div>
-                <div class="price-row">
-                  <span class="price-now">$4.800</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Estufa%20chica"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="tensiometro digital lambotech"
-              data-price="21000"
-              data-cat="tecnologia"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/tensiometro digital.jpeg"
-                  alt="tensiometro"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Tecnología</div>
-                <h4>Tensiómetro digital Lambotech</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$21.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Tensiometro%20digital%20Lambotech"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="batidora de mano 7 velocidades"
-              data-price="20000"
-              data-cat="tecnologia"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/batidora de mano.jpeg"
-                  alt="batidora"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Tecnología</div>
-                <h4>Batidora de mano 7 velocidades</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$20.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Batidora%20de%20mano%207%20velocidades"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="auriculares"
-              data-price="8000"
-              data-cat="tecnologia"
-            >
-              <div class="card-img">
-                <span class="badge">Nuevo</span>
-                <img
-                  src="img-1/auriculares.jpg"
-                  alt="auriculares"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Tecnología</div>
-                <h4>Auriculares</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$8.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Auriculares"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="camara de seguridad"
-              data-price="20100"
-              data-cat="tecnologia"
-            >
-              <div class="card-img">
-                <img
-                  src="img-1/camara de seguridad.jpeg"
-                  alt="camara seguridad"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Tecnología</div>
-                <h4>Cámara de seguridad</h4>
-                <div class="stars">★★★★☆</div>
-                <div class="price-row">
-                  <span class="price-now">$20.100</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Camara%20de%20seguridad"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-
-            <article
-              class="card"
-              data-name="aspiradora de mano"
-              data-price="13200"
-              data-cat="tecnologia"
-            >
-              <div class="card-img">
-                <span class="badge">Oferta</span>
-                <img
-                  src="img-1/aspiradora de mano.jpeg"
-                  alt="aspiradora"
-                  loading="lazy"
-                />
-              </div>
-              <div class="card-body">
-                <div class="card-cat">Tecnología</div>
-                <h4>Aspiradora de mano</h4>
-                <div class="stars">★★★★★</div>
-                <div class="price-row">
-                  <span class="price-now">$13.200</span
-                  ><span class="price-old">$15.000</span>
-                </div>
-                <a
-                  class="btn-wa"
-                  href="https://wa.me/5491157572467?text=Hola!%20Me%20interesa%3A%20Aspiradora%20de%20mano"
-                  target="_blank"
-                  onclick="event.stopPropagation()"
-                  >Consultar</a
-                >
-              </div>
-            </article>
-          </div>
-        </section>
-      </section>
-    </main>
-
-    <section class="footer-cta">
-      <div class="shell footer-cta-inner">
-        <div>
-          <h3>Consultá por WhatsApp</h3>
-          <p>
-            Encontrá lo que necesitás o pedinos lo que no ves en el catálogo.
-          </p>
-        </div>
-        <a
-          class="btn btn-outline"
-          href="https://wa.me/5491157572467"
-          target="_blank"
-          >Escribinos</a
-        >
       </div>
-    </section>
-
-    <footer>
-      <div class="shell">
-        © 2025 Casa Mecha Bazar · Envíos a todo el país · Compra segura
-      </div>
-    </footer>
-
-    <a class="wa-float" href="https://wa.me/5491157572467" target="_blank"
-      >WhatsApp</a
-    >
-
-    <div
-      id="previewModal"
-      style="
-        position: fixed;
-        inset: 0;
-        z-index: 200;
-        background: rgba(26, 20, 14, 0.65);
-        backdrop-filter: blur(6px);
-        align-items: center;
-        justify-content: center;
-        padding: 16px;
-        overflow-y: auto;
-      "
-    >
-      <div
-        style="
-          background: #fff;
-          border-radius: 22px;
-          max-width: 460px;
-          width: 100%;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
-          overflow: hidden;
-          animation: modalIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-          position: relative;
-          margin: auto;
-        "
-      >
-        <button
-          id="modalClose"
-          style="
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 5;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(255, 255, 255, 0.92);
-            cursor: pointer;
-            font-size: 18px;
-            display: grid;
-            place-items: center;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
-            color: #333;
-            line-height: 1;
-          "
-        >
-          ✕
-        </button>
-        <div
-          style="
-            background: #f3ebe0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            max-height: 70vh;
-            overflow: hidden;
-            position: relative;
-          "
-        >
-          <img
-            id="modalImg"
-            src=""
-            alt=""
-            style="
-              width: 100%;
-              height: auto;
-              max-height: 70vh;
-              object-fit: contain;
-              display: block;
-              transition: opacity 0.2s;
-            "
-          />
-          <span
-            id="modalBadge"
-            style="
-              position: absolute;
-              top: 12px;
-              left: 12px;
-              background: #1a4a2e;
-              color: #fff;
-              padding: 6px 12px;
-              border-radius: 999px;
-              font-size: 11px;
-              font-weight: 700;
-            "
-          ></span>
-        </div>
-        <div style="padding: 20px 22px 22px">
-          <div
-            id="modalCat"
-            style="
-              font-size: 10px;
-              font-weight: 700;
-              letter-spacing: 1px;
-              text-transform: uppercase;
-              color: #2d6a45;
-              margin-bottom: 4px;
-            "
-          ></div>
-          <div
-            id="modalName"
-            style="
-              font-family: &quot;Playfair Display&quot;, serif;
-              font-size: 21px;
-              font-weight: 700;
-              color: #1a1a1a;
-              line-height: 1.2;
-              margin-bottom: 6px;
-            "
-          ></div>
-          <div
-            id="modalStars"
-            style="color: #c99a4b; font-size: 15px; margin-bottom: 10px"
-          ></div>
-          <div
-            style="
-              display: flex;
-              align-items: baseline;
-              gap: 10px;
-              margin-bottom: 18px;
-              flex-wrap: wrap;
-            "
-          >
-            <span
-              id="modalPrice"
-              style="font-size: 28px; font-weight: 700; color: #1a4a2e"
-            ></span>
-            <span
-              id="modalOld"
-              style="
-                font-size: 14px;
-                color: #6c6c6c;
-                text-decoration: line-through;
-              "
-            ></span>
+ 
+      <!-- TAB: LIST -->
+      <div class="admin-pane" id="pane-list">
+        <div class="admin-card">
+          <div class="admin-searchbar">
+            <input id="adminSearch" class="form-input" type="search" placeholder="Buscar en el panel..." />
+            <select id="adminCatFilter" class="form-select"></select>
           </div>
-          <a
-            id="modalWa"
-            href="#"
-            target="_blank"
-            style="
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              gap: 8px;
-              width: 100%;
-              padding: 14px;
-              border-radius: 12px;
-              background: #25d366;
-              color: #fff;
-              font-size: 14px;
-              font-weight: 700;
-              text-decoration: none;
-              transition: background 0.2s;
-            "
-            onmouseover="this.style.background = '#1daf55'"
-            onmouseout="this.style.background = '#25d366'"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
-              />
-            </svg>
-            Consultar por WhatsApp
-          </a>
+          <div class="admin-tools" style="margin-bottom:14px">
+            <button id="exportCsvBtn" class="btn-export" type="button">⬇ Exportar CSV</button>
+            <button id="clearCartBtnAdmin" class="btn-secondary" type="button">🧹 Vaciar carrito</button>
+          </div>
+          <div id="adminList" class="admin-list"></div>
+        </div>
+        <div class="admin-card">
+          <h3>Estadísticas</h3>
+          <div class="stats-grid">
+            <div class="stat"><div class="k">Productos</div><div id="stProducts" class="v">0</div></div>
+            <div class="stat"><div class="k">Stock total</div><div id="stStock" class="v">0</div></div>
+            <div class="stat"><div class="k">Valor inventario</div><div id="stValue" class="v">$0</div></div>
+            <div class="stat"><div class="k">Sin stock</div><div id="stOut" class="v">0</div></div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- TAB: BULK -->
+      <div class="admin-pane" id="pane-bulk">
+        <div class="admin-card">
+          <h3>Carga masiva — CSV / Excel</h3>
+          <p class="hint">Columnas soportadas: <strong>nombre, sku, precio, categoria, stock, descripcion_corta, descripcion, caracteristicas, seo, imagenes, etiquetas, oferta, destacado, variantes</strong></p>
+          <div id="dropzone" class="dropzone" tabindex="0" role="button">
+            <div class="icon">📂</div>
+            <p><strong>Hacé clic o arrastrá</strong> un archivo CSV o Excel aquí</p>
+            <p style="margin-top:4px;font-size:12px">CSV / XLSX · hasta 500 filas</p>
+          </div>
+          <input id="fileInput" type="file" accept=".csv,.txt,.xlsx,.xls" hidden />
+          <pre id="filePreview" class="preview"></pre>
+          <div class="form-actions">
+            <button id="importBtn" class="btn-save" type="button" style="display:none">⬆ Importar</button>
+          </div>
+        </div>
+        <div class="admin-card">
+          <h3>Pegar tabla desde Excel / Sheets</h3>
+          <p class="hint">Columnas: nombre | precio | categoria | stock | descripcion_corta | descripcion | imagenes | etiquetas</p>
+          <textarea id="pasteArea" class="form-textarea form-input" style="min-height:150px;font-family:monospace;font-size:12px" placeholder="Pegá aquí la tabla copiada de Excel o Google Sheets..."></textarea>
+          <div class="form-actions"><button id="importPasteBtn" class="btn-save" type="button">⬆ Importar pegado</button></div>
+        </div>
+      </div>
+ 
+      <!-- TAB: SETTINGS -->
+      <div class="admin-pane" id="pane-settings">
+        <div class="admin-card">
+          <h3>WhatsApp y datos de la tienda</h3>
+          <div class="admin-grid">
+            <div class="field">
+              <label for="waNumber">Número de WhatsApp</label>
+              <input id="waNumber" class="form-input" type="text" placeholder="5491100000000" />
+              <span class="field-hint">Sin espacios, con código de país</span>
+            </div>
+            <div class="field">
+              <label for="storeName">Nombre de la tienda</label>
+              <input id="storeName" class="form-input" type="text" placeholder="Casa Mecha" />
+            </div>
+            <div class="field full">
+              <label for="waTemplate">Mensaje automático de WhatsApp</label>
+              <textarea id="waTemplate" class="form-textarea form-input" placeholder="Hola! Me interesa {{name}}."></textarea>
+              <span class="field-hint">Variables: {{name}}, {{store}}, {{total}}</span>
+            </div>
+            <div class="field">
+              <label for="adminPass">Nueva contraseña del panel</label>
+              <input id="adminPass" class="form-input" type="password" placeholder="Dejar vacío para no cambiar" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button id="saveSettingsBtn" class="btn-save" type="button">💾 Guardar ajustes</button>
+          </div>
         </div>
       </div>
     </div>
-
-    <script>
-      const pills = Array.from(document.querySelectorAll(".cat-pill"));
-      const cards = Array.from(document.querySelectorAll("#productGrid .card"));
-      const sortSelect = document.getElementById("sortSelect");
-      const searchInput = document.getElementById("searchInput");
-      const countEl = document.getElementById("visibleCount");
-
-      function currentCategory() {
-        return document.querySelector(".cat-pill.active")?.dataset.cat || "all";
-      }
-
-      function matchesCategory(card, cat) {
-        const cardCat = (card.dataset.cat || "").toLowerCase();
-        if (cat === "all") return true;
-        return cardCat === cat;
-      }
-
-      function compareCards(a, b, sortValue) {
-        const ap = Number(a.dataset.price || 0);
-        const bp = Number(b.dataset.price || 0);
-        const an = (a.dataset.name || "").toLowerCase();
-        const bn = (b.dataset.name || "").toLowerCase();
-
-        if (sortValue === "price-asc") return ap - bp;
-        if (sortValue === "price-desc") return bp - ap;
-        if (sortValue === "name") return an.localeCompare(bn);
-        return bp - ap;
-      }
-
-      function updateBadges() {
-        const counts = { all: cards.length };
-        cards.forEach((c) => {
-          const cat = (c.dataset.cat || "").toLowerCase();
-          counts[cat] = (counts[cat] || 0) + 1;
-        });
-        pills.forEach((pill) => {
-          const cat = pill.dataset.cat;
-          const badge = pill.querySelector("span:last-child");
-          if (badge) badge.textContent = counts[cat] || 0;
-        });
-      }
-
-      function applyFilters() {
-        const q = (searchInput.value || "").trim().toLowerCase();
-        const cat = currentCategory();
-        const sortValue = sortSelect.value;
-
-        const visibleCards = cards.filter((card) => {
-          const name = (card.dataset.name || "").toLowerCase();
-          const haystack = `${name} ${(card.dataset.cat || "").toLowerCase()} ${card.innerText.toLowerCase()}`;
-          const okCat = matchesCategory(card, cat);
-          const okSearch = !q || haystack.includes(q);
-          const show = okCat && okSearch;
-          card.style.display = show ? "" : "none";
-          return show;
-        });
-
-        visibleCards.sort((a, b) => compareCards(a, b, sortValue));
-        visibleCards.forEach((card) => card.parentElement.appendChild(card));
-        if (countEl) countEl.textContent = visibleCards.length;
-      }
-
-      pills.forEach((pill) => {
-        pill.addEventListener("click", () => {
-          pills.forEach((p) => p.classList.remove("active"));
-          pill.classList.add("active");
-          applyFilters();
-        });
-      });
-
-      sortSelect.value = "price-desc";
-      sortSelect.addEventListener("change", applyFilters);
-      searchInput.addEventListener("input", applyFilters);
-
-      updateBadges();
-      applyFilters();
-
-      const modal = document.getElementById("previewModal");
-      const modalImg = document.getElementById("modalImg");
-      const modalName = document.getElementById("modalName");
-      const modalCat = document.getElementById("modalCat");
-      const modalPric = document.getElementById("modalPrice");
-      const modalOld = document.getElementById("modalOld");
-      const modalStar = document.getElementById("modalStars");
-      const modalWa = document.getElementById("modalWa");
-      const modalBdg = document.getElementById("modalBadge");
-      const modalClose = document.getElementById("modalClose");
-
-      function openModal(card) {
-        const img = card.querySelector(".card-img img");
-        const badge = card.querySelector(".badge");
-        const pNow = card.querySelector(".price-now");
-        const pOld = card.querySelector(".price-old");
-        const waBtn = card.querySelector(".btn-wa");
-        modalImg.src = img ? img.src : "";
-        modalImg.alt = img ? img.alt : "";
-        modalName.textContent =
-          (card.querySelector("h4") || {}).textContent?.trim() || "";
-        modalCat.textContent =
-          (card.querySelector(".card-cat") || {}).textContent?.trim() || "";
-        modalStar.textContent =
-          (card.querySelector(".stars") || {}).textContent?.trim() || "";
-        modalPric.textContent = pNow ? pNow.textContent.trim() : "";
-        modalOld.textContent = pOld ? pOld.textContent.trim() : "";
-        modalOld.style.display = pOld ? "" : "none";
-        modalBdg.textContent = badge ? badge.textContent.trim() : "";
-        modalBdg.style.display = badge ? "" : "none";
-        modalWa.href = waBtn ? waBtn.href : "https://wa.me/5491157572467";
-        modal.classList.add("open");
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeModal() {
-        modal.classList.remove("open");
-        document.body.style.overflow = "";
-      }
-
-      modalClose.addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
-      });
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeModal();
-      });
-      document.getElementById("productGrid").addEventListener("click", (e) => {
-        const card = e.target.closest(".card");
-        if (!card) return;
-        if (e.target.closest(".btn-wa")) return;
-        openModal(card);
-      });
-    </script>
-  </body>
+  </div>
+</div>
+ 
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+ 
+<script>
+(() => {
+'use strict';
+ 
+// ─── CONSTANTS ────────────────────────────────────────────
+const STORAGE = {
+  products: 'casamecha_products_v3',
+  cart:     'casamecha_cart_v3',
+  settings: 'casamecha_settings_v3'
+};
+ 
+const DEFAULT_SETTINGS = {
+  whatsappNumber:   '5491100000000',
+  whatsappTemplate: 'Hola! Me interesa {{name}}. ¿Pueden confirmarme stock y variantes disponibles? Gracias.',
+  storeName:        'Casa Mecha',
+  adminPasswordHash:'admin123'
+};
+ 
+const CATEGORIES = [
+  'Accesorios','Accesorios Auto','Adultos','Belleza','Especieros y Saleros',
+  'Herramientas','Hogar','Mascota','Niños y Niñas','Organizador','Perfumes y Cremas',
+  'Tecnología','Textil','Utensilios de Cocina','Útiles'
+];
+ 
+const EMOJIS = {
+  'Accesorios':'👜','Accesorios Auto':'🚗','Adultos':'👔','Belleza':'💄',
+  'Especieros y Saleros':'🧂','Herramientas':'🔧','Hogar':'🏠','Mascota':'🐾',
+  'Niños y Niñas':'🧒','Organizador':'📦','Perfumes y Cremas':'🌸',
+  'Tecnología':'📱','Textil':'🧺','Utensilios de Cocina':'🍳','Útiles':'✏️'
+};
+ 
+// ─── SAMPLE PRODUCTS (enriquecidos) ──────────────────────
+const SAMPLE_PRODUCTS = [
+  {
+    id:'p1',
+    name:'Bowl de cerámica 14 cm',
+    sku:'CM-HOG-001',
+    price:3200,cat:'Hogar',
+    shortDesc:'Bowl redondo artesanal, ideal para desayuno, snacks o ensaladas.',
+    desc:'Bowl de cerámica esmaltada de 14 cm de diámetro. Acabado artesanal con bordes levemente irregulares que le dan un toque único a cada pieza. Perfecto para el desayuno, merienda o para servir snacks y ensaladas pequeñas.',
+    features:'Material: cerámica esmaltada\nCapacidad: 400 ml aprox.\nApto microondas y lavavajillas\nDiámetro: 14 cm | Altura: 7 cm\nColores: crema, verde salvia, terracota',
+    seoKeywords:'bowl cerámica artesanal, vajilla cerámica hogar, bowl desayuno, cerámica esmaltada',
+    stock:25,images:[''],tags:['hogar','nuevo','cerámica'],variants:'Crema, Verde Salvia, Terracota',offer:false,feat:true,date:Date.now()-86400000*0
+  },
+  {
+    id:'p2',
+    name:'Taza mug 350 ml — colores surtidos',
+    sku:'CM-HOG-002',
+    price:2100,cat:'Hogar',
+    shortDesc:'Taza grande con asa ergonómica. Resistente y apta para microondas.',
+    desc:'Taza mug de 350 ml con asa ergonómica de agarre cómodo. Fabricada en cerámica de alta resistencia, ideal para café, té o infusiones calientes. Disponible en varios colores para combinar con tu vajilla.',
+    features:'Capacidad: 350 ml\nApta microondas y lavavajillas\nAsa ergonómica antideslizante\nBase antirrayado\nColores: blanco, negro, azul, rojo, verde',
+    seoKeywords:'taza mug 350ml, taza grande café té, taza cerámica colores, mug resistente',
+    stock:40,images:[''],tags:['hogar','taza'],variants:'Blanco, Negro, Azul, Rojo, Verde',offer:true,feat:false,date:Date.now()-86400000*1
+  },
+  {
+    id:'p3',
+    name:'Perchero de pared — 5 ganchos',
+    sku:'CM-ORG-001',
+    price:4800,cat:'Organizador',
+    shortDesc:'Perchero metálico minimalista con 5 ganchos. Ideal para pasillo o dormitorio.',
+    desc:'Perchero de pared de metal lacado en negro mate. Su diseño minimalista lo hace versátil para cualquier ambiente: pasillo, dormitorio, baño o entrada. Se instala con tornillos incluidos en la caja.',
+    features:'Material: metal lacado negro mate\nIncluye: 5 ganchos dobles\nFijación: tornillos y tacos incluidos\nMedidas: 60 cm de largo × 12 cm de profundidad\nCapacidad: hasta 15 kg',
+    seoKeywords:'perchero pared minimalista, perchero metal negro, organizador ropa pasillo, perchero 5 ganchos',
+    stock:12,images:[''],tags:['organización','metal','minimalista'],variants:'',offer:false,feat:false,date:Date.now()-86400000*2
+  },
+  {
+    id:'p4',
+    name:'Sartén antiadherente 24 cm con tapa',
+    sku:'CM-COC-001',
+    price:8900,cat:'Utensilios de Cocina',
+    shortDesc:'Sartén antiadherente reforzado, con tapa de vidrio y mango ergonómico.',
+    desc:'Sartén de 24 cm con revestimiento antiadherente de triple capa libre de PFOA. El mango baquelita permanece fresco durante la cocción. La tapa de vidrio templado permite ver la cocción sin destapar. Compatible con todo tipo de cocinas excepto inducción.',
+    features:'Diámetro: 24 cm | Profundidad: 5 cm\nRevestimiento antiadherente libre de PFOA\nMango baquelita resistente al calor\nIncluy tapa de vidrio templado\nCompatible: gas, eléctrica, vitrocerámica\nNo apto para inducción',
+    seoKeywords:'sartén antiadherente 24cm, sartén cocina con tapa, sartén libre PFOA, cocina saludable',
+    stock:8,images:[''],tags:['cocina','premium','oferta'],variants:'',offer:true,feat:true,date:Date.now()-86400000*3
+  },
+  {
+    id:'p5',
+    name:'Set de utensilios de silicona × 6',
+    sku:'CM-COC-002',
+    price:5600,cat:'Utensilios de Cocina',
+    shortDesc:'Juego de 6 utensilios de silicona resistentes al calor. Incluye estuche.',
+    desc:'Set de 6 utensilios de cocina fabricados en silicona de grado alimentario con mango de madera natural. No rayan las superficies antiadherentes. Resistentes hasta 230°C. Se entregan en estuche portátil.',
+    features:'Set incluye: espátula, cucharón, pinzas, cuchara ranurada, batidor, espumadera\nMaterial: silicona grado alimentario + madera natural\nResistente hasta 230°C\nNo rayan antiadherentes\nFácil limpieza, apto lavavajillas',
+    seoKeywords:'set utensilios silicona cocina, utensilios cocina madera, juego cocina silicona, utensilios antiadherentes',
+    stock:18,images:[''],tags:['cocina','set','silicona'],variants:'Colores surtidos',offer:false,feat:false,date:Date.now()-86400000*4
+  },
+  {
+    id:'p6',
+    name:'Mantequera con tapa giratoria',
+    sku:'CM-HOG-003',
+    price:1400,cat:'Hogar',
+    shortDesc:'Mantequera hermética con tapa giratoria. Mantiene la mantequilla fresca.',
+    desc:'Mantequera de diseño compacto con tapa giratoria hermética que evita que la mantequilla absorba olores del refrigerador. Fabricada en plástico BPA free de alta resistencia. Apta para lavavajillas.',
+    features:'Material: plástico BPA free\nCierre hermético giratorio\nCapacidad: 250 g aprox.\nApta lavavajillas\nColores: transparente con tapa blanca o roja',
+    seoKeywords:'mantequera tapa hermética, mantequera refrigerador, conservar mantequilla, cocina organización',
+    stock:30,images:[''],tags:['hogar','cocina'],variants:'Tapa blanca, Tapa roja',offer:false,feat:false,date:Date.now()-86400000*5
+  },
+  {
+    id:'p7',
+    name:'Cesto de ropa tejido — tamaño grande',
+    sku:'CM-TEX-001',
+    price:6200,cat:'Textil',
+    shortDesc:'Cesto de ropa tejido en macramé. 40 L de capacidad, con asas.',
+    desc:'Cesto de ropa tejido a mano en macramé de algodón natural. Su diseño artesanal lo convierte también en un elemento decorativo para el dormitorio o baño. Las asas de cuero vegano facilitan el transporte.',
+    features:'Material: algodón natural + asas de cuero vegano\nCapacidad: 40 litros\nMedidas: 45 cm de alto × 35 cm de diámetro\nResistente y lavable\nIdeal para dormitorio, baño, lavandería',
+    seoKeywords:'cesto ropa tejido macramé, canasto ropa algodón, organizador ropa dormitorio, cesto decorativo',
+    stock:5,images:[''],tags:['textil','deco','artesanal'],variants:'Natural, Blanco',offer:false,feat:false,date:Date.now()-86400000*6
+  },
+  {
+    id:'p8',
+    name:'Carrito organizador 3 pisos con ruedas',
+    sku:'CM-ORG-002',
+    price:12500,cat:'Organizador',
+    shortDesc:'Carrito metálico de 3 estantes con ruedas con freno. Ideal para cocina u oficina.',
+    desc:'Carrito organizador de 3 pisos fabricado en metal cromado con revestimiento anticorrosión. Los estantes son removibles para facilitar la limpieza. Cuenta con 4 ruedas de las cuales 2 tienen freno de seguridad.',
+    features:'Material: metal cromado anticorrosión\n3 estantes removibles\n4 ruedas (2 con freno de seguridad)\nMedidas: 90 cm alto × 40 cm ancho × 35 cm prof.\nCapacidad por estante: 10 kg\nFácil armado sin herramientas',
+    seoKeywords:'carrito organizador metal, carrito cocina 3 pisos, organizador ruedas, mueble auxiliar cocina',
+    stock:7,images:[''],tags:['organización','destacado','metal'],variants:'',offer:false,feat:true,date:Date.now()-86400000*7
+  },
+  {
+    id:'p9',
+    name:'Cargador de auto USB-C 20W',
+    sku:'CM-TEC-001',
+    price:3800,cat:'Accesorios Auto',
+    shortDesc:'Cargador rápido para auto con puerto USB-C 20W y USB-A 18W.',
+    desc:'Cargador de auto con tecnología de carga rápida Power Delivery 20W para USB-C y Quick Charge 3.0 18W para USB-A. Diseño compacto que no sobresale del encendedor. Compatible con iPhone 12 en adelante, Samsung Galaxy, Xiaomi y más.',
+    features:'Puerto USB-C: 20W Power Delivery\nPuerto USB-A: 18W Quick Charge 3.0\nCompatible: iPhone, Samsung, Xiaomi y más\nProtección contra sobrecarga y cortocircuito\nDiseño ultrafino, no tapa el encendedor',
+    seoKeywords:'cargador auto USB-C 20W, carga rápida auto, cargador iPhone auto, cargador quick charge auto',
+    stock:22,images:[''],tags:['tecnología','auto','carga rápida'],variants:'',offer:true,feat:false,date:Date.now()-86400000*8
+  },
+  {
+    id:'p10',
+    name:'Torre especiera giratoria × 12 frascos',
+    sku:'CM-ESP-001',
+    price:7800,cat:'Especieros y Saleros',
+    shortDesc:'Torre giratoria con 12 frascos de vidrio con tapa hermética. Lista para usar.',
+    desc:'Torre especiera giratoria de 360° con 12 frascos de vidrio incluidos. Las tapas herméticas de acero inoxidable mantienen el aroma y frescura de las especias. Incluye etiquetas adhesivas y embudo para carga.',
+    features:'12 frascos de vidrio incluidos\nBase giratoria 360°\nTapas herméticas de acero inoxidable\nIncluye: etiquetas, embudo y pincel\nFrascos: 80 ml c/u\nMedidas torre: 27 cm alto × 19 cm diámetro',
+    seoKeywords:'torre especiera giratoria, especiero 12 frascos vidrio, organizador especias cocina, especiero acero inoxidable',
+    stock:10,images:[''],tags:['cocina','especias','organización'],variants:'',offer:false,feat:false,date:Date.now()-86400000*9
+  },
+  {
+    id:'p11',
+    name:'Cable USB-C trenzado 2 m',
+    sku:'CM-TEC-002',
+    price:1900,cat:'Tecnología',
+    shortDesc:'Cable trenzado de carga rápida USB-C a USB-C. 2 metros, resistente.',
+    desc:'Cable de carga rápida con trenzado nylon reforzado que lo hace resistente a dobleces y tirones. Compatible con dispositivos Android, iPad Pro, MacBook y cualquier dispositivo con puerto USB-C. Soporta carga hasta 60W y transferencia de datos a 480 Mbps.',
+    features:'Longitud: 2 metros\nMaterial: trenzado nylon reforzado\nCarga máxima: 60W\nTransferencia de datos: USB 2.0 (480 Mbps)\nCompatible: Android, iPad, MacBook, Nintendo Switch\nColores: negro, blanco',
+    seoKeywords:'cable USB-C trenzado 2m, cable carga rápida Android, cable USB-C resistente, cable tipo C largo',
+    stock:50,images:[''],tags:['tecnología','cable','carga rápida'],variants:'Negro, Blanco',offer:false,feat:false,date:Date.now()-86400000*10
+  },
+  {
+    id:'p12',
+    name:'Espátula de silicona con mango de madera',
+    sku:'CM-COC-003',
+    price:1200,cat:'Utensilios de Cocina',
+    shortDesc:'Espátula flexible de silicona reforzada. Resistente hasta 230°C. No raya.',
+    desc:'Espátula de cocina fabricada en silicona grado alimentario de alta resistencia con mango de madera natural barnizado. La cabeza flexible se adapta a curvas de bowls y sartenes. No raya superficies antiadherentes.',
+    features:'Material cabeza: silicona grado alimentario\nMaterial mango: madera natural barnizada\nResistente hasta 230°C\nNo raya antiadherentes\nLongitud: 30 cm\nApta lavavajillas',
+    seoKeywords:'espátula silicona madera, espátula cocina antiadherente, espátula flexible repostería, utensilio silicona',
+    stock:35,images:[''],tags:['cocina','silicona','madera'],variants:'',offer:false,feat:false,date:Date.now()-86400000*11
+  }
+];
+ 
+// ─── STATE ────────────────────────────────────────────────
+const state = {
+  products:[], filtered:[], cart:[], settings:{...DEFAULT_SETTINGS},
+  activeCategory:'Todos', search:'', sort:'newest',
+  adminUnlocked: sessionStorage.getItem('CM_admin_ok') === '1',
+  editId:null, csvRows:[], pendingImages:[], toastTimer:null
+};
+ 
+// ─── UTILITIES ────────────────────────────────────────────
+const $  = id => document.getElementById(id);
+const esc = v => String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+const txt = v => String(v??'').trim();
+const clamp = (v,min=0,fb=0) => { const n=Number(v); return isNaN(n)?fb:Math.max(min,Math.floor(n)); };
+const uid  = p => `${p}${Date.now()}${Math.random().toString(36).slice(2,7)}`;
+const fmtPrice = v => Number(clamp(v)).toLocaleString('es-AR');
+ 
+function genSKU(name, cat) {
+  const catAbbr = (cat||'GEN').split(/[\s\/]/)[0].slice(0,3).toUpperCase();
+  const nameSlug = (name||'P').replace(/[^a-zA-ZÀ-ú]/g,'').slice(0,3).toUpperCase();
+  return `CM-${catAbbr}-${nameSlug}-${String(Date.now()).slice(-4)}`;
+}
+ 
+function seoFilename(name, index=1) {
+  return name.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')
+    .slice(0,50) + `-0${index}.jpg`;
+}
+ 
+function toast(msg) {
+  clearTimeout(state.toastTimer);
+  const el=$('toast'); el.textContent=msg; el.classList.add('show');
+  state.toastTimer=setTimeout(()=>el.classList.remove('show'),2400);
+}
+ 
+// ─── PERSIST ─────────────────────────────────────────────
+function loadSettings() {
+  try { const s=JSON.parse(localStorage.getItem(STORAGE.settings)||'null'); if(s) state.settings={...DEFAULT_SETTINGS,...s}; } catch{}
+}
+function saveSettings() { localStorage.setItem(STORAGE.settings,JSON.stringify(state.settings)); }
+ 
+function loadProducts() {
+  try {
+    const saved=JSON.parse(localStorage.getItem(STORAGE.products)||'null');
+    state.products=Array.isArray(saved)&&saved.length?saved:[...SAMPLE_PRODUCTS];
+  } catch { state.products=[...SAMPLE_PRODUCTS]; }
+  normalizeProducts(); saveProducts();
+}
+function normalizeProducts() {
+  state.products=state.products.map(p=>({
+    id: p.id||uid('p'),
+    name: txt(p.name||'Sin nombre').slice(0,120),
+    sku: txt(p.sku||p.codigo||''),
+    price: clamp(p.price,0,0),
+    cat: p.cat||'Hogar',
+    shortDesc: txt(p.shortDesc||p.short_desc||p.descripcion_corta||'').slice(0,150),
+    desc: txt(p.desc||p.descripcion||p.description||'').slice(0,600),
+    features: txt(p.features||p.caracteristicas||'').slice(0,500),
+    seoKeywords: txt(p.seoKeywords||p.seo||'').slice(0,200),
+    stock: clamp(p.stock,0,0),
+    images: normImages(p.images||p.imagenes||p.img||''),
+    tags: normTags(p.tags||p.etiquetas||''),
+    variants: txt(p.variants||p.variantes||''),
+    offer: Boolean(p.offer||p.oferta),
+    feat: Boolean(p.feat||p.destacado),
+    date: Number(p.date)||Date.now()
+  }));
+}
+function normImages(raw) {
+  if(Array.isArray(raw)) return raw.map(v=>txt(v)).filter(Boolean);
+  if(typeof raw==='string') return raw.split(',').map(v=>txt(v)).filter(Boolean);
+  return [];
+}
+function normTags(raw) {
+  if(Array.isArray(raw)) return raw.map(v=>txt(v)).filter(Boolean);
+  if(typeof raw==='string') return raw.split(',').map(v=>txt(v)).filter(Boolean);
+  return [];
+}
+function saveProducts() { localStorage.setItem(STORAGE.products,JSON.stringify(state.products)); }
+ 
+function loadCart() {
+  try { const c=JSON.parse(localStorage.getItem(STORAGE.cart)||'[]'); state.cart=Array.isArray(c)?c:[]; } catch { state.cart=[]; }
+}
+function saveCart() { localStorage.setItem(STORAGE.cart,JSON.stringify(state.cart)); }
+ 
+// ─── HELPERS ─────────────────────────────────────────────
+function firstImage(p) { return (p.images||[]).filter(Boolean)[0]||''; }
+function emoji(cat) { return EMOJIS[cat]||'📦'; }
+function stockBadge(stock) {
+  if(stock<=0) return `<div class="card-stock out-stock"><span class="stock-dot"></span>Sin stock</div>`;
+  if(stock<=5) return `<div class="card-stock low-stock"><span class="stock-dot"></span>Últimas ${stock} unidades</div>`;
+  return `<div class="card-stock in-stock"><span class="stock-dot"></span>En stock</div>`;
+}
+function getById(id) { return state.products.find(p=>p.id===id); }
+ 
+// ─── STATUS ───────────────────────────────────────────────
+function setStatus() {
+  const now=new Date(), day=now.getDay(), h=now.getHours()+now.getMinutes()/60;
+  const sched={1:[9,18,'lun'],2:[9,18,'mar'],3:[9,18,'mié'],4:[9,18,'jue'],5:[9,18,'vie'],6:[10,17,'sáb']};
+  const dot=$('statusDot'), txt_=$('statusText');
+  if(sched[day]&&h>=sched[day][0]&&h<sched[day][1]){
+    dot.classList.add('open');
+    txt_.textContent=`Abierto · Cierra a las ${sched[day][1]}:00`;
+  } else {
+    dot.classList.remove('open');
+    let next=(day+1)%7;
+    for(let i=0;i<7;i++){ if(sched[next]){txt_.textContent=`Cerrado · Abre ${sched[next][2]} ${sched[next][0]}:00`;break;} next=(next+1)%7; }
+  }
+}
+ 
+// ─── CATEGORIES ───────────────────────────────────────────
+function buildCategoryChips() {
+  const container=$('catsContainer'); container.innerHTML='';
+  const allBtn=document.createElement('button');
+  allBtn.className='cat-chip'+(state.activeCategory==='Todos'?' active':'');
+  allBtn.textContent='🏷 Ver todos';
+  allBtn.addEventListener('click',()=>setCategory('Todos',allBtn));
+  container.appendChild(allBtn);
+  const used=[...new Set(state.products.map(p=>p.cat).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+  used.forEach(cat=>{
+    const btn=document.createElement('button');
+    btn.className='cat-chip'+(state.activeCategory===cat?' active':'');
+    btn.textContent=`${emoji(cat)} ${cat}`;
+    btn.addEventListener('click',()=>setCategory(cat,btn));
+    container.appendChild(btn);
+  });
+  // Footer cats
+  const fc=$('footerCats');
+  if(fc){ fc.innerHTML=used.slice(0,8).map(c=>`<li>${emoji(c)} ${esc(c)}</li>`).join(''); }
+}
+ 
+function setCategory(cat,btn) {
+  state.activeCategory=cat;
+  document.querySelectorAll('.cat-chip').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderProducts();
+}
+ 
+function buildAdminSelects() {
+  const cats=[...new Set(state.products.map(p=>p.cat).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+  $('f-cat').innerHTML='<option value="">Seleccionar...</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+  $('adminCatFilter').innerHTML='<option value="">Todas las categorías</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+}
+ 
+// ─── FILTERING ────────────────────────────────────────────
+function getFiltered() {
+  let list=[...state.products];
+  if(state.activeCategory!=='Todos') list=list.filter(p=>p.cat===state.activeCategory);
+  if(state.search){
+    const q=state.search.toLowerCase();
+    list=list.filter(p=>
+      p.name.toLowerCase().includes(q)||
+      p.cat.toLowerCase().includes(q)||
+      (p.desc||'').toLowerCase().includes(q)||
+      (p.shortDesc||'').toLowerCase().includes(q)||
+      (p.seoKeywords||'').toLowerCase().includes(q)||
+      (p.tags||[]).join(' ').toLowerCase().includes(q)
+    );
+  }
+  switch(state.sort){
+    case 'cheap':     list.sort((a,b)=>a.price-b.price); break;
+    case 'expensive': list.sort((a,b)=>b.price-a.price); break;
+    case 'nameAsc':   list.sort((a,b)=>a.name.localeCompare(b.name,'es')); break;
+    case 'nameDesc':  list.sort((a,b)=>b.name.localeCompare(a.name,'es')); break;
+    case 'featured':  list.sort((a,b)=>Number(b.feat)-Number(a.feat)||b.date-a.date); break;
+    case 'offer':     list.sort((a,b)=>Number(b.offer)-Number(a.offer)||b.date-a.date); break;
+    default:          list.sort((a,b)=>b.date-a.date);
+  }
+  return list;
+}
+ 
+// ─── SKELETON ─────────────────────────────────────────────
+function renderSkeletons() {
+  const grid=$('productsGrid'); grid.innerHTML='';
+  const wrap=document.createElement('div'); wrap.className='skeleton-grid';
+  for(let i=0;i<8;i++){
+    const c=document.createElement('div'); c.className='skeleton-card';
+    c.innerHTML=`<div class="skeleton-box sk-img"></div><div class="sk-body"><div class="skeleton-box sk-line md"></div><div class="skeleton-box sk-line lg"></div><div class="skeleton-box sk-line sm"></div></div><div class="sk-actions"><div class="skeleton-box sk-btn"></div><div class="skeleton-box sk-btn"></div></div>`;
+    wrap.appendChild(c);
+  }
+  grid.appendChild(wrap);
+}
+ 
+// ─── RENDER PRODUCTS ──────────────────────────────────────
+function renderProducts() {
+  state.filtered=getFiltered();
+  $('resultsCount').innerHTML=`<strong>${state.filtered.length}</strong> producto${state.filtered.length!==1?'s':''}`;
+  const grid=$('productsGrid');
+  if(!state.filtered.length){
+    grid.innerHTML=`<div class="empty-state"><div class="icon">🔍</div><h3>Sin resultados</h3><p>Probá con otra búsqueda o categoría.</p></div>`;
+    return;
+  }
+  grid.innerHTML=state.filtered.map(p=>{
+    const img=firstImage(p);
+    const imgHtml=img?`<img src="${esc(img)}" alt="${esc(p.name)}" loading="lazy" onerror="this.outerHTML='<div class=&quot;card-placeholder&quot;>${emoji(p.cat)}</div>'">`:`<div class="card-placeholder">${emoji(p.cat)}</div>`;
+    return `
+      <article class="product-card" data-id="${esc(p.id)}">
+        <div class="card-img-wrap" data-open-detail="${esc(p.id)}">
+          ${imgHtml}
+          ${p.offer?'<span class="badge-offer">Oferta</span>':''}
+          ${p.feat?'<span class="badge-featured">★ Destacado</span>':''}
+          ${p.sku?`<span class="sku-badge">${esc(p.sku)}</span>`:''}
+        </div>
+        <div class="card-body">
+          <div class="card-cat">${esc(p.cat)}</div>
+          <div class="card-name" data-open-detail="${esc(p.id)}">${esc(p.name)}</div>
+          ${p.shortDesc?`<div class="card-desc-short">${esc(p.shortDesc)}</div>`:''}
+          <div class="card-price-row"><div class="card-price">$${fmtPrice(p.price)}</div></div>
+          ${stockBadge(p.stock)}
+        </div>
+        <div class="card-footer">
+          <button class="btn-detail" type="button" data-open-detail="${esc(p.id)}">Ver detalle</button>
+          <button class="btn-add" type="button" data-add-cart="${esc(p.id)}" ${p.stock<=0?'disabled':''}>${p.stock<=0?'Sin stock':'+ Pedido'}</button>
+        </div>
+      </article>`;
+  }).join('');
+  grid.querySelectorAll('[data-open-detail]').forEach(el=>el.addEventListener('click',()=>openDetail(el.dataset.openDetail)));
+  grid.querySelectorAll('[data-add-cart]').forEach(btn=>btn.addEventListener('click',()=>addToCart(btn.dataset.addCart)));
+}
+ 
+// ─── DETAIL MODAL ─────────────────────────────────────────
+function openDetail(id) {
+  const p=getById(id); if(!p) return;
+  const images=(p.images||[]).filter(Boolean);
+  const features=(p.features||'').split('\n').map(f=>f.trim()).filter(Boolean);
+  const mainHtml=images.length
+    ?`<img id="detailMainImg" class="detail-main" src="${esc(images[0])}" alt="${esc(p.name)}" onerror="this.outerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:4rem;background:linear-gradient(135deg,#f0eae0,#ddd4c7)&quot;>${emoji(p.cat)}</div>'">`
+    :`<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:4rem;background:linear-gradient(135deg,#f0eae0,#ddd4c7)">${emoji(p.cat)}</div>`;
+  const thumbsHtml=images.length>1?`<div class="detail-thumbs">${images.map((src,i)=>`<button type="button" class="thumb ${i===0?'active':''}" data-thumb="${i}"><img src="${esc(src)}" alt="${i+1}"></button>`).join('')}</div>`:'';
+ 
+  $('detailContent').innerHTML=`
+    <div class="detail-gallery">
+      <div class="detail-main-wrap">
+        ${mainHtml}
+        ${images.length>1?`<div class="detail-img-count">${images.length} fotos</div>`:''}
+      </div>
+      ${thumbsHtml}
+    </div>
+    <div class="detail-cat">${esc(p.cat)}</div>
+    <h2 id="detailTitle" class="detail-name">${esc(p.name)}</h2>
+    ${p.sku?`<div class="detail-sku">SKU: ${esc(p.sku)}</div>`:''}
+    ${p.shortDesc?`<div class="detail-short">${esc(p.shortDesc)}</div>`:''}
+    ${p.desc?`<div class="detail-desc">${esc(p.desc)}</div>`:''}
+    ${features.length?`<div class="detail-features"><h4>Características</h4>${features.map(f=>`<div class="detail-feature-item">${esc(f)}</div>`).join('')}</div>`:''}
+    <div class="detail-price">$${fmtPrice(p.price)}</div>
+    ${stockBadge(p.stock)}
+    ${p.variants?`<div class="tag-row" style="margin-top:10px"><span style="font-size:12px;font-weight:700;color:var(--text2);margin-right:6px">Variantes:</span>${p.variants.split(',').map(v=>`<span class="tag">${esc(v.trim())}</span>`).join('')}</div>`:''}
+    ${(p.tags||[]).length?`<div class="tag-row">${p.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>`:''}
+    <div class="detail-actions">
+      <button class="btn-add big" type="button" ${p.stock<=0?'disabled':''} id="detailAddBtn">${p.stock<=0?'Sin stock':'+ Agregar al pedido'}</button>
+      <button class="btn-wa" type="button" id="detailWaBtn">💬 Consultar</button>
+    </div>`;
+ 
+  $('detailAddBtn')?.addEventListener('click',()=>{ addToCart(id); closeOverlay('detailOverlay'); });
+  $('detailWaBtn').addEventListener('click',()=>openWA(p.name));
+  $('detailContent').querySelectorAll('[data-thumb]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const idx=Number(btn.dataset.thumb);
+      const mi=$('detailMainImg'); if(mi) mi.src=images[idx];
+      $('detailContent').querySelectorAll('.thumb').forEach(x=>x.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+  openOverlay('detailOverlay');
+}
+ 
+// ─── OVERLAYS ─────────────────────────────────────────────
+function openOverlay(id){ $(id).classList.add('open'); $(id).setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+function closeOverlay(id){ $(id).classList.remove('open'); $(id).setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+ 
+// ─── CART ─────────────────────────────────────────────────
+function addToCart(id) {
+  const p=getById(id); if(!p||p.stock<=0) return;
+  const row=state.cart.find(i=>i.id===id);
+  if(row) row.qty=Math.min(row.qty+1,p.stock);
+  else state.cart.push({id,qty:1});
+  saveCart(); updateCartBadge(); toast('✅ Agregado al pedido');
+}
+ 
+function changeQty(id,delta) {
+  const p=getById(id); if(!p) return;
+  const row=state.cart.find(i=>i.id===id); if(!row) return;
+  row.qty=clamp(row.qty+delta,1,1);
+  if(delta>0) row.qty=Math.min(row.qty,p.stock||row.qty);
+  if(row.qty<=0) state.cart=state.cart.filter(i=>i.id!==id);
+  saveCart(); renderCart(); updateCartBadge();
+}
+ 
+function removeFromCart(id) {
+  state.cart=state.cart.filter(i=>i.id!==id);
+  saveCart(); renderCart(); updateCartBadge(); toast('🗑 Eliminado del pedido');
+}
+ 
+function clearCart() {
+  state.cart=[]; saveCart(); updateCartBadge(); renderCart(); toast('🧹 Carrito vaciado');
+}
+ 
+function updateCartBadge() {
+  const tot=state.cart.reduce((s,i)=>s+i.qty,0);
+  const b=$('cartBadge'); b.textContent=String(tot); b.classList.toggle('visible',tot>0);
+}
+ 
+function renderCart() {
+  const container=$('cartContent');
+  if(!state.cart.length){
+    container.innerHTML=`<div class="cart-title" id="cartTitle">🛒 Mi Pedido</div><div class="cart-empty"><div class="icon">🛒</div><p>Tu pedido está vacío.</p></div>`;
+    return;
+  }
+  let subtotal=0;
+  const itemsHtml=state.cart.map(item=>{
+    const p=getById(item.id); if(!p) return '';
+    const qty=clamp(item.qty,1,1), line=p.price*qty; subtotal+=line;
+    const img=firstImage(p);
+    return `<div class="cart-item">
+      <div class="cart-item-img">${img?`<img src="${esc(img)}" alt="">`:emoji(p.cat)}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${esc(p.name)}</div>
+        <div class="cart-item-price">$${fmtPrice(p.price)} c/u · Subtotal $${fmtPrice(line)}</div>
+      </div>
+      <div class="cart-item-qty">
+        <button class="qty-btn" data-dec="${esc(p.id)}">−</button>
+        <span class="qty-num">${qty}</span>
+        <button class="qty-btn" data-inc="${esc(p.id)}">+</button>
+        <button class="qty-btn" data-rm="${esc(p.id)}">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+  container.innerHTML=`<div class="cart-title" id="cartTitle">🛒 Mi Pedido</div>${itemsHtml}
+    <div class="cart-total"><span class="total-label">Subtotal</span><span>$${fmtPrice(subtotal)}</span></div>
+    <div class="cart-actions">
+      <button class="btn-secondary" id="clearCartBtn2">Vaciar</button>
+      <button class="btn-send-order" id="sendOrderBtn">💬 Enviar pedido por WhatsApp</button>
+    </div>`;
+  container.querySelectorAll('[data-dec]').forEach(b=>b.addEventListener('click',()=>changeQty(b.dataset.dec,-1)));
+  container.querySelectorAll('[data-inc]').forEach(b=>b.addEventListener('click',()=>changeQty(b.dataset.inc,1)));
+  container.querySelectorAll('[data-rm]').forEach(b=>b.addEventListener('click',()=>removeFromCart(b.dataset.rm)));
+  $('clearCartBtn2').addEventListener('click',clearCart);
+  $('sendOrderBtn').addEventListener('click',sendOrderWA);
+}
+ 
+// ─── WHATSAPP ─────────────────────────────────────────────
+function normalizePhone(v) { return String(v||'').replace(/\D/g,'')||DEFAULT_SETTINGS.whatsappNumber; }
+function calcTotal() { return state.cart.reduce((s,i)=>{ const p=getById(i.id); return s+(p?p.price*i.qty:0); },0); }
+ 
+function buildWAUrl(productName='') {
+  const num=normalizePhone(state.settings.whatsappNumber);
+  let msg=state.settings.whatsappTemplate
+    .replaceAll('{{store}}',state.settings.storeName)
+    .replaceAll('{{name}}',productName||'consulta')
+    .replaceAll('{{total}}',`$${fmtPrice(calcTotal())}`);
+  if(state.cart.length){
+    const lines=state.cart.map(i=>{ const p=getById(i.id); return p?`• ${p.name} × ${i.qty}  →  $${fmtPrice(p.price*i.qty)}`:null; }).filter(Boolean);
+    if(lines.length) msg+=`\n\n🛒 *Detalle del pedido:*\n${lines.join('\n')}\n\n💰 *Total: $${fmtPrice(calcTotal())}*`;
+  }
+  return `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+}
+ 
+function openWA(name='') { window.open(buildWAUrl(name),'_blank','noopener'); }
+function sendOrderWA() { if(!state.cart.length) return toast('Tu carrito está vacío'); window.open(buildWAUrl(),'_blank','noopener'); }
+ 
+// ─── ADMIN ────────────────────────────────────────────────
+function unlockAdmin() {
+  const entered=prompt('Contraseña del panel:');
+  if(entered===null) return;
+  if(entered!==state.settings.adminPasswordHash){ toast('❌ Acceso denegado'); return; }
+  sessionStorage.setItem('CM_admin_ok','1');
+  state.adminUnlocked=true;
+  showAdmin();
+}
+ 
+function openAdmin() { if(!state.adminUnlocked){ unlockAdmin(); return; } showAdmin(); }
+ 
+function showAdmin() {
+  openOverlay('adminOverlay');
+  renderAdminList(); updateStats(); fillSettings();
+}
+ 
+function switchTab(tab) {
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  document.querySelectorAll('.admin-pane').forEach(p=>p.classList.remove('active'));
+  $(`pane-${tab}`).classList.add('active');
+  if(tab==='list'){ renderAdminList(); updateStats(); }
+}
+ 
+// ─── FORM ─────────────────────────────────────────────────
+function buildForm(p) {
+  $('f-name').value=p?.name||'';
+  $('f-sku').value=p?.sku||'';
+  $('f-price').value=p?.price??'';
+  $('f-cat').value=p?.cat||'';
+  $('f-stock').value=p?.stock??0;
+  $('f-shortdesc').value=p?.shortDesc||'';
+  $('f-desc').value=p?.desc||'';
+  $('f-features').value=p?.features||'';
+  $('f-seo').value=p?.seoKeywords||'';
+  $('f-imgs').value=(p?.images||[]).join(', ');
+  $('f-tags').value=(p?.tags||[]).join(', ');
+  $('f-variants').value=p?.variants||'';
+  $('tog-offer').classList.toggle('on',!!p?.offer);
+  $('tog-feat').classList.toggle('on',!!p?.feat);
+  state.editId=p?.id||null;
+  state.pendingImages=[];
+  $('imgPreviewGrid').innerHTML='';
+  updateShortDescCount();
+  $('formTitle').textContent=p?`Editando: ${p.name}`:'Nuevo producto';
+  $('editHint').style.display=p?'block':'none';
+  $('editHint').textContent=p?`ID: ${p.id} · SKU: ${p.sku||'—'}`:'';
+}
+ 
+function clearForm() {
+  buildForm(null);
+  $('saveConfirm').classList.remove('show');
+  $('formTitle').textContent='Nuevo producto';
+}
+ 
+function updateShortDescCount() {
+  const v=txt($('f-shortdesc').value);
+  $('shortDescCount').textContent=`${v.length} / 150`;
+}
+ 
+function readForm() {
+  const name=txt($('f-name').value);
+  const cat=txt($('f-cat').value);
+  const price=clamp($('f-price').value,0,0);
+  const stock=clamp($('f-stock').value,0,0);
+  const shortDesc=txt($('f-shortdesc').value).slice(0,150);
+  const desc=txt($('f-desc').value).slice(0,600);
+  const features=txt($('f-features').value).slice(0,500);
+  const seoKeywords=txt($('f-seo').value).slice(0,200);
+  const images=normImages($('f-imgs').value);
+  const tags=normTags($('f-tags').value);
+  const variants=txt($('f-variants').value);
+  const offer=$('tog-offer').classList.contains('on');
+  const feat=$('tog-feat').classList.contains('on');
+  let sku=txt($('f-sku').value)||genSKU(name,cat);
+ 
+  if(!name||!cat){ toast('⚠️ Completá nombre y categoría'); return null; }
+ 
+  return {
+    id: state.editId||uid('p'),
+    name: name.slice(0,120), sku, price, cat, stock,
+    shortDesc, desc, features, seoKeywords,
+    images: [...state.pendingImages, ...images].slice(0,8),
+    tags: tags.slice(0,8), variants: variants.slice(0,120),
+    offer, feat,
+    date: state.editId?(getById(state.editId)?.date||Date.now()):Date.now()
+  };
+}
+ 
+function saveProduct() {
+  const p=readForm(); if(!p) return;
+  const idx=state.products.findIndex(x=>x.id===p.id);
+  if(idx>=0) state.products[idx]=p; else state.products.unshift(p);
+  saveProducts(); buildCategoryChips(); buildAdminSelects(); renderProducts(); updateStats(); renderAdminList();
+  $('saveConfirm').classList.add('show');
+  setTimeout(()=>$('saveConfirm').classList.remove('show'),2200);
+  state.editId=null; $('formTitle').textContent='Nuevo producto';
+  toast('✅ Producto guardado');
+}
+ 
+// ─── IMAGE UPLOAD ─────────────────────────────────────────
+function handleImgFiles(files) {
+  const available=5-state.pendingImages.length;
+  const toProcess=Array.from(files).slice(0,Math.max(0,available));
+  if(!toProcess.length){ toast('⚠️ Máximo 5 imágenes'); return; }
+  toProcess.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      state.pendingImages.push(e.target.result);
+      renderImgPreviews();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+ 
+function renderImgPreviews() {
+  const grid=$('imgPreviewGrid');
+  grid.innerHTML=state.pendingImages.map((src,i)=>`
+    <div class="img-thumb-wrap">
+      <img src="${src}" alt="img ${i+1}">
+      <button class="img-thumb-remove" type="button" data-img-rm="${i}">✕</button>
+      <div class="img-filename">${seoFilename($('f-name').value||'producto',i+1)}</div>
+    </div>`).join('');
+  grid.querySelectorAll('[data-img-rm]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      state.pendingImages.splice(Number(btn.dataset.imgRm),1);
+      renderImgPreviews();
+    });
+  });
+}
+ 
+// ─── ADMIN LIST ───────────────────────────────────────────
+function renderAdminList() {
+  const q=txt($('adminSearch')?.value||'').toLowerCase();
+  const cat=$('adminCatFilter')?.value||'';
+  let list=[...state.products];
+  if(q) list=list.filter(p=>p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)||(p.sku||'').toLowerCase().includes(q));
+  if(cat) list=list.filter(p=>p.cat===cat);
+  const el=$('adminList');
+  if(!el) return;
+  if(!list.length){ el.innerHTML=`<div class="empty-state"><div class="icon">📭</div><h3>Sin productos</h3><p>Probá otro filtro.</p></div>`; return; }
+  el.innerHTML=list.map(p=>{
+    const img=firstImage(p);
+    return `<div class="admin-row">
+      <div class="admin-row-img">${img?`<img src="${esc(img)}" alt="" onerror="this.outerHTML='${emoji(p.cat)}'">`:emoji(p.cat)}</div>
+      <div class="admin-row-main">
+        <div class="admin-row-name">${esc(p.name)}</div>
+        <div class="admin-row-meta">${esc(p.cat)}${p.sku?' · '+esc(p.sku):''}${p.offer?' · 🔥':''}${p.feat?' · ⭐':''}</div>
+      </div>
+      <div class="admin-row-controls">
+        <input class="edit-price" type="number" min="0" step="1" value="${Number(p.price)}" data-price="${esc(p.id)}" />
+        <div class="stock-controls">
+          <button class="icon-btn" data-stock-dec="${esc(p.id)}">−</button>
+          <span id="stk-${esc(p.id)}" class="stock-val">${Number(p.stock)}</span>
+          <button class="icon-btn" data-stock-inc="${esc(p.id)}">+</button>
+        </div>
+        <button class="icon-btn" data-edit="${esc(p.id)}" title="Editar">✏️</button>
+        <button class="icon-btn" data-dup="${esc(p.id)}" title="Duplicar">⧉</button>
+        <button class="icon-btn danger" data-del="${esc(p.id)}" title="Eliminar">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+  el.querySelectorAll('[data-price]').forEach(i=>i.addEventListener('change',()=>updatePrice(i.dataset.price,i.value)));
+  el.querySelectorAll('[data-stock-dec]').forEach(b=>b.addEventListener('click',()=>updateStock(b.dataset.stockDec,-1)));
+  el.querySelectorAll('[data-stock-inc]').forEach(b=>b.addEventListener('click',()=>updateStock(b.dataset.stockInc,1)));
+  el.querySelectorAll('[data-edit]').forEach(b=>b.addEventListener('click',()=>{ buildForm(getById(b.dataset.edit)); switchTab('add'); toast('✏️ Producto cargado'); }));
+  el.querySelectorAll('[data-dup]').forEach(b=>b.addEventListener('click',()=>duplicateProduct(b.dataset.dup)));
+  el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>deleteProduct(b.dataset.del)));
+}
+ 
+function updateStats() {
+  $('stProducts').textContent=String(state.products.length);
+  $('stStock').textContent=String(state.products.reduce((s,p)=>s+clamp(p.stock),0));
+  $('stValue').textContent='$'+fmtPrice(state.products.reduce((s,p)=>s+clamp(p.price)*clamp(p.stock),0));
+  $('stOut').textContent=String(state.products.filter(p=>clamp(p.stock)<=0).length);
+}
+ 
+function updatePrice(id,v) { const p=getById(id); if(!p) return; p.price=clamp(v,0,p.price); saveProducts(); updateStats(); toast('💰 Precio actualizado'); }
+function updateStock(id,d) { const p=getById(id); if(!p) return; p.stock=clamp(p.stock+d,0,0); saveProducts(); buildCategoryChips(); renderProducts(); updateStats(); const b=document.getElementById(`stk-${id}`); if(b) b.textContent=String(p.stock); }
+function duplicateProduct(id) { const p=getById(id); if(!p) return; state.products.unshift({...p,id:uid('p'),name:p.name+' (copia)',sku:genSKU(p.name+'copia',p.cat),date:Date.now()}); saveProducts(); buildCategoryChips(); buildAdminSelects(); renderProducts(); renderAdminList(); updateStats(); toast('⧉ Duplicado'); }
+function deleteProduct(id) { const p=getById(id); if(!p) return; if(!confirm(`¿Eliminar "${p.name}"?`)) return; state.products=state.products.filter(x=>x.id!==id); state.cart=state.cart.filter(i=>i.id!==id); saveCart(); saveProducts(); buildCategoryChips(); buildAdminSelects(); renderProducts(); renderAdminList(); updateStats(); updateCartBadge(); toast('🗑 Eliminado'); }
+ 
+// ─── SETTINGS ─────────────────────────────────────────────
+function fillSettings() {
+  $('waNumber').value=state.settings.whatsappNumber;
+  $('waTemplate').value=state.settings.whatsappTemplate;
+  $('storeName').value=state.settings.storeName;
+  $('adminPass').value='';
+}
+function saveSettingsFn() {
+  state.settings.whatsappNumber=normalizePhone($('waNumber').value);
+  state.settings.whatsappTemplate=txt($('waTemplate').value)||DEFAULT_SETTINGS.whatsappTemplate;
+  state.settings.storeName=txt($('storeName').value)||DEFAULT_SETTINGS.storeName;
+  const np=txt($('adminPass').value); if(np) state.settings.adminPasswordHash=np;
+  saveSettings(); toast('⚙ Ajustes guardados');
+}
+ 
+// ─── CSV / BULK ───────────────────────────────────────────
+function parseCSV(text) {
+  const rows=[], lines=String(text||'').replace(/\r/g,'').trim().split('\n').filter(Boolean);
+  if(!lines.length) return rows;
+  const headers=splitLine(lines[0]).map(h=>h.toLowerCase().trim());
+  for(let i=1;i<lines.length;i++){
+    const cols=splitLine(lines[i]); if(!cols.length) continue;
+    const obj={}; headers.forEach((h,j)=>obj[h]=cols[j]??''); rows.push(obj);
+  }
+  return rows;
+}
+function splitLine(line) {
+  const out=[]; let cur='', inQ=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"'){ if(inQ&&line[i+1]==='"'){cur+='"';i++;} else inQ=!inQ; }
+    else if(!inQ&&/[;,\t]/.test(ch)){out.push(cur);cur='';}
+    else cur+=ch;
+  }
+  out.push(cur); return out.map(v=>v.trim());
+}
+ 
+function prepareRows(rows) {
+  return rows.map(row=>{
+    const name=txt(row.nombre||row.name||row.producto||''); if(!name) return null;
+    return {
+      id:uid('p'),
+      name:name.slice(0,120),
+      sku:txt(row.sku||row.codigo||''),
+      price:clamp(row.precio||row.price,0,0),
+      cat:row.categoria||row.category||row.cat||'Hogar',
+      stock:clamp(row.stock,0,0),
+      shortDesc:txt(row.descripcion_corta||row.short_desc||row.shortdesc||'').slice(0,150),
+      desc:txt(row.descripcion||row.description||row.desc||'').slice(0,600),
+      features:txt(row.caracteristicas||row.features||'').slice(0,500),
+      seoKeywords:txt(row.seo||row.palabras_clave||'').slice(0,200),
+      images:normImages(row.imagenes||row.images||row.imagen||''),
+      tags:normTags(row.etiquetas||row.tags||''),
+      variants:txt(row.variantes||row.variants||''),
+      offer:/^(1|true|si|sí|yes)$/i.test(String(row.oferta||row.offer||'')),
+      feat:/^(1|true|si|sí|yes)$/i.test(String(row.destacado||row.featured||row.feat||'')),
+      date:Date.now()
+    };
+  }).filter(Boolean).slice(0,500);
+}
+ 
+async function handleFile(file) {
+  if(!file) return;
+  const ext=file.name.split('.').pop().toLowerCase();
+  let rows=[];
+  if(['xlsx','xls'].includes(ext)){
+    if(typeof XLSX==='undefined'){ toast('⚠️ XLSX no disponible'); return; }
+    const buf=await file.arrayBuffer();
+    const wb=XLSX.read(buf,{type:'array'});
+    const sheet=wb.Sheets[wb.SheetNames[0]];
+    rows=XLSX.utils.sheet_to_json(sheet,{defval:''});
+  } else {
+    rows=parseCSV(await file.text());
+  }
+  state.csvRows=prepareRows(rows);
+  $('filePreview').textContent=state.csvRows.slice(0,6).map(r=>JSON.stringify(r,null,0)).join('\n')+(state.csvRows.length>6?`\n... +${state.csvRows.length-6} más`:'');
+  $('filePreview').classList.add('show');
+  $('importBtn').style.display='inline-flex';
+  toast(`📄 ${state.csvRows.length} filas listas`);
+}
+ 
+function importRows(rows) {
+  if(!rows.length) return;
+  state.products=[...rows,...state.products];
+  saveProducts(); buildCategoryChips(); buildAdminSelects(); renderProducts(); updateStats(); renderAdminList();
+  toast(`✅ ${rows.length} productos importados`);
+  $('filePreview').classList.remove('show'); $('importBtn').style.display='none'; state.csvRows=[]; $('fileInput').value='';
+}
+ 
+function importPaste() {
+  const lines=txt($('pasteArea').value).replace(/\r/g,'').trim().split('\n').filter(Boolean);
+  const rows=lines.map(line=>{
+    const cols=line.includes('\t')?line.split('\t'):line.split(/[|,;]/);
+    return { nombre:cols[0]||'', precio:cols[1]||'', categoria:cols[2]||'', stock:cols[3]||'', descripcion_corta:cols[4]||'', descripcion:cols[5]||'', imagenes:cols[6]||'', etiquetas:cols[7]||'' };
+  });
+  const prepared=prepareRows(rows);
+  if(!prepared.length) return toast('⚠️ Sin filas válidas');
+  importRows(prepared); $('pasteArea').value='';
+}
+ 
+function exportCSV() {
+  const header=['nombre','sku','precio','categoria','stock','descripcion_corta','descripcion','caracteristicas','seo','imagenes','etiquetas','oferta','destacado','variantes'];
+  const csv=[header.join(','), ...state.products.map(p=>[
+    p.name,p.sku||'',p.price,p.cat,p.stock,p.shortDesc||'',p.desc||'',p.features||'',p.seoKeywords||'',
+    (p.images||[]).join(' | '),(p.tags||[]).join(' | '),p.offer?1:0,p.feat?1:0,p.variants||''
+  ].map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(','))].join('\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='casa-mecha-catalogo.csv'; a.click();
+  URL.revokeObjectURL(url); toast('⬇ CSV exportado');
+}
+ 
+// ─── EVENTS ───────────────────────────────────────────────
+function initEvents() {
+  $('adminBtn').addEventListener('click',openAdmin);
+  $('cartBtn').addEventListener('click',()=>{ renderCart(); openOverlay('cartOverlay'); });
+  $('waFab').addEventListener('click',()=>openWA(''));
+  $('searchInput').addEventListener('input',e=>{ state.search=txt(e.target.value); $('searchClear').classList.toggle('visible',!!state.search); renderProducts(); });
+  $('searchClear').addEventListener('click',()=>{ $('searchInput').value=''; state.search=''; $('searchClear').classList.remove('visible'); renderProducts(); });
+  $('sortSelect').addEventListener('change',e=>{ state.sort=e.target.value; renderProducts(); });
+  $('closeAdminBtn').addEventListener('click',()=>closeOverlay('adminOverlay'));
+  document.querySelector('[data-close="detail"]').addEventListener('click',()=>closeOverlay('detailOverlay'));
+  document.querySelector('[data-close="cart"]').addEventListener('click',()=>closeOverlay('cartOverlay'));
+  $('saveProductBtn').addEventListener('click',saveProduct);
+  $('clearFormBtn').addEventListener('click',clearForm);
+  $('exportCsvBtn').addEventListener('click',exportCSV);
+  $('clearCartBtnAdmin').addEventListener('click',clearCart);
+  $('importPasteBtn').addEventListener('click',importPaste);
+  $('saveSettingsBtn').addEventListener('click',saveSettingsFn);
+  $('tog-offer').addEventListener('click',()=>$('tog-offer').classList.toggle('on'));
+  $('tog-feat').addEventListener('click',()=>$('tog-feat').classList.toggle('on'));
+  $('adminSearch').addEventListener('input',renderAdminList);
+  $('adminCatFilter').addEventListener('change',renderAdminList);
+  $('fileInput').addEventListener('change',e=>handleFile(e.target.files[0]));
+  $('importBtn').addEventListener('click',()=>importRows(state.csvRows));
+  $('f-shortdesc').addEventListener('input',updateShortDescCount);
+ 
+  // Dropzone CSV
+  const dz=$('dropzone');
+  dz.addEventListener('click',()=>$('fileInput').click());
+  dz.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') $('fileInput').click(); });
+  dz.addEventListener('dragover',e=>{ e.preventDefault(); dz.classList.add('dragover'); });
+  dz.addEventListener('dragleave',()=>dz.classList.remove('dragover'));
+  dz.addEventListener('drop',e=>{ e.preventDefault(); dz.classList.remove('dragover'); const f=e.dataTransfer.files?.[0]; if(f) handleFile(f); });
+ 
+  // Image upload
+  const imgDz=$('imgDropzone');
+  imgDz.addEventListener('click',()=>$('imgFileInput').click());
+  imgDz.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' ') $('imgFileInput').click(); });
+  imgDz.addEventListener('dragover',e=>{ e.preventDefault(); imgDz.classList.add('dragover'); });
+  imgDz.addEventListener('dragleave',()=>imgDz.classList.remove('dragover'));
+  imgDz.addEventListener('drop',e=>{ e.preventDefault(); imgDz.classList.remove('dragover'); handleImgFiles(e.dataTransfer.files); });
+  $('imgFileInput').addEventListener('change',e=>handleImgFiles(e.target.files));
+ 
+  document.querySelectorAll('.admin-tab').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+ 
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeOverlay('detailOverlay'); closeOverlay('cartOverlay'); closeOverlay('adminOverlay'); } });
+  ['detailOverlay','cartOverlay','adminOverlay'].forEach(id=>$(id).addEventListener('click',e=>{ if(e.target===$(id)) closeOverlay(id); }));
+}
+ 
+// ─── ADMIN BUTTON VISIBILITY ──────────────────────────────
+function checkAdminBtn() {
+  // Show admin button if unlocked OR if user types the secret code
+  if(state.adminUnlocked) $('adminBtn').style.display='flex';
+}
+ 
+// ─── INIT ─────────────────────────────────────────────────
+function init() {
+  loadSettings(); loadProducts(); loadCart();
+  setStatus(); buildCategoryChips(); buildAdminSelects();
+  updateCartBadge(); checkAdminBtn();
+  renderSkeletons();
+  initEvents(); fillSettings(); buildForm(null);
+  setTimeout(renderProducts,260);
+  renderCart();
+}
+ 
+init();
+ 
+})();
+ 
+// Secret code to reveal admin button
+let _buf='';
+document.addEventListener('keydown',e=>{
+  if(/[0-9]/.test(e.key)){ _buf=(_buf+e.key).slice(-6); if(_buf==='258369'){ _buf=''; document.getElementById('adminBtn').style.display='flex'; } }
+});
+</script>
+</body>
 </html>
